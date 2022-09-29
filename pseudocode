@@ -1,0 +1,85 @@
+PROJET RESEAU SOCIAL :
+-----Front-end :
+    Création d'un router à la base de l'app
+    
+    Composant RegisterForm : affichage du formulaire d'inscription
+    Composant LoginForm : affichage du formulaire de connexion
+    
+    Composant Navbar qui contient les liens vers les routes
+    Composant CategoriesList : Nav pour voir les feed par catégories
+    
+    Composant Home :
+        - Composant MostPopularCarousel qui tourne sur le 5 posts les plus populaires du jour
+        - Composant HomeFeed qui affiche tout les posts qui correspondent aux centres d'intérêts choisis par l'utilisateur, avec upvote-downvote
+        
+    Composant MostPopular : Liste des posts les plus populaires du site (moins de 24h)
+    Composant Categorie : Liste des posts d'une catégorie spécifique
+    
+    Composant AddPost : Formulaire d'ajout d'un nouveau post
+    
+    Composant Profile : Profil d'un l'utilisateur
+        Si l'utilisateur = la personne connectée, accès a UpdateMyProfile
+        
+    Composant UpdateMyProfile : Formulaire avec possibilité de modif username et avatar
+        et accès au lien vers DeleteMyProfile
+        
+    Composant DeleteMyProfile : Message d'avertissement et bouton qui supprime le compte,
+        redirection sur la page inscription
+    
+    // ADMIN //
+    
+    Composant Statistics : Affichages des stats du sites, nb d'users etc...
+    Composant AddCategories : Form qui ajoute des nouvelles catégories
+    OPTIONNEL : 
+        Composant Moderation : Affiche les posts signalés et choix suppression ou maintien
+    
+    
+-----Back-end :
+    Création d'un routeur qui appelle les controllers
+    Liste des controllers :
+        - Register GET -
+        - Register POST -
+                Verification des données entrées par l'utilisateur
+                    message d'erreur si infos invalide sinon redirection vers Home
+        
+        - Connect GET -
+        - Connect POST -
+                Verification des données : 
+                    si cela correspond = connexion, redirection vers home et ouverture de la session
+                    sinon message d'erreur et on reste sur la page
+                    
+        - Home GET
+            Recupération des 5 posts avec le meilleur score du jour pour carousel
+            Recuperation des 25 posts les plus récents qui correspondent aux catégories choisies
+        - Home POST
+            Suppression du post
+        
+        - MostPopular GET
+        - MostPopular POST
+        
+        - Categories GET
+        - Categories POST
+        
+        - AddPost GET
+        - AddPost POST
+        
+        - Profile GET
+        
+        - UpdateMyProfile GET
+        - UpdateMyProfile POST
+        
+        - DeleteMyProfile GET
+        - DeleteMyProfile POST
+        
+        // ADMIN //
+        
+        -Admin GET
+        -Admin POST
+        
+        -AddCategories GET
+        -AddCategories POST
+        
+        -Moderation GET
+        -Moderation POST
+    
+    
