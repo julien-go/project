@@ -1,6 +1,5 @@
 import pool from '../config/database.js';
 import bcrypt from 'bcrypt';
-import session from 'express-session';
 
 const registerUser = (req, res) => {
     console.log(req.body)
@@ -13,19 +12,24 @@ const registerUser = (req, res) => {
     pool.query(compareEmail, [req.body.email], (error, users, fields) => {
         if (error) throw error;
         
-        if(!users[0]) {
-            console.log('email already exists')
+        if(users[0]) {
             res.json({response:false, errorMsg: 'This email is already taken'})
             return;
         } else {
+            
             pool.query(compareUsername, [req.body.username], (error, users, fields) => {
                 if (error) throw error;
         
-                if(!users[0]) {
-                    console.log('username already exists')
+                if(users[0]) {
+                    
                     res.json({response:false, errorMsg: 'This username is already taken'})
                     return;
                 } else {
+                    
+                    if(req.body.username.includes(' ')) {
+                        res.json({response:false, errorMsg: 'Empty spaces not allowed in username'})
+                        return;
+                    }
                     
                     const regExPassword =/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
                     if (regExPassword.test(req.body.password)){
@@ -33,10 +37,15 @@ const registerUser = (req, res) => {
                         bcrypt.hash(req.body.password, saltRound, (err, hash) => {
                             if (err) throw err;
                             
-                            let params = [req.body.username, req.body.email, hash, Date.now()]
+                            let params = [req.body.username.toLowerCase(), req.body.email, hash, new Date()]
+                            
                             pool.query(newUser, params, (err, user, fields) => {
                                 if (err) throw err
-                                res.json({response:true, errorMsg: ''})
+                                
+                                req.session.username = req.body.username.toLowerCase()
+                                console.log(req.session.username)
+                                req.session.isAdmin = false;
+                                res.json({response:true, errorMsg: '', isAdmin: false, username: req.session.username})
                             })
                         })
                     } else {
@@ -46,7 +55,6 @@ const registerUser = (req, res) => {
                 }
             })
         }
-        
         
     })
 }

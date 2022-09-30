@@ -1,14 +1,19 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom'
 import BASE_URL from "../config.js"
 import axios from 'axios'
+import {AppContext} from './reducer/reducer'
 
 const Register = () => {
-    
+
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const navigate = useNavigate();
+    
+    const [state, dispatch] = React.useContext(AppContext)
     
     const submit = (e) => {
         e.preventDefault();
@@ -23,17 +28,20 @@ const Register = () => {
                 setErrorMsg(res.data.errorMsg);
             } else {
                 setErrorMsg('')
+                dispatch({type: 'LOGIN', payload: res.data.username})
+                navigate("/", {replace: true});
             }
         })
         .catch((err) => {
             console.log(err)
         })
-    }
 
+    }
+    
     return (
         <React.Fragment>
             <h1>Inscription</h1>
-            {errorMsg !== '' && <p>{errorMsg}</p>}
+            {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
             <form onSubmit={submit}>
                 <div>
                     <label name='username'>
