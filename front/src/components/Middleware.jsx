@@ -1,7 +1,7 @@
 import React from 'react';
 import {useContext, useEffect, Fragment} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AppContext } from "./reducer/reducer.js";
+import { AppContext } from "../reducer/reducer.js";
 import { userPath, adminPath, notConnectedPath } from '../config/path.js'
 
 const Middleware = ({children}) => {

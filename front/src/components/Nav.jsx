@@ -1,11 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import {AppContext} from './reducer/reducer'
+import {AppContext} from '../reducer/reducer.js'
 
 const Nav = () => {
     
     const [state, dispatch]= React.useContext(AppContext)
-    console.log(state)
+    const url = `profile/${state.username}`
 
     return (
         <React.Fragment>
@@ -18,6 +18,16 @@ const Nav = () => {
                             <li>
                                 <NavLink to="/">
                                 HOME
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={url}>
+                                MY PROFILE
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="modify-avatar">
+                                MODIFY AVATAR
                                 </NavLink>
                             </li>
                             <li>

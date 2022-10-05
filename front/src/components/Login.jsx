@@ -1,9 +1,10 @@
 import React from 'react'
-import { useState, useEffect} from 'react';
+import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 import BASE_URL from "../config.js"
 import axios from 'axios';
-import {AppContext} from './reducer/reducer'
+import {AppContext} from '../reducer/reducer'
+import {verifyLength} from '../utils/utils.js'
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,45 +14,48 @@ const Login = () => {
     
     const [state, dispatch] = React.useContext(AppContext)
 
-    const submit = (e) => {
+    const submitLogin = (e) => {
         e.preventDefault();
-        axios.post(`${BASE_URL}/login`, {
-            email,
-            password
-        })
-        .then((res) =>{
-            // console.log(res)
-            if (res.data.errorMsg !== ''){
-                setErrorMsg(res.data.errorMsg);
+            if (!verifyLength(email, 255)){
+                setErrorMsg('connection error')
             } else {
-                setErrorMsg('')
-                if(res.data.isAdmin == true){
-                    dispatch({type: 'ISADMIN'})
+            axios.post(`${BASE_URL}/login`, {
+                email,
+                password
+            })
+            .then((res) =>{
+                if (res.data.errorMsg !== ''){
+                    setErrorMsg(res.data.errorMsg);
+                } else {
+                    setErrorMsg('')
+                    if(res.data.isAdmin == true){
+                        dispatch({type: 'ISADMIN'})
+                    }
+                    dispatch({type: 'LOGIN', payload: res.data.username})
+                    navigate("/", {replace: true});
                 }
-                dispatch({type: 'LOGIN', payload: res.data.username})
-                navigate("/", {replace: true});
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
     }
 
     return (
         <React.Fragment>
             <h1>Connexion</h1>
             {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
-            <form onSubmit={submit}>
+            <form onSubmit={submitLogin}>
                 <div>
                     <label name='email'>
                         Email
-                        <input type='mail' name='email' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
+                        <input type='mail' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
                     </label>
                 </div>
                 <div>
                     <label name='password'>
                         Password
-                        <input type='password' name='password' value={password} onChange= {(e) => setPassword(e.target.value)} required/>
+                        <input type='password' name='password' maxLength='255' value={password} autoComplete='current-password' onChange= {(e) => setPassword(e.target.value)} required/>
                     </label>
                 </div>
                 <input type='submit' value='Submit'/>

@@ -22,22 +22,20 @@ app.use(session({
 app.use( (req, res, next) => {
     res.locals.username = req.session.username || null
     res.locals.isAdmin = req.session.isAdmin || false 
-    console.log(res.locals.isAdmin)
-    console.log(res.locals.username)
+    // console.log(res.locals.isAdmin)
+    // console.log(res.locals.username)
     next();
 })
 
 app.use((req, res, next)=>{
     let pathname = parseurl(req).pathname.split('/')
-    console.log(pathname);
+    // console.log(pathname);
 
     let notConnectedPath = ["/api/register","/api/login"];
     let usersPath = ["/api/disconnect"];
     
     //Si aucun user n'est connecté
-    if(!req.session.username && usersPath.includes(pathname[1])){
-        res.redirect('/');
-    } else if (req.session.username && notConnectedPath.includes(pathname[1])){
+    if(!req.session.username && usersPath.includes(pathname[1]) || (req.session.username && notConnectedPath.includes(pathname[1]))){
         res.redirect('/');
     }
     else{

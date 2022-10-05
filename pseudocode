@@ -2,8 +2,8 @@ PROJET RESEAU SOCIAL :
 -----Front-end :
     Création d'un router à la base de l'app
     
-    Composant RegisterForm : affichage du formulaire d'inscription
-    Composant LoginForm : affichage du formulaire de connexion
+    Composant RegisterForm : affichage du formulaire d'inscription  OK
+    Composant LoginForm : affichage du formulaire de connexion  OK
     
     Composant Navbar qui contient les liens vers les routes
     Composant CategoriesList : Nav pour voir les feed par catégories
@@ -29,7 +29,7 @@ PROJET RESEAU SOCIAL :
     // ADMIN //
     
     Composant Statistics : Affichages des stats du sites, nb d'users etc...
-    Composant AddCategories : Form qui ajoute des nouvelles catégories
+    Composant AddCategories : Form qui ajoute des nouvelles catégories OK
     OPTIONNEL : 
         Composant Moderation : Affiche les posts signalés et choix suppression ou maintien
     
