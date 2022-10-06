@@ -5,7 +5,7 @@ PROJET RESEAU SOCIAL :
     Composant RegisterForm : affichage du formulaire d'inscription  OK
     Composant LoginForm : affichage du formulaire de connexion  OK
     
-    Composant Navbar qui contient les liens vers les routes
+    Composant Navbar qui contient les liens vers les routes 
     Composant CategoriesList : Nav pour voir les feed par catégories
     
     Composant Home :
@@ -18,10 +18,13 @@ PROJET RESEAU SOCIAL :
     Composant AddPost : Formulaire d'ajout d'un nouveau post
     
     Composant Profile : Profil d'un l'utilisateur
-        Si l'utilisateur = la personne connectée, accès a UpdateMyProfile
+        Si l'utilisateur = la personne connectée, accès a :
+        - ModifyAvatar OK
+        - RemoveAvatar 
+        - ModifyProfile
+        - DeleteMyProfile
         
-    Composant UpdateMyProfile : Formulaire avec possibilité de modif username et avatar
-        et accès au lien vers DeleteMyProfile
+    Composant ModifyProfile : Formulaire avec possibilité de modif username et email
         
     Composant DeleteMyProfile : Message d'avertissement et bouton qui supprime le compte,
         redirection sur la page inscription
@@ -76,7 +79,6 @@ PROJET RESEAU SOCIAL :
         -Admin GET
         -Admin POST
         
-        -AddCategories GET
         -AddCategories POST
         
         -Moderation GET

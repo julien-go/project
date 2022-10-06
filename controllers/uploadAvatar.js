@@ -7,21 +7,25 @@ export const uploadAvatar = (req, res) => {
     const form = formidable({keepExtensions: true});
     form.parse(req, (err, fields, files) => {
         if (err) throw err;
+        // console.log(1)
         const currentUsername = fields.username;
-        console.log(fields)
-        console.log(files)
+        // console.log(fields)
+        // console.log(files)
         
         let file = files.files;
-        console.log(file)
+        // console.log(file)
         let newFilename = files.files.newFilename;
         let oldPath = files.files.filepath;
 
         let newPath = `public/avatars/${newFilename}`;
-        console.log(newPath)
+        // console.log(newPath)
         if(checkAcceptedExtensions(file)){
+        // console.log(2)
             if(files.originalFilename !== ''){
+        // console.log(3)
                 fs.copyFile(oldPath, newPath, (err) => {
                     if (err) throw err;
+        // console.log(4)
                     /*
                     Ajouter nouvel avatar BDD
                     Recuperer id nouvel avatar
@@ -37,32 +41,39 @@ export const uploadAvatar = (req, res) => {
                     
                     pool.query(addAvatar, [newPath], (err, avatar, fields) => {
                         if (err) throw err;
+        // console.log(5)
                         const newId = avatar.insertId;
                         
                         pool.query(checkAvatarUser, [currentUsername], (err, user, fields) => {
                             if (err) throw err;
+        // console.log(6)
                             const oldId = user[0].avatar_id;
                             
                             pool.query(changeId, [newId, currentUsername], (err, updatedUser, fields) => {
                                 if (err) throw err;
-                                
-                                if(oldId !== null){
+        // console.log(7)
+                                console.log(oldId)
+                                if(oldId !== null && oldId !== 91){
                                     
                                     pool.query(oldAvatarPath, [oldId], (err, oldAvatar, fields) => {
                                         if (err) throw err;
+        // console.log(8)
                                         const path = oldAvatar[0].url
                                         fs.unlink(path, (err)=> {
                                             if (err) throw err;
+        // console.log(9)
                                             
                                             pool.query(deleteOld, [oldId], (err, user, fields)=> {
                                                 if (err) throw err;
+        // console.log(10)
                                                 res.json({response: true, msg: 'successfully replaced'})
-                                                return;
                                             })
                                         });
                                     })
+                                    
+                                } else {
+                                    // console.log(11)
                                     res.json({response: true, msg: 'successfully added'})
-                                    return;
                                 }
                             })
                         })
@@ -70,7 +81,8 @@ export const uploadAvatar = (req, res) => {
                 }) 
             }
         } else {
-            res.json({response: false, msg: 'Extension not accepted'})
+            // console.log(12)
+            res.json({response: false, msg: 'Format not accepted'})
         }
         
         }

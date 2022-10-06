@@ -31,7 +31,7 @@ const Login = () => {
                     if(res.data.isAdmin == true){
                         dispatch({type: 'ISADMIN'})
                     }
-                    dispatch({type: 'LOGIN', payload: res.data.username})
+                    dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
                     navigate("/", {replace: true});
                 }
             })

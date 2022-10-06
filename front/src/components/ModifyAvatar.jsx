@@ -14,14 +14,14 @@ const ModifyAvatar = () => {
         e.preventDefault()
         const username = state.username
         const files = e.target.avatar.files;
-        console.log(files)
+        // console.log(files)
         const dataFile = new FormData();
         dataFile.append('username', state.username)
         dataFile.append('files', files[0], files[0].name)
         
         axios.post(`${BASE_URL}/upload-avatar`, dataFile)
         .then((res)=> {
-            console.log(res)
+            // console.log(res)
             setMsg(res.data.msg);
             if(res.data.response){
                 navigate(`/profile/${state.username}`)
@@ -30,7 +30,11 @@ const ModifyAvatar = () => {
         .catch((err) => {
             console.log(err)
         })
-    } 
+    }
+    
+    const removeCurrentAvatar = (e) => {
+        e.preventDefault()
+    }
     
     return (
         <React.Fragment>
@@ -42,6 +46,8 @@ const ModifyAvatar = () => {
                     <input type='submit' value='Submit'/>
                 </label>
             </form>
+            <hr/>
+            <button>Remove current avatar</button>
             
         </React.Fragment>
     )

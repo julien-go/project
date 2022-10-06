@@ -1,13 +1,13 @@
 import pool from '../config/database.js';
 import bcrypt from 'bcrypt';
-import formidable from 'formidable'
 import verifyLength from '../components/verifyLength/index.js';
+import {checkSpecialCharacters} from '../components/regEx/index.js';
 
 const registerUser = (req, res) => {
-    console.log(req.body)
-    const form = formidable();
-    const newUser = 'INSERT INTO users (username, email, password, role_id, registration_date) VALUES (?,?,?,2,?)'
-    const compareEmail = 'SELECT * FROM users WHERE email = ?'
+    // console.log(req.body)
+    const newUser = 'INSERT INTO users (username, email, avatar_id, password, role_id, registration_date) VALUES (?,?,91,?,2,?)';
+    const getId = 'SELECT id FROM users WHERE username = ?';
+    const compareEmail = 'SELECT * FROM users WHERE email = ?';
     const compareUsername = 'SELECT * FROM users WHERE username = ?';
     const saltRound = 10;
     
@@ -33,6 +33,10 @@ const registerUser = (req, res) => {
                                 res.json({response:false, errorMsg: 'Empty spaces not allowed in username'})
                                 return;
                             }
+                            if(!checkSpecialCharacters(req.body.username)) {
+                                res.json({response:false, errorMsg: ` Special characters not allowed in username`})
+                                return;
+                            }
                                 bcrypt.hash(req.body.password, saltRound, (err, hash) => {
                                     if (err) throw err;
 
@@ -40,10 +44,14 @@ const registerUser = (req, res) => {
                                     pool.query(newUser, params, (err, user, fields) => {
                                         if (err) throw err
                                         
-                                        req.session.username = req.body.username.toLowerCase()
-                                        // console.log(req.session.username)
-                                        req.session.isAdmin = false;
-                                        res.json({response:true, errorMsg: '', isAdmin: false, username: req.session.username})
+                                        pool.query(getId, [req.body.username.toLowerCase()], (err, result, fields) => {
+                                            if (err) throw err;
+                                            
+                                            req.session.username = req.body.username.toLowerCase()
+                                            // console.log(req.session.username)
+                                            req.session.isAdmin = false;
+                                            res.json({response:true, errorMsg: '', isAdmin: false, username: req.session.username, email: req.body.email, id: result[0].id})
+                                        })
                                     })
                                 })
                         }

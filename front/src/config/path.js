@@ -6,6 +6,7 @@ import Admin from '../components/Admin'
 import ModifyAvatar from '../components/ModifyAvatar'
 import Error404 from '../components/Error404'
 import Profile from '../components/Profile'
+import ModifyProfile from '../components/ModifyProfile'
 
 export const routes = [
     {path: '/', element: <Home />},
@@ -15,6 +16,7 @@ export const routes = [
     {path: '/admin', element: <Admin/>},
     {path: "*", element: <Error404 />},
     {path: "/modify-avatar", element: <ModifyAvatar />},
+    {path: "/modify-profile", element: <ModifyProfile />},
     {path: '/profile/:username', element: <Profile />}
 ]
 
@@ -22,7 +24,8 @@ export const userPath = [
     '/home',
     '/disconnect',
     '/modify-avatar',
-    '/profile/:username'
+    '/profile/:username',
+    "/modify-profile"
 ]
 
 export const adminPath = [

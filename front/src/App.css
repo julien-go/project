@@ -37,6 +37,14 @@
   }
 }
 
+
+/****************TEMP*****************/
 .form_error_msg {
   color: red;
+}
+
+.user_avatar {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
 }

@@ -5,7 +5,11 @@ import {AppContext} from '../reducer/reducer.js'
 const Nav = () => {
     
     const [state, dispatch]= React.useContext(AppContext)
-    const url = `profile/${state.username}`
+    const urlMyProfile = `profile/${state.username}`
+    
+    React.useEffect(() => {
+        console.log(state.id)
+    })
 
     return (
         <React.Fragment>
@@ -21,13 +25,8 @@ const Nav = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to={url}>
+                                <NavLink to={urlMyProfile}>
                                 MY PROFILE
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="modify-avatar">
-                                MODIFY AVATAR
                                 </NavLink>
                             </li>
                             <li>

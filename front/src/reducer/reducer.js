@@ -1,6 +1,7 @@
 import React from 'react';
 
-const initialState = {username: '', 
+const initialState = {id: null, username: '',
+                    email: '',
                     isLogged: false, 
                     isAdmin: false
                     };
@@ -11,11 +12,11 @@ const reducer = (state, action) => {
     switch(action.type) {
         
         case 'LOGIN': 
-            return {...state, username: action.payload , isLogged: true};
+            return {...state, id: action.payload.id, username: action.payload.username, email: action.payload.email , isLogged: true};
         case 'LOGOUT': 
-            return {...state, username: '', isLogged: false, isAdmin: false};
+            return {...state, id: null, username: '', email: '', isLogged: false, isAdmin: false};
         case 'ISADMIN':
-            return {...state, username: '', isAdmin: true};
+            return {...state, isAdmin: true};
         default:
             return state;
     }

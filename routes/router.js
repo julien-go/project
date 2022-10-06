@@ -4,8 +4,9 @@ import registerUser from '../controllers/register.js'
 import loginUser from '../controllers/login.js'
 import disconnectUser from '../controllers/disconnect.js'
 import addCategorie from '../controllers/admin/addCategorie.js'
-import { uploadAvatar } from '../controllers/uploadImg.js'
+import { uploadAvatar } from '../controllers/uploadAvatar.js'
 import getProfileInfos from '../controllers/profile.js'
+import modifyProfileInfos from '../controllers/modifyProfile.js'
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router.post("/api/login", loginUser)
 router.get("/api/disconnect", disconnectUser)
 router.get("/api/profile/:username", getProfileInfos);
 
+router.post("/api/modify-profile", modifyProfileInfos);
 router.post("/api/upload-avatar", uploadAvatar)
 
 // Admin routes 

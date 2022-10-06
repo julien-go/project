@@ -1,5 +1,5 @@
 const verifyLength = (stringToTest, maxLength) => {
-    console.log(stringToTest)
+    // console.log(stringToTest)
     if(stringToTest.toString().length <= maxLength){
         return true;
     } else {

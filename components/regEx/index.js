@@ -17,3 +17,12 @@ export const checkRegExEmail = (email) =>{
         return false
     }
 }
+
+export const checkSpecialCharacters = (input) => {
+    const regEx = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g
+    if (input.match(regEx)){
+        return true;
+    } else {
+        return false;
+    }
+}
