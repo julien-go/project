@@ -7,6 +7,9 @@ import ModifyAvatar from '../components/ModifyAvatar'
 import Error404 from '../components/Error404'
 import Profile from '../components/Profile'
 import ModifyProfile from '../components/ModifyProfile'
+import DeleteAccount from '../components/DeleteAccount'
+
+import AddPost from '../components/AddPost'
 
 export const routes = [
     {path: '/', element: <Home />},
@@ -17,7 +20,11 @@ export const routes = [
     {path: "*", element: <Error404 />},
     {path: "/modify-avatar", element: <ModifyAvatar />},
     {path: "/modify-profile", element: <ModifyProfile />},
-    {path: '/profile/:username', element: <Profile />}
+    {path: '/profile/:username', element: <Profile />},
+    {path: '/delete-account', element: <DeleteAccount />},
+    {path: '/add-post', element: <AddPost />},
+    
+    
 ]
 
 export const userPath = [
@@ -25,7 +32,9 @@ export const userPath = [
     '/disconnect',
     '/modify-avatar',
     '/profile/:username',
-    "/modify-profile"
+    "/modify-profile",
+    '/delete-account',
+    '/add-post'
 ]
 
 export const adminPath = [

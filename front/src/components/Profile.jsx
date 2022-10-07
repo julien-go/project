@@ -53,6 +53,10 @@ const Profile = () => {
         e.preventDefault();
         navigate('/modify-profile')
     }
+    const redirectDeleteAccount = (e) => {
+        e.preventDefault();
+        navigate('/delete-account')
+    }
     
     useEffect(() => {
         getParams();
@@ -64,7 +68,7 @@ const Profile = () => {
                 <h1>Profil</h1>
                 {msg !== '' && <p>{msg}</p>}
                 {userInfos.email !== '' && <h2>USERNAME : {profileName}</h2>}
-                {userInfos.avatarPath !== '' && <img src={`https://juliengodard.ide.3wa.io/preview/sites/nodereact/project/${userInfos.avatarPath}`} alt={`${profileName}'s avatar`} className="user_avatar"/>}
+                {userInfos.avatarPath !== '' && <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${userInfos.avatarPath}`} alt={`${profileName}'s avatar`} className="user_avatar"/>}
                 <p>{userInfos.registrationDate}</p>
             </div>
             <hr/>
@@ -73,6 +77,7 @@ const Profile = () => {
                     <h3>Gestion du profil</h3>
                     <button onClick={redirectModifAvatar}>Modify/Add avatar</button>
                     <button onClick={redirectModifProfile}>Modify profile informations</button>
+                    <button onClick={redirectDeleteAccount}>Delete my profile</button>
                 </div>
             }
         </Fragment>

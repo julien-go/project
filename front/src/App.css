@@ -48,3 +48,8 @@
   height: 250px;
   object-fit: cover;
 }
+
+.react_select_container {
+  max-width: 50%;
+  margin: auto;
+}

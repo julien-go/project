@@ -7,9 +7,9 @@ const Nav = () => {
     const [state, dispatch]= React.useContext(AppContext)
     const urlMyProfile = `profile/${state.username}`
     
-    React.useEffect(() => {
-        console.log(state.id)
-    })
+    // React.useEffect(() => {
+    //     console.log(state.id)
+    // })
 
     return (
         <React.Fragment>
@@ -27,6 +27,11 @@ const Nav = () => {
                             <li>
                                 <NavLink to={urlMyProfile}>
                                 MY PROFILE
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="add-post">
+                                ADD NEW POST
                                 </NavLink>
                             </li>
                             <li>

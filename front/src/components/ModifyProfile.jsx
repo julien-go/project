@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import {useNavigate} from 'react-router-dom'
 import BASE_URL from "../config.js"
 import axios from 'axios'
@@ -13,7 +13,7 @@ const ModifyProfile = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const navigate = useNavigate();
     
-    const [state, dispatch] = React.useContext(AppContext)
+    const [state, dispatch] = useContext(AppContext)
     
     const submitModif = (e) => {
         e.preventDefault();

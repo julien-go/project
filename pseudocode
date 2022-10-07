@@ -17,12 +17,12 @@ PROJET RESEAU SOCIAL :
     
     Composant AddPost : Formulaire d'ajout d'un nouveau post
     
-    Composant Profile : Profil d'un l'utilisateur
+    Composant Profile : Profil d'un l'utilisateur 
         Si l'utilisateur = la personne connectée, accès a :
         - ModifyAvatar OK
-        - RemoveAvatar 
-        - ModifyProfile
-        - DeleteMyProfile
+        - RemoveAvatar OK
+        - ModifyProfile OK
+        - DeleteMyProfile OK
         
     Composant ModifyProfile : Formulaire avec possibilité de modif username et email
         

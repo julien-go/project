@@ -8,6 +8,7 @@ import {AppContext} from '../reducer/reducer.js'
 const ModifyAvatar = () => {
     const [state, dispatch] = React.useContext(AppContext);
     const [msg, setMsg] = useState('');
+    const [deleteMsg, setDeleteMsg] = useState('');
     const navigate = useNavigate();
     
     const addNewAvatar = (e) => {
@@ -25,6 +26,8 @@ const ModifyAvatar = () => {
             setMsg(res.data.msg);
             if(res.data.response){
                 navigate(`/profile/${state.username}`)
+            } else {
+                setDeleteMsg(res.data.msg);
             }
         })
         .catch((err) => {
@@ -34,6 +37,19 @@ const ModifyAvatar = () => {
     
     const removeCurrentAvatar = (e) => {
         e.preventDefault()
+        axios.post(`${BASE_URL}/remove-avatar`, {
+            id: state.id
+        })
+        .then((res)=>{
+            if (res.data.response){
+                navigate(`/profile/${state.username}`)
+            } else {
+                setDeleteMsg('No file to delete')
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     }
     
     return (
@@ -47,7 +63,8 @@ const ModifyAvatar = () => {
                 </label>
             </form>
             <hr/>
-            <button>Remove current avatar</button>
+            {deleteMsg !== '' && <p>{deleteMsg}</p>}
+            <button onClick={removeCurrentAvatar}>Remove current avatar</button>
             
         </React.Fragment>
     )
