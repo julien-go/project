@@ -8,6 +8,7 @@ import Error404 from '../components/Error404'
 import Profile from '../components/Profile'
 import ModifyProfile from '../components/ModifyProfile'
 import DeleteAccount from '../components/DeleteAccount'
+import MyCategories from '../components/MyCategories'
 
 import AddPost from '../components/AddPost'
 
@@ -23,8 +24,7 @@ export const routes = [
     {path: '/profile/:username', element: <Profile />},
     {path: '/delete-account', element: <DeleteAccount />},
     {path: '/add-post', element: <AddPost />},
-    
-    
+    {path: '/my-categories', element: <MyCategories />},
 ]
 
 export const userPath = [
@@ -34,7 +34,8 @@ export const userPath = [
     '/profile/:username',
     "/modify-profile",
     '/delete-account',
-    '/add-post'
+    '/add-post',
+    '/my-categories'
 ]
 
 export const adminPath = [

@@ -39,6 +39,11 @@ const Nav = () => {
                                 DISCONNECT
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink to="my-categories">
+                                CENTRES D'INTERETS
+                                </NavLink>
+                            </li>
                         </React.Fragment>
                     }
                     {!state.isLogged &&

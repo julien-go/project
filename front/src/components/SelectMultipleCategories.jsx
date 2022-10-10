@@ -2,11 +2,11 @@ import {useEffect, Fragment, useState} from 'react'
 import BASE_URL from "../config.js"
 import axios from 'axios'
 import Select from 'react-select'
+import {customSelectStyles} from '../utils/customReactSelectStyle.js'
 
-const SelectMultipleCategories = () => {
+const SelectMultipleCategories = ({selectedCategories, changeSelectedCategories}) => {
     
     const [categories, setCategories] = useState([]);
-    const [choosenCategories, setChoosenCategories] = useState([]);
     
     const getCategories = () => {
         axios.get(`${BASE_URL}/get-categories`)
@@ -33,17 +33,10 @@ const SelectMultipleCategories = () => {
         getCategories()
     }, [])
     
-    const customStyles = {
-      option: (provided, state) => ({
-        ...provided,
-        color: state.isSelected ? 'green' : 'black',
-        padding: 20,
-      })
-    }
-    
+
     return (
         <div className='react_select_container'>
-            <Select onChange={(e)=> setChoosenCategories(e.target.value)}className='react-select' styles={customStyles} isMulti options={categories} name='categories' required/>
+            <Select onChange={(e)=> changeSelectedCategories(e)} value={selectedCategories} className='react-select' styles={customSelectStyles} isMulti options={categories} name='categories' required/>
         </div>
         
     )

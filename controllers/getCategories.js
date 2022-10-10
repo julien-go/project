@@ -7,16 +7,15 @@ const getCategories = (req, res) => {
     
     pool.query(selectCategories, (err, cats, fields)=>{
         if (err) throw err
-        console.log(cats)
+        // console.log(cats)
         
         let categories = [];
         for(let i = 0; i < cats.length; i++){
             categories.push({id: cats[i].id, name: cats[i].name})
         }
-        console.log(categories)
+        // console.log(categories)
         res.json({response: true, categories})
     })
-    
     
 }
 

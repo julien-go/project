@@ -2,6 +2,7 @@ import pool from '../config/database.js';
 import formidable from 'formidable';
 import fs from 'fs';
 import checkAcceptedExtensions from '../components/checkExtension/index.js'
+import {defaultAvatarId} from '../config/defaultAvatar.js'
 
 export const uploadAvatar = (req, res) => {
     const form = formidable({keepExtensions: true});
@@ -18,7 +19,9 @@ export const uploadAvatar = (req, res) => {
 
         let newPath = `public/avatars/${newFilename}`;
         // console.log(newPath)
-        if(checkAcceptedExtensions(file)){
+        if(!checkAcceptedExtensions(file)){
+            res.json({response: false, msg: 'Format not accepted'})
+        } else {
             if(files.originalFilename !== ''){
                 fs.copyFile(oldPath, newPath, (err) => {
                     if (err) throw err;
@@ -46,7 +49,7 @@ export const uploadAvatar = (req, res) => {
                             pool.query(changeId, [newId, currentUsername], (err, updatedUser, fields) => {
                                 if (err) throw err;
                                 console.log(oldId)
-                                if(oldId !== null && oldId !== 91){
+                                if(oldId !== null && oldId !== defaultAvatarId){
                                     
                                     pool.query(oldAvatarPath, [oldId], (err, oldAvatar, fields) => {
                                         if (err) throw err;
@@ -69,12 +72,9 @@ export const uploadAvatar = (req, res) => {
                     })
                 }) 
             }
-        } else {
-            res.json({response: false, msg: 'Format not accepted'})
         }
         
-        }
-    )
+    })
 }
 
 

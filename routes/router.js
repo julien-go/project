@@ -11,6 +11,8 @@ import deleteAccount from '../controllers/deleteAccount.js'
 import { removeAvatar } from '../controllers/removeAvatar.js'
 
 import getCategories from '../controllers/getCategories.js'
+import getMyCategories from '../controllers/getMyCategories.js'
+import addPost from '../controllers/addPost.js'
 
 const router = express.Router();
 
@@ -28,7 +30,10 @@ router.post("/api/upload-avatar", uploadAvatar)
 router.post("/api/remove-avatar", removeAvatar);
 router.post("/api/delete-account", deleteAccount)
 
+router.post("/api/add-post", addPost);
+
 router.get("/api/get-categories", getCategories);
+router.get("/api/get-mycategories", getMyCategories);
 // Admin routes 
 router.post("/api/admin/add-categorie", addCategorie);
 

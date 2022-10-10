@@ -1,10 +1,12 @@
 import pool from '../config/database.js';
 import fs from 'fs';
+import {defaultAvatarId} from '../config/defaultAvatar.js'
 
 export const removeAvatar = (req, res) => {
+    
     const checkAvatar = 'SELECT * FROM avatars JOIN users ON users.avatar_id = avatars.id WHERE users.id = ?'
     const deleteAvatar = 'DELETE FROM avatars WHERE avatars.id = ( SELECT avatar_id FROM users WHERE users.id = ?)';
-    const setDefaultAvatar = 'UPDATE users SET avatar_id = 91 WHERE id = ?'
+    const setDefaultAvatar = 'UPDATE users SET avatar_id = ? WHERE id = ?'
 
     pool.query(checkAvatar, [req.body.id], (err, avatar, fields)=> {
         if (err) throw err;
@@ -20,7 +22,7 @@ export const removeAvatar = (req, res) => {
                 fs.unlink(path, (err)=> {
                     if (err) throw err;
                     
-                    pool.query(setDefaultAvatar, [req.body.id], (err, avatar, fields)=> {
+                    pool.query(setDefaultAvatar, [defaultAvatarId, req.body.id], (err, avatar, fields)=> {
                         if (err) throw err
                         res.json({response: true, msg: ''})
                     })

@@ -2,10 +2,11 @@ import pool from '../config/database.js';
 import bcrypt from 'bcrypt';
 import verifyLength from '../components/verifyLength/index.js';
 import {checkSpecialCharacters} from '../components/regEx/index.js';
+import {defaultAvatarId} from '../config/defaultAvatar.js'
 
 const registerUser = (req, res) => {
     // console.log(req.body)
-    const newUser = 'INSERT INTO users (username, email, avatar_id, password, role_id, registration_date) VALUES (?,?,91,?,2,?)';
+    const newUser = 'INSERT INTO users (username, email, avatar_id, password, role_id, registration_date) VALUES (?,?,?,?,2,?)';
     const getId = 'SELECT id FROM users WHERE username = ?';
     const compareEmail = 'SELECT * FROM users WHERE email = ?';
     const compareUsername = 'SELECT * FROM users WHERE username = ?';
@@ -40,7 +41,7 @@ const registerUser = (req, res) => {
                                 bcrypt.hash(req.body.password, saltRound, (err, hash) => {
                                     if (err) throw err;
 
-                                    let params = [req.body.username.toLowerCase(), req.body.email, hash, new Date()]
+                                    let params = [req.body.username.toLowerCase(), req.body.email, defaultAvatarId, hash, new Date()]
                                     pool.query(newUser, params, (err, user, fields) => {
                                         if (err) throw err
                                         

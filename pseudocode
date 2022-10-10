@@ -15,7 +15,7 @@ PROJET RESEAU SOCIAL :
     Composant MostPopular : Liste des posts les plus populaires du site (moins de 24h)
     Composant Categorie : Liste des posts d'une catégorie spécifique
     
-    Composant AddPost : Formulaire d'ajout d'un nouveau post
+    Composant AddPost : Formulaire d'ajout d'un nouveau post OK
     
     Composant Profile : Profil d'un l'utilisateur 
         Si l'utilisateur = la personne connectée, accès a :
@@ -24,13 +24,13 @@ PROJET RESEAU SOCIAL :
         - ModifyProfile OK
         - DeleteMyProfile OK
         
-    Composant ModifyProfile : Formulaire avec possibilité de modif username et email
+    Composant ModifyProfile : Formulaire avec possibilité de modif username et email OK
         
     Composant DeleteMyProfile : Message d'avertissement et bouton qui supprime le compte,
-        redirection sur la page inscription
+        redirection sur la page inscription OK
     
     // ADMIN //
-    
+
     Composant Statistics : Affichages des stats du sites, nb d'users etc...
     Composant AddCategories : Form qui ajoute des nouvelles catégories OK
     OPTIONNEL : 
