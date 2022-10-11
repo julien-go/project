@@ -13,6 +13,8 @@ import { removeAvatar } from '../controllers/removeAvatar.js'
 import getCategories from '../controllers/getCategories.js'
 import getMyCategories from '../controllers/getMyCategories.js'
 import addPost from '../controllers/addPost.js'
+import followCategories from '../controllers/followCategories.js'
+import unfollowCategories from '../controllers/unfollowCategories.js'
 
 const router = express.Router();
 
@@ -31,9 +33,11 @@ router.post("/api/remove-avatar", removeAvatar);
 router.post("/api/delete-account", deleteAccount)
 
 router.post("/api/add-post", addPost);
+router.post("/api/follow-categories", followCategories);
+router.post("/api/unfollow-categories", unfollowCategories);
 
 router.get("/api/get-categories", getCategories);
-router.get("/api/get-mycategories", getMyCategories);
+router.get("/api/get-mycategories/:id", getMyCategories);
 // Admin routes 
 router.post("/api/admin/add-categorie", addCategorie);
 

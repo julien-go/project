@@ -16,7 +16,6 @@ const getCategories = (req, res) => {
         // console.log(categories)
         res.json({response: true, categories})
     })
-    
 }
 
 export default getCategories;

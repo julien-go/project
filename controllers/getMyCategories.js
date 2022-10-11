@@ -2,30 +2,35 @@ import pool from '../config/database.js';
 
 const getMyCategories = (req, res) => {
     
-    const selectMyCategories = 'SELECT * FROM categories WHERE id = (SELECT categorie_id FROM users_categories WHERE user_id = ?)';
-    const selectOtherCategories = 'SELECT * FROM categories WHERE NOT id = (SELECT categorie_id FROM users_categories WHERE user_id = ?)';
+    const selectAllCategories = 'SELECT id, name FROM categories'
+    const selectMyCategories = 'SELECT categories.id, categories.name FROM categories JOIN users_categories ON users_categories.categorie_id = categories.id JOIN users ON users.id = users_categories.user_id WHERE users.id = ?';
+    // const selectOtherCategories = 'SELECT * FROM categories JOIN users_categories ON categories.id = users_categories.categorie_id JOIN users ON users_categories.user_id = users.id WHERE users.id != ?';
     
-    const userId = req.query.id;
+    const userId = req.params.id;
     
-    pool.query(selectMyCategories, [userId], (err, cats, fields)=>{
-        if (err) throw err
-        console.log(cats)
-        let categories = [];
-        for(let i = 0; i < cats.length; i++){
-            categories.push({id: cats[i].id, name: cats[i].name})
-        }
-        console.log(categories)
-        pool.query(selectOtherCategories,[userId], (err, otherCats, fields)=>{
-            if (err) throw err;
-            let otherCategories = [];
-            for(let j = 0; j < otherCats.length; j++){
-                otherCategories.push({id: otherCats[j].id, name: otherCats[j].name})
-            }
-            res.json({response: true, categories, otherCategories})
-        })
+    pool.query(selectAllCategories, (err, allCats, fields)=>{
+        if (err) throw err;
+        // console.log(allCats)
+        let allCatsId = []
         
-    })
-    
-}
+        for(let i=0; i < allCats.length; i++){
+            allCatsId.push(allCats[i].id)
+        }
+        
+        pool.query(selectMyCategories,[userId], (err, myCats, fields)=>{
+            if (err) throw err;
+            // console.log(myCats)
+            let myCatsId = [];
+            
+            for(let i=0; i < myCats.length; i++){
+                myCatsId.push(myCats[i].id)
+            }
+            
+            const otherCats = allCats.filter(item => !myCatsId.includes(item.id));
+        
+            res.json({response: true, categories: myCats, otherCategories: otherCats});
+        });
+    });
+};
 
 export default getMyCategories;

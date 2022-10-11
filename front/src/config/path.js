@@ -24,7 +24,7 @@ export const routes = [
     {path: '/profile/:username', element: <Profile />},
     {path: '/delete-account', element: <DeleteAccount />},
     {path: '/add-post', element: <AddPost />},
-    {path: '/my-categories', element: <MyCategories />},
+    {path: '/my-categories', element: <MyCategories />}
 ]
 
 export const userPath = [
