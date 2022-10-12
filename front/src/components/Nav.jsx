@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import {AppContext} from '../reducer/reducer.js'
+import NavCategories from './NavCategories'
 
 const Nav = () => {
     
@@ -71,6 +72,9 @@ const Nav = () => {
                     }
                 </ul>
             </nav>
+            {state.isLogged &&
+                <NavCategories />
+            }
         </React.Fragment>
         )
 }

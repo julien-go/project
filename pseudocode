@@ -1,11 +1,11 @@
 PROJET RESEAU SOCIAL :
 -----Front-end :
-    Création d'un router à la base de l'app
+    Création d'un router à la base de l'app OK
     
     Composant RegisterForm : affichage du formulaire d'inscription  OK
     Composant LoginForm : affichage du formulaire de connexion  OK
     
-    Composant Navbar qui contient les liens vers les routes 
+    Composant Navbar qui contient les liens vers les routes OK
     Composant CategoriesList : Nav pour voir les feed par catégories
     
     Composant Home :

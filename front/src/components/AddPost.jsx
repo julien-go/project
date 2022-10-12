@@ -59,7 +59,7 @@ const AddPost = () => {
                 <div>
                     <label name='categories'>
                         Centre(s) d'intérêt(s):
-                        <SelectMultipleCategories selectedCategories={selectedCategories} changeSelectedCategories={changeSelectedCategories}/>
+                        <SelectMultipleCategories choosenCategories={selectedCategories} changeSelectedCategories={changeSelectedCategories}/>
                     </label>
                 </div>
                 <div>

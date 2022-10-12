@@ -9,6 +9,7 @@ import Profile from '../components/Profile'
 import ModifyProfile from '../components/ModifyProfile'
 import DeleteAccount from '../components/DeleteAccount'
 import MyCategories from '../components/MyCategories'
+import CategoryFeed from '../components/CategoryFeed'
 
 import AddPost from '../components/AddPost'
 
@@ -24,7 +25,8 @@ export const routes = [
     {path: '/profile/:username', element: <Profile />},
     {path: '/delete-account', element: <DeleteAccount />},
     {path: '/add-post', element: <AddPost />},
-    {path: '/my-categories', element: <MyCategories />}
+    {path: '/my-categories', element: <MyCategories />},
+    {path: '/category/:id', element: <CategoryFeed />}
 ]
 
 export const userPath = [
@@ -35,7 +37,8 @@ export const userPath = [
     "/modify-profile",
     '/delete-account',
     '/add-post',
-    '/my-categories'
+    '/my-categories',
+    '/category/:id'
 ]
 
 export const adminPath = [
