@@ -40,7 +40,7 @@ router.post("/api/unfollow-categories", unfollowCategories);
 
 router.get("/api/get-categories", getCategories);
 router.get("/api/get-mycategories/:id", getMyCategories);
-router.get("/api/get-homefeed/:id", getHomeFeed);
+// router.get("/api/get-homefeed/:id", getHomeFeed);
 router.get("/api/get-categoryfeed/:id", getCategoryFeed);
 
 // Admin routes 

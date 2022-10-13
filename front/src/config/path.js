@@ -26,7 +26,7 @@ export const routes = [
     {path: '/delete-account', element: <DeleteAccount />},
     {path: '/add-post', element: <AddPost />},
     {path: '/my-categories', element: <MyCategories />},
-    {path: '/category/:id', element: <CategoryFeed />}
+    {path: '/category/:name', element: <CategoryFeed />}
 ]
 
 export const userPath = [
@@ -38,7 +38,7 @@ export const userPath = [
     '/delete-account',
     '/add-post',
     '/my-categories',
-    '/category/:id'
+    '/category/:name'
 ]
 
 export const adminPath = [

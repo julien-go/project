@@ -32,7 +32,7 @@ const addPost = (req, res) => {
                 console.log(2)
                 res.json({response: false, msg: 'Too many characters'})
             } else {
-                if(textContent.toString().length < 50){
+                if(textContent.toString().length < 20){
                     console.log(3)
                     res.json({response: false, msg: 'Not enough characters'})
                 } else {

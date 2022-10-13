@@ -27,11 +27,9 @@ const getHomeFeed = (req, res) => {
             }
             
             const postsToShow = allposts.filter(item => !myCategoriesId.includes(item.id)) ;
-            console.log(postsToShow)
+            // console.log(postsToShow)
         })        
     })
-    
-    
 
     // let selectedPosts = [];
     // let selectedPostId = [];

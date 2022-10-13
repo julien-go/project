@@ -8,22 +8,22 @@ const HomeFeed = () => {
     
     const [posts, setPosts] = useState([])
     
-    const getLastPosts = () => {
+    // const getLastPosts = () => {
         
-        axios.get(`${BASE_URL}/get-homefeed/${state.id}`)
-        .then((res)=> {
-            if(res.data.response){
+    //     axios.get(`${BASE_URL}/get-homefeed/${state.id}`)
+    //     .then((res)=> {
+    //         if(res.data.response){
                 
-            }
-        })
-        .catch((err)=> {
-            console.log(err)
-        })
-    }
+    //         }
+    //     })
+    //     .catch((err)=> {
+    //         console.log(err)
+    //     })
+    // }
     
-    useEffect(() => {
-        getLastPosts();
-    }, [])
+    // useEffect(() => {
+    //     getLastPosts();
+    // }, [])
     
     return (
         <Fragment>

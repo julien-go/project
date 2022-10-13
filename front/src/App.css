@@ -43,10 +43,24 @@
   color: red;
 }
 
+.post {
+  border: 1px solid black;
+}
+.username {
+  color: black;
+  font-size: 2em;
+}
+
 .user_avatar {
   width: 250px;
   height: 250px;
   object-fit: cover;
+}
+
+.little_avatar {
+  width: 125px;
+  height: 125px;
+
 }
 
 .react_select_container {

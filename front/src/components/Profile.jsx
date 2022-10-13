@@ -17,7 +17,6 @@ const Profile = () => {
     const navigate = useNavigate();
     
     const getParams = () => {
-        
         const pathTable = path.pathname.split('/');
         const name = pathTable[pathTable.length-1];
         setProfileName(name);

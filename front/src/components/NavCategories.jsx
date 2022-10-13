@@ -33,7 +33,7 @@ const NavCategories = () => {
             <nav>
                 {categories.map((e, i)=> 
                 <li key={i}>
-                    <NavLink to={`/category/${e.id}`}>
+                    <NavLink to={`/category/${e.value}`}>
                     {e.value}
                     </NavLink>
                 </li>

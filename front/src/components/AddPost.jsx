@@ -20,7 +20,7 @@ const AddPost = () => {
         const files = e.target.image.files;
         // console.log(textContent)
         
-        if(textContent.length < 50){
+        if(textContent.length < 20){
             setMsg('Not enough characters')
         } else {
             form.append('userId', state.id);

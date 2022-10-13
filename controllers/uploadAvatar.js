@@ -40,6 +40,7 @@ export const uploadAvatar = (req, res) => {
                     
                     pool.query(addAvatar, [newFilename], (err, avatar, fields) => {
                         if (err) throw err;
+                        console.log(avatar)
                         const newId = avatar.insertId;
                         
                         pool.query(checkAvatarUser, [currentUsername], (err, user, fields) => {
