@@ -9,8 +9,6 @@ const getHomeFeedPosts = (req, res) => {
     const selectImagePost = 'SELECT images.id AS image_id, images.url FROM images JOIN posts ON posts.image_id = images.id WHERE posts.id = ?'
     
     const postId = req.params.id;
-    
-        let postsToShow = [];
         
         if(postId === []){
             res.json({response: false})
@@ -27,8 +25,8 @@ const getHomeFeedPosts = (req, res) => {
                     }
                     pool.query(selectImagePost, [postId], (err, img, fields)=> {
                             if (err) throw err;
-                            console.log(img)
-                            res.json({response:true, post: {...post[0], id: postId, categories: cats[0], image: img[0]}})
+                            // console.log({response:true, post: {...post[0], id: postId, categories: cats, image: img[0]}})
+                            res.json({response:true, post: {...post[0], id: postId, categories: cats, image: img[0]}})
                     })
                     
                 })

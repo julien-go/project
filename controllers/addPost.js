@@ -46,13 +46,13 @@ const addPost = (req, res) => {
                         for(let i=0; i < categories.length; i++){
                             pool.query(insertPostCategorie, [postId, categories[i]], (err, cats, fields) => {
                                 if (err) throw err;
-                                console.log('0000')
+                                // console.log('0000')
                             })
                                 // console.log(cats)
                         }
                         pool.query(insertScore, [postId], (err, score, fields) => {
                             if (err) throw err;
-                            console.log(6)
+                            // console.log(6)
 
                             if(!files.files){
                                 console.log('successfully added without img')

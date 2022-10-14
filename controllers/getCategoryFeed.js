@@ -32,7 +32,6 @@ const getCategoryFeed = (req, res) => {
                                 postCategories.push(cats[j])
                             }
                         }
-                        
                         pool.query(selectImagePost, [postsId[i].id], (err, img, fields)=> {
                             if (err) throw err;
                             postsToShow.push({...post[0], id: postsId[i].id, categories: postCategories, image: img[0]})

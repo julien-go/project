@@ -29,28 +29,26 @@ const HomeFeed = () => {
     
     // Recuperation des infos de chaque posts dans la bdd
     const getPosts = () => {
-        let postsToShow = [];
+        let idList = [];
+        let postsToShow = [...posts];
         postsId.map((e, i) => {
             axios.get(`${BASE_URL}/get-homefeed-posts/${postsId[i]}`)
             .then((res)=> {
-                if(res.data.response && res.data.post){
-                    const newPost = res.data.post;
-                    console.log(newPost.id)
-                        for(let j=0; j < postsToShow.length; j++){
-                            
-                            if(postsToShow[j].id != newPost.id){
-                                postsToShow.push(newPost)
-                            }
-                        }
+                if(res.data.response){
+                    // console.log(posts)
+                    if(!idList.includes(res.data.post.id)){
+                        idList.push(res.data.post.id)
+                        postsToShow.push(res.data.post)
                     }
                     setPosts(postsToShow)
+                }
             })
             .catch((err)=> {
                 console.log(err)
             })
         })
-
-        }
+        
+    }
     
     
     useEffect(() => {
@@ -62,16 +60,12 @@ const HomeFeed = () => {
             getPosts();
         }
     }, [postsId])
-    
-    useEffect(() => {
-        console.log(posts)
-    })
+
     
     return (
         <Fragment>
             <div className='feed'>
-            
-            {/*  {posts.map((e, i)=> {
+              {posts.map((e, i)=> {
                     return (
                     <div key={i} id={e.id} className='post'>
                         <div className="user_post">
@@ -80,23 +74,25 @@ const HomeFeed = () => {
                                 <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${e.avatar_url}`} alt={`${e.username}'s avatar`} className="little_avatar user_avatar "/>
                             </NavLink>
                         </div>
-                        <div>
+                       <div>
                             <p>{e.text_content}</p>
                             
-                            {posts[i].image !== undefined && <img src={`http://juliengodard.sites.3wa.io:9300/img/${posts[i].image.url}`} alt={`${e.username}'s uploaded picture`} className="post_img"/>}
+                            {e.image !== undefined && <img src={`http://juliengodard.sites.3wa.io:9300/img/${e.image.url}`} alt={`${e.username}'s uploaded picture`} className="post_img"/>}
                             
                             <p className='score'>SCORE : {e.score}</p>
                             <p className='date'>{e.publication_date}</p>
-                        </div>
+                        </div> 
+                        
                         <ul className='post_categories'>
-                        {posts[i].categories.map((element, j) => 
+                        {e.categories.map((element, j) => 
                             <li key={j} className='label_category'>{element.name}</li>
                         )}
                         </ul>
+                        
                     </div>
                 )
                 })} 
-                */}
+                
             </div>
         </Fragment>
     )
