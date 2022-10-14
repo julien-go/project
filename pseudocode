@@ -6,14 +6,14 @@ PROJET RESEAU SOCIAL :
     Composant LoginForm : affichage du formulaire de connexion  OK
     
     Composant Navbar qui contient les liens vers les routes OK
-    Composant CategoriesList : Nav pour voir les feed par catégories
+    Composant CategoriesList : Nav pour voir les feed par catégories OK
     
     Composant Home :
         - Composant MostPopularCarousel qui tourne sur le 5 posts les plus populaires du jour
         - Composant HomeFeed qui affiche tout les posts qui correspondent aux centres d'intérêts choisis par l'utilisateur, avec upvote-downvote
-        
     Composant MostPopular : Liste des posts les plus populaires du site (moins de 24h)
-    Composant Categorie : Liste des posts d'une catégorie spécifique
+    
+    Composant Categorie : Liste des posts d'une catégorie spécifique OK 
     
     Composant AddPost : Formulaire d'ajout d'un nouveau post OK
     

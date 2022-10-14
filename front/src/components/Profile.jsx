@@ -35,7 +35,7 @@ const Profile = () => {
                     setMsg('')
                     const regDate = res.data.registrationDate;
 
-                    setUserInfos({email: res.data.email, role: res.data.role, avatarPath: res.data.avatarPath, registrationDate: regDate})
+                    setUserInfos({email: res.data.email, role: res.data.role, avatarPath: res.data.avatarPath, registrationDate: regDate, postCount: res.data.postCount})
                 }
             })
             .catch((err)=> {
@@ -68,7 +68,8 @@ const Profile = () => {
                 {msg !== '' && <p>{msg}</p>}
                 {userInfos.email !== '' && <h2>USERNAME : {profileName}</h2>}
                 {userInfos.avatarPath !== '' && <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${userInfos.avatarPath}`} alt={`${profileName}'s avatar`} className="user_avatar"/>}
-                <p>{userInfos.registrationDate}</p>
+                <p>Nombre de posts : {userInfos.postCount}</p>
+                <p>Inscrit depuis le : {userInfos.registrationDate}</p>
             </div>
             <hr/>
             {profileName === state.username && 

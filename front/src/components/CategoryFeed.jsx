@@ -25,20 +25,20 @@ const CategoryFeed = () => {
             .then((res)=> {
                 // console.log(res)
                 // console.log(res.data.posts)
-                if(res.data.response){
-                    if(res.data.posts !== []){
+                if(res.data.response || res.data.posts !== []){
                         const postsToShow = res.data.posts
                         setPosts(postsToShow);
                         console.log(posts)
                         setMsg('')
-                    } else {
+                        
+                } else {
                         setPosts([])
                         setMsg('No posts here !')
-                    }
-    
                 }
+            
             })
             .catch((err)=> {
+                setMsg('No posts here !')
                 console.log(err)
             })
         }
@@ -49,7 +49,9 @@ const CategoryFeed = () => {
     }, [path])
     
     useEffect(()=> {
-        getLastPosts()
+        if(thisCategory !== ''){
+            getLastPosts()
+        }
     }, [thisCategory])
 
     return (
@@ -58,20 +60,29 @@ const CategoryFeed = () => {
             {msg !== '' && <p>{msg}</p>}
             <div className='feed'>
             {posts.map((e, i)=> {
-                return(
+                return (
                 <div key={i} id={e.id} className='post'>
                     <div className="user_post">
                         <NavLink to={`/profile/${e.username}`}>
                             <p className='username'>{e.username}</p>
+                            <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${e.avatar_url}`} alt={`${e.username}'s avatar`} className="little_avatar user_avatar "/>
                         </NavLink>
-                        <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${e.avatar_url}`} alt={`${e.username}'s avatar`} className="little_avatar user_avatar "/>
                     </div>
                     <div>
                         <p>{e.text_content}</p>
+                        
+                        {posts[i].image !== undefined && <img src={`http://juliengodard.sites.3wa.io:9300/img/${posts[i].image.url}`} alt={`${e.username}'s uploaded picture`} className="post_img"/>}
+                        
                         <p className='score'>SCORE : {e.score}</p>
                         <p className='date'>{e.publication_date}</p>
                     </div>
-                </div>
+                    <ul className='post_categories'>
+                    {posts[i].categories.map((element, j) => 
+                    <li key={j} className='label_category'>{element.name}</li>
+                    )}
+                    </ul>
+                    
+                    </div>
                 )
             })}
             </div>
