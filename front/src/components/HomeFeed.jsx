@@ -4,6 +4,8 @@ import {AppContext} from '../reducer/reducer'
 import BASE_URL from "../config.js"
 import axios from 'axios'
 
+import VoteBar from './VoteBar'
+
 const HomeFeed = () => {
     const [state, dispatch] = useContext(AppContext)
     const [categoriesId, setCategoriesId] = useState([])
@@ -128,7 +130,6 @@ const HomeFeed = () => {
                             
                             {e.image !== undefined && <img src={`http://juliengodard.sites.3wa.io:9300/img/${e.image.url}`} alt={`${e.username}'s uploaded picture`} className="post_img"/>}
                             
-                            <p className='score'>SCORE : {e.score}</p>
                             <p className='date'>{e.publication_date}</p>
                         </div> 
                         
@@ -138,7 +139,7 @@ const HomeFeed = () => {
                         )}
                         </ul>
                         <div className='vote_bar'>
-                        
+                            <VoteBar post_id={e.id} user_id={state.id} score={e.score}/>
                         </div>
                     </div>
                 )

@@ -21,6 +21,8 @@ import getHomeFeedCategories from '../controllers/getHomeFeedCategories.js'
 import getHomeFeedPosts from '../controllers/getHomeFeedPosts.js'
 import getHomeFeedInfos from '../controllers/getHomeFeedInfos.js'
 
+import {verifyVote, upVote, downVote, getScore} from '../controllers/vote.js'
+
 const router = express.Router();
 
 // Not connected routes
@@ -50,6 +52,10 @@ router.get("/api/get-homefeed-infos/:id", getHomeFeedInfos);
 
 router.get("/api/get-categoryfeed/:id", getCategoryFeed);
 
+router.get("/api/verify-vote/:userid/:postid", verifyVote);
+router.get("/api/get-score/:postid", getScore);
+router.post("/api/upvote", upVote);
+router.post("/api/downvote", downVote);
 // Admin routes 
 router.post("/api/admin/add-categorie", addCategorie);
 
