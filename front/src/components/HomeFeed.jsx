@@ -6,65 +6,114 @@ import axios from 'axios'
 
 const HomeFeed = () => {
     const [state, dispatch] = useContext(AppContext)
+    const [categoriesId, setCategoriesId] = useState([])
     const [postsId, setPostsId] = useState([])
     const [posts, setPosts] = useState([])
     
-    const getPostsId = () => {
+    // // On récupère les id des catégories auxquelles le user est abonné
+    const getCategoriesId = () => {
+        let allCategories = []
         if(state.id !== null){
-            axios.get(`${BASE_URL}/get-homefeed/${state.id}`)
+            axios.get(`${BASE_URL}/get-homefeed-categories/${state.id}`)
             .then((res)=> {
-                if(res.data.response){
-                    // console.log(res.data)
-                    setPostsId(res.data.postsId)
-                    getPosts()
+                if(res.data.response && res.data.myCategories){
+                    for(let i = 0; i < res.data.myCategories.length; i++){
+                        allCategories.push(res.data.myCategories[i].id)
+                        setCategoriesId([...allCategories])
+                    }
                 }
             })
             .catch((err)=> {
                 console.log(err)
             })
-            .then((res)=>{
-            })
         }
     }
     
-    // Recuperation des infos de chaque posts dans la bdd
-    const getPosts = () => {
-        let idList = [];
-        let postsToShow = [...posts];
-        postsId.map((e, i) => {
-            axios.get(`${BASE_URL}/get-homefeed-posts/${postsId[i]}`)
+    // // On récupère pour chaque catégories, tout les articles associés
+    const getPostsId = () => {
+        let allPostsId = []
+        categoriesId.map((e, i)=> {
+            axios.get(`${BASE_URL}/get-homefeed-posts/${e}`)
             .then((res)=> {
                 if(res.data.response){
-                    // console.log(posts)
-                    if(!idList.includes(res.data.post.id)){
-                        idList.push(res.data.post.id)
-                        postsToShow.push(res.data.post)
+                    // console.log(res.data.postsId)
+                    for(let i = 0; i < res.data.postsId.length; i++){
+                        if(!allPostsId.includes(res.data.postsId[i].id)){
+                            allPostsId.push(res.data.postsId[i].id)
+                        }
+                        // console.log(res.data.postsId[i].id)
                     }
-                    setPosts(postsToShow)
+                    setPostsId([...allPostsId.sort().reverse()])
+                    // console.log(postsId)
                 }
             })
             .catch((err)=> {
                 console.log(err)
             })
         })
-        
     }
     
+    // On récupère les infos de chaque posts
+    const getPosts = () => {
+        let postsToShow = [];
+        postsId.map((e, i) => {
+            axios.get(`${BASE_URL}/get-homefeed-infos/${postsId[i]}`)
+            .then((res)=> {
+                if(res.data.response){
+                    // console.log(res.data.post)
+                    postsToShow.push(res.data.post)
+                    setPosts([...postsToShow.sort(compareId)
+                    ])
+                }
+            })
+            .catch((err)=> {
+                console.log(err)
+            })
+        })
+    }
     
+    const refresh = (e) => {
+        e.preventDefault();
+        getCategoriesId()
+    }
+    
+    const compareId = (a, b) => {
+        if(a.id < b.id) return 1
+        if(a.id > b.id) return -1
+        else return 0
+    }
+    
+    // Au chargement du composant
     useEffect(() => {
-        getPostsId();
+        getCategoriesId();
     }, [])
     
+    // A l'update du state categoriesId
+    useEffect(() => {
+        if(categoriesId !== [] || categoriesId !== null){
+            getPostsId();
+        }
+    }, [categoriesId])
+    
+    // A l'update du state postsId
     useEffect(() => {
         if(postsId !== [] || postsId !== null){
             getPosts();
         }
     }, [postsId])
+    
 
+    // useEffect(()=> {
+    //      console.log(posts)
+    //     // console.log(categoriesId)
+    // })
     
     return (
         <Fragment>
             <div className='feed'>
+                <form onSubmit={e => refresh(e)}>
+                    <input type='submit' value='Refresh'/>
+                </form>
               {posts.map((e, i)=> {
                     return (
                     <div key={i} id={e.id} className='post'>
@@ -88,7 +137,9 @@ const HomeFeed = () => {
                             <li key={j} className='label_category'>{element.name}</li>
                         )}
                         </ul>
+                        <div className='vote_bar'>
                         
+                        </div>
                     </div>
                 )
                 })} 

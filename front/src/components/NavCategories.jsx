@@ -30,7 +30,7 @@ const NavCategories = () => {
     return (
         <div>
             <h2>Par catégories :</h2>
-            <nav>
+            <nav className='nav_categories'>
                 {categories.map((e, i)=> 
                 <li key={i}>
                     <NavLink to={`/category/${e.value}`}>

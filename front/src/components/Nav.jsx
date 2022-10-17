@@ -16,7 +16,7 @@ const Nav = () => {
         <React.Fragment>
         
         {state.username !== '' && <p>Bienvenue {state.username}</p>}
-            <nav>
+            <nav className='navbar'>
                 <ul>
                     {state.isLogged &&
                         <React.Fragment>

@@ -60,7 +60,7 @@ const MyCategories = () => {
     
     const submitAdd = (e) => {
         e.preventDefault();
-        if(toAdd !== []){
+        if(toAdd !== [] || toAdd !== undefined){
             axios.post(`${BASE_URL}/follow-categories`, {
                 toAdd,
                 userId: state.id

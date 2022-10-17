@@ -1,18 +1,20 @@
 import pool from '../config/database.js';
 
-const getHomeFeedPosts = (req, res) => {
+const getHomeFeedCategories = (req, res) => {
     /*39 et 43 musique, 37 et 40*/
     // Recuperation des categories auxquelles le user est abonné 
     
+    const selectMyCategories = 'SELECT categories.id FROM categories JOIN users_categories ON users_categories.categorie_id = categories.id JOIN users ON users.id = users_categories.user_id WHERE users.id = ? ORDER BY categories.id DESC';
     const selectPostsId = 'SELECT posts.id FROM posts JOIN posts_categories ON posts_categories.post_id = posts.id WHERE posts_categories.categorie_id = ? ORDER BY posts.id'
 
-    const categoryId = req.params.id;
-    pool.query(selectPostsId, [categoryId], (err, postsId, fields)=> {
+    const userId = req.params.id;
+    pool.query(selectMyCategories, [userId], (err, myCategories, fields)=> {
         if (err) throw err;
-            if(postsId === []){
+
+            if(myCategories === []){
                 res.json({response: false}) 
             } else {
-                res.json({response: true, postsId})
+                res.json({response: true, myCategories})
             }
         
 
@@ -35,7 +37,7 @@ const getHomeFeedPosts = (req, res) => {
     })        
 }
 
-export default getHomeFeedPosts; 
+export default getHomeFeedCategories; 
 
 /*
 1 - SELECTIONNER LES CATEGORIES SUIVIES PAR L'UTILISATEUR

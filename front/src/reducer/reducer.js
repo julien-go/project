@@ -3,7 +3,8 @@ import React from 'react';
 const initialState = {id: null, username: '',
                     email: '',
                     isLogged: false, 
-                    isAdmin: false
+                    isAdmin: false,
+                    categories: []
                     };
                     
 const AppContext = React.createContext([]);
