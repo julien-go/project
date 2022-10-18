@@ -7,6 +7,7 @@ import {routes} from "../config/path"
 const Router = () => {
     
     return (
+        <main>
         <Routes>
             {routes.map((e, i) => {
                 return (
@@ -17,6 +18,7 @@ const Router = () => {
                 )
             })}
         </Routes>
+        </main>
     )
 }
 

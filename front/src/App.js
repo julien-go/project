@@ -6,6 +6,7 @@ import BASE_URL from "./config.js"
 import {AppContext} from './reducer/reducer.js'
 import Router from './components/Router'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <BrowserRouter>
             <Nav />
             <Router />
+            <Footer />
         </BrowserRouter>
     </div>
   );

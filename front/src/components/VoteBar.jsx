@@ -6,6 +6,13 @@ const VoteBar = (props) => {
     
     const [vote, setVote] = useState({voted: false, type: ''})
     const [score, setScore] = useState(0);
+    const userId = props.user_id
+    const postId = props.post_id
+    
+    const upSelectedColor = 'green vote_btn';
+    const downSelectedColor = 'red vote_btn';
+    const notSelectedColor = 'grey vote_btn';
+    
     
     const getScore = () => {
         axios.get(`${BASE_URL}/get-score/${props.post_id}`)
@@ -22,7 +29,8 @@ const VoteBar = (props) => {
     const verifyVote = () => {
         axios.get(`${BASE_URL}/verify-vote/${props.user_id}/${props.post_id}`)
         .then((res) => {
-            if(res.response){
+            if(res.data.response){
+                // console.log(res.data.vote.name)
                 setVote({voted: true, type: res.data.vote.name})
             } else {
                 setVote({voted: false, type: ''})
@@ -36,12 +44,10 @@ const VoteBar = (props) => {
     
     const upVote = (e) => {
         e.preventDefault()
-        const userId = props.user_id
-        const postId = props.post_id
         const currentScore = score
         if(vote.voted){
             if(vote.type === 'up'){
-                annulUpVote()
+                annulVote()
             }
         } else {
                 axios.post(`${BASE_URL}/upvote`, {
@@ -53,7 +59,6 @@ const VoteBar = (props) => {
                     if(res.data.response){
                         setScore(currentScore + 1)
                         setVote({voted: true, type: 'up'})
-                        
                     }
                 })
                 .catch((err)=> {
@@ -61,20 +66,13 @@ const VoteBar = (props) => {
                 })
         }
     }
-    
-    
-    const annulUpVote = () => {
-        console.log('annuler')
-    }
-    
+
     const downVote = (e) => {
         e.preventDefault()
-        const userId = props.user_id
-        const postId = props.post_id
         const currentScore = score
         if(vote.voted){
             if(vote.type === 'down'){
-                annulDownVote()
+                annulVote()
             }
         } else {
                 axios.post(`${BASE_URL}/downvote`, {
@@ -94,23 +92,44 @@ const VoteBar = (props) => {
         }
     }
     
-        const annulDownVote = () => {
+    const annulVote = () => {
         console.log('annuler')
+        axios.post(`${BASE_URL}/annul-vote`, {
+                userId,
+                postId,
+                score,
+                vote
+            })
+            .then((res)=>{
+                if(res.data.response){
+                    setScore(res.data.newScore)
+                    setVote({voted: false, type: ''})
+                }
+            })
+            .catch((err)=> {
+                console.log(err)
+            })
     }
     
     useEffect(()=> {
         verifyVote()
     }, [])
     
+    useEffect(()=> {
+        console.log(vote)
+    })
     return (
         <Fragment>
             <p>SCORE : {score}</p>
-            <form onSubmit={(e) => upVote(e)}>
-                <input type='submit' value='+'/>
-            </form>
-            <form onSubmit={(e) => downVote(e)}>
-                <input type='submit' value='-'/>
-            </form>
+            <div className='vote_buttons_container'>
+                <form onSubmit={(e) => upVote(e)}>
+                    <input type='submit' value='+' className={vote.type === 'up' ? upSelectedColor : notSelectedColor}/>
+                </form>
+                <form onSubmit={(e) => downVote(e)}>
+                    <input type='submit' value='-' className={vote.type === 'down' ? downSelectedColor : notSelectedColor}/>
+                </form>
+            </div>
+
         </Fragment>
     )
 }

@@ -13,36 +13,25 @@ const Nav = () => {
     // })
 
     return (
-        <React.Fragment>
-        
-        {state.username !== '' && <p>Bienvenue {state.username}</p>}
+        <header>
             <nav className='navbar'>
                 <ul>
                     {state.isLogged &&
                         <React.Fragment>
                             <li>
                                 <NavLink to="/">
-                                HOME
+                                    HOME
                                 </NavLink>
                             </li>
-                            <li>
-                                <NavLink to={urlMyProfile}>
-                                MY PROFILE
-                                </NavLink>
-                            </li>
+
                             <li>
                                 <NavLink to="add-post">
-                                ADD NEW POST
+                                AJOUTER UN POST
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="disconnect">
-                                DISCONNECT
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="my-categories">
-                                CENTRES D'INTERETS
+                                <NavLink to="categories">
+                                CATEGORIES
                                 </NavLink>
                             </li>
                         </React.Fragment>
@@ -72,10 +61,34 @@ const Nav = () => {
                     }
                 </ul>
             </nav>
-            {state.isLogged &&
+           {/* {state.isLogged &&
                 <NavCategories />
-            }
-        </React.Fragment>
+            } */}
+            {state.isLogged &&
+            <div className='user_bar'>
+                <ul>
+                    <li>
+                        <p className='username'>{state.username}</p>
+                    </li>
+                    <li>
+                        <NavLink to={urlMyProfile}>
+                        Profil
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="my-categories">
+                        Centres d'intérêts
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="disconnect">
+                            Déconnexion
+                        </NavLink>
+                    </li>
+                </ul>
+            </div> }
+
+        </header>
         )
 }
 
