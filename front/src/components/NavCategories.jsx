@@ -29,15 +29,17 @@ const NavCategories = () => {
     
     return (
         <div>
-            <h2>Par catégories :</h2>
+            <h1>Par catégories :</h1>
             <nav className='nav_categories'>
-                {categories.map((e, i)=> 
-                <li key={i}>
-                    <NavLink to={`/category/${e.value}`}>
-                    {e.value}
-                    </NavLink>
-                </li>
-                )}
+                <ul>
+                    {categories.map((e, i)=> 
+                    <li key={i}>
+                        <NavLink to={`/category/${e.value}`}>
+                        {e.value}
+                        </NavLink>
+                    </li>
+                    )}
+                </ul>
             </nav>
         </div>
         )

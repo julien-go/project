@@ -54,29 +54,25 @@ const Register = () => {
     
     return (
         <React.Fragment>
-            <h1>Inscription</h1>
-            {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
-            <form onSubmit={submitRegister}>
-                <div>
-                    <label name='username'>
-                        Username
-                        <input type='text' name='username' maxLength='20' autoComplete='username' value={username} onChange= {(e) => setUsername(e.target.value)} required/>
-                    </label>
-                </div>
-                <div>
-                    <label name='email'>
-                        Email
-                        <input type='email' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
-                    </label>
-                </div>
-                <div>
-                    <label name='password'>
-                        Password
-                        <input type='password' name='password' maxLength='255' value={password}  autoComplete='new-password' onChange= {(e) => setPassword(e.target.value)} required/>
-                    </label>
-                </div>
-                <input type='submit' value='Submit'/>
-            </form>
+            <div className='form_container'>
+                <h1>Inscription</h1>
+                {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
+                <form onSubmit={submitRegister}>
+                        <label name='username'>
+                            Username
+                            <input type='text' name='username' maxLength='20' autoComplete='username' value={username} onChange= {(e) => setUsername(e.target.value)} required/>
+                        </label>
+                        <label name='email'>
+                            Email
+                            <input type='email' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
+                        </label>
+                        <label name='password'>
+                            Password
+                            <input type='password' name='password' maxLength='255' value={password}  autoComplete='new-password' onChange= {(e) => setPassword(e.target.value)} required/>
+                        </label>
+                    <input type='submit' value='Submit'/>
+                </form>
+            </div>
         </React.Fragment>
         )
 }

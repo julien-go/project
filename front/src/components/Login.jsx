@@ -43,23 +43,21 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <h1>Connexion</h1>
-            {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
-            <form onSubmit={submitLogin}>
-                <div>
-                    <label name='email'>
-                        Email
-                        <input type='mail' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
-                    </label>
-                </div>
-                <div>
-                    <label name='password'>
-                        Password
-                        <input type='password' name='password' maxLength='255' value={password} autoComplete='current-password' onChange= {(e) => setPassword(e.target.value)} required/>
-                    </label>
-                </div>
-                <input type='submit' value='Submit'/>
-            </form>
+            <div className='form_container'>
+                <h1>Connexion</h1>
+                {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
+                <form onSubmit={submitLogin}>
+                        <label name='email'>
+                            Email
+                            <input type='mail' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
+                        </label>
+                        <label name='password'>
+                            Password
+                            <input type='password' name='password' maxLength='255' value={password} autoComplete='current-password' onChange= {(e) => setPassword(e.target.value)} required/>
+                        </label>
+                    <input type='submit' value='Submit'/>
+                </form>
+            </div>
         </React.Fragment>
         )
 }

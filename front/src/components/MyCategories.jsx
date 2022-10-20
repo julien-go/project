@@ -104,31 +104,34 @@ const MyCategories = () => {
 
     return (
         <Fragment>
-            <h1>Mes centres d'intérêts</h1>
-            <ul>
-                {myCategories.map((e, i)=> 
-                    <li key={i} id={e.id} value={e.value}>{e.value}</li>
-                    )}
-            </ul>
-            <h2>Ajouter abonnement(s)</h2>
-            <form onSubmit={submitAdd}>
-                <div className='react_select_container'>
-                    <label>
-                        <Select onChange={(e)=> changeToAdd(e)} value={toAdd} className='react-select' styles={customSelectStyles} isMulti options={otherCategories} name='toAdd' required/>
-                        <input type="submit" value="Ajouter un abonnement"/>
-                    </label>
-                </div>
-            </form>
-            <hr/>
-            <h2>Supprimer abonnement(s)</h2>
-            <form onSubmit={submitRemove}>
-                <div className='react_select_container'>
-                    <label>
-                        <Select onChange={(e)=> changeToRemove(e)} value={toRemove} className='react-select' styles={customSelectStyles} isMulti options={myCategories} name='toRemove' required/>
-                    </label>
-                    <input type="submit" value="Supprimer un abonnement"/>
-                </div>
-            </form>
+            <div className='mycategories'>
+                <h1>Mes centres d'intérêts</h1>
+                <ul className='mycategories_list'>
+                    {myCategories.map((e, i)=> 
+                        <li className='label_category' key={i} id={e.id} value={e.value}>{e.value}</li>
+                        )}
+                </ul>
+                <div className='separator'></div>
+                <h2 className='bloc_title'>Ajouter abonnement(s)</h2>
+                <form onSubmit={submitAdd}>
+                    <div className='react_select_container'>
+                        <label>
+                            <Select onChange={(e)=> changeToAdd(e)} value={toAdd} className='react-select' styles={customSelectStyles} isMulti options={otherCategories} name='toAdd' required/>
+                        </label>
+                        <input className='action_btn' type="submit" value="Ajouter un abonnement"/>
+                    </div>
+                </form>
+                <div className='separator'></div>
+                <h2 className='bloc_title'>Supprimer abonnement(s)</h2>
+                <form onSubmit={submitRemove}>
+                    <div className='react_select_container'>
+                        <label>
+                            <Select onChange={(e)=> changeToRemove(e)} value={toRemove} className='react-select' styles={customSelectStyles} isMulti options={myCategories} name='toRemove' required/>
+                        </label>
+                        <input className='action_btn' type="submit" value="Supprimer un abonnement"/>
+                    </div>
+                </form>
+            </div>
         </Fragment>
     )
 }

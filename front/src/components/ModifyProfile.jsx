@@ -62,23 +62,25 @@ const ModifyProfile = () => {
     
     return (
         <React.Fragment>
-            <h1>Modification des informations du profil</h1>
-            {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
-            <form onSubmit={submitModif}>
-                <div>
-                    <label name='username'>
-                        Username
-                        <input type='text' name='username' maxLength='20' autoComplete='username' value={username} onChange= {(e) => setUsername(e.target.value)} required/>
-                    </label>
-                </div>
-                <div>
-                    <label name='email'>
-                        Email
-                        <input type='email' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
-                    </label>
-                </div>
-                <input type='submit' value='Submit'/>
-            </form>
+            <div className='profile'>
+                <h1>Modification des informations du profil</h1>
+                {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
+                <form onSubmit={submitModif}>
+                    <div>
+                        <label name='username'>
+                            Username
+                            <input type='text' name='username' maxLength='20' autoComplete='username' value={username} onChange= {(e) => setUsername(e.target.value)} required/>
+                        </label>
+                    </div>
+                    <div>
+                        <label name='email'>
+                            Email
+                            <input type='email' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
+                        </label>
+                    </div>
+                    <input className='action_btn' type='submit' value='Submit'/>
+                </form>
+            </div>
         </React.Fragment>
         )
 }

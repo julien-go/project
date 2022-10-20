@@ -113,8 +113,8 @@ const HomeFeed = () => {
     return (
         <Fragment>
             <div className='feed'>
-                <form onSubmit={e => refresh(e)}>
-                    <input type='submit' value='Refresh'/>
+                <form className='refresh_container' onSubmit={e => refresh(e)}>
+                    <input className='action_btn' type='submit' value='Rafraichir la page'/>
                 </form>
               {posts.map((e, i)=> {
                     return (
@@ -138,12 +138,15 @@ const HomeFeed = () => {
                             <img src={`http://juliengodard.sites.3wa.io:9300/img/${e.image.url}`} alt={`${e.username}'s uploaded picture`} className="post_img"/>
                             </div>
                             }
-                            
-                            <p className='date'>{e.publication_date}</p>
                         </div> 
+                        
                         <div className='vote_bar'>
                             <VoteBar post_id={e.id} user_id={state.id} score={e.score}/>
                         </div>
+                        <div className='date_container'>
+                            <div className='date'>{e.publication_date}</div>
+                        </div>
+                        
                     </div>
                 )
                 })} 

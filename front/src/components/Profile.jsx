@@ -63,23 +63,28 @@ const Profile = () => {
     
     return (
         <Fragment>
-            <div>
-                <h1>Profil</h1>
-                {msg !== '' && <p>{msg}</p>}
-                {userInfos.email !== '' && <h2>USERNAME : {profileName}</h2>}
-                {userInfos.avatarPath !== '' && <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${userInfos.avatarPath}`} alt={`${profileName}'s avatar`} className="user_avatar"/>}
-                <p>Nombre de posts : {userInfos.postCount}</p>
-                <p>Inscrit depuis le : {userInfos.registrationDate}</p>
-            </div>
-            <hr/>
-            {profileName === state.username && 
-                <div>
-                    <h3>Gestion du profil</h3>
-                    <button onClick={redirectModifAvatar}>Modify/Add avatar</button>
-                    <button onClick={redirectModifProfile}>Modify profile informations</button>
-                    <button onClick={redirectDeleteAccount}>Delete my profile</button>
+        <div className='profile'>
+            <h1>Profil</h1>
+                <div className='profile_infos_container'>
+                    {msg !== '' && <p>{msg}</p>}
+                    {userInfos.email !== '' && <h2 className='username profile_name'>{profileName}</h2>}
+                    {userInfos.avatarPath !== '' && <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${userInfos.avatarPath}`} alt={`${profileName}'s avatar`} className="user_avatar profile_avatar"/>}
+                    <div className='profile_infos'>
+                        <p>Nombre de posts : {userInfos.postCount}</p>
+                        <p>Inscrit depuis le : {userInfos.registrationDate}</p>
+                    </div>
                 </div>
-            }
+                <div className='separator'></div>
+                
+                {profileName === state.username && 
+                    <div className='modif_profile_container'>
+                        <h3 className='bloc_title'>Gestion du profil</h3>
+                        <button className='action_btn' onClick={redirectModifAvatar}>Modify/Add avatar</button>
+                        <button className='action_btn' onClick={redirectModifProfile}>Modify profile informations</button>
+                        <button className='action_btn' onClick={redirectDeleteAccount}>Delete my profile</button>
+                    </div>
+                }
+        </div>
         </Fragment>
         )
 }

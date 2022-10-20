@@ -10,6 +10,7 @@ import ModifyProfile from '../components/ModifyProfile'
 import DeleteAccount from '../components/DeleteAccount'
 import MyCategories from '../components/MyCategories'
 import CategoryFeed from '../components/CategoryFeed'
+import NavCategories from '../components/NavCategories'
 
 import AddPost from '../components/AddPost'
 
@@ -26,7 +27,8 @@ export const routes = [
     {path: '/delete-account', element: <DeleteAccount />},
     {path: '/add-post', element: <AddPost />},
     {path: '/my-categories', element: <MyCategories />},
-    {path: '/category/:name', element: <CategoryFeed />}
+    {path: '/category/:name', element: <CategoryFeed />},
+    {path: '/categories', element: <NavCategories/>}
 ]
 
 export const userPath = [
@@ -38,7 +40,8 @@ export const userPath = [
     '/delete-account',
     '/add-post',
     '/my-categories',
-    '/category/:name'
+    '/category/:name',
+    '/categories'
 ]
 
 export const adminPath = [

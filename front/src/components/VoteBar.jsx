@@ -1,6 +1,7 @@
 import {Fragment, useContext, useState, useEffect} from 'react'
 import BASE_URL from "../config.js"
 import axios from 'axios';
+import {ImArrowUp , ImArrowDown} from "react-icons/im";
 
 const VoteBar = (props) => {
     
@@ -93,7 +94,7 @@ const VoteBar = (props) => {
     }
     
     const annulVote = () => {
-        console.log('annuler')
+        // console.log('annuler')
         axios.post(`${BASE_URL}/annul-vote`, {
                 userId,
                 postId,
@@ -116,18 +117,18 @@ const VoteBar = (props) => {
     }, [])
     
     useEffect(()=> {
-        console.log(vote)
+        // console.log(vote)
     })
     return (
         <Fragment>
-            <p>SCORE : {score}</p>
+            <p className='bloc_score'>SCORE : <span className='score'>{score}</span></p>
             <div className='vote_buttons_container'>
-                <form onSubmit={(e) => upVote(e)}>
-                    <input type='submit' value='+' className={vote.type === 'up' ? upSelectedColor : notSelectedColor}/>
-                </form>
-                <form onSubmit={(e) => downVote(e)}>
-                    <input type='submit' value='-' className={vote.type === 'down' ? downSelectedColor : notSelectedColor}/>
-                </form>
+                    <button onClick={(e) => upVote(e)} className={vote.type === 'up' ? upSelectedColor : notSelectedColor}>
+                        <ImArrowUp className='up_arrow'/>
+                    </button>
+                    <button onClick={(e) => downVote(e)} className={vote.type === 'down' ? downSelectedColor : notSelectedColor}>
+                        <ImArrowDown className='down_arrow'/>
+                    </button>
             </div>
 
         </Fragment>

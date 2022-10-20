@@ -54,18 +54,22 @@ const ModifyAvatar = () => {
     
     return (
         <React.Fragment>
+        <div className='form_container modify_avatar'>
             <h1>Ajouter/Modifier l'avatar</h1>
             {msg !== '' && <p>{msg}</p>}
-            <form onSubmit={addNewAvatar} encType="multipart/form-data">
+            <form  onSubmit={addNewAvatar} encType="multipart/form-data">
                 <label name='avatar'>
-                    <input type='file' name='avatar' required/>
+                    <input className='input_file' type='file' name='avatar' required/>
                     <input type='submit' value='Submit'/>
                 </label>
             </form>
-            <hr/>
-            {deleteMsg !== '' && <p>{deleteMsg}</p>}
-            <button onClick={removeCurrentAvatar}>Remove current avatar</button>
-            
+             <div className='separator'></div>
+             <div>
+                {deleteMsg !== '' && <p>{deleteMsg}</p>}
+            <button className='action_btn' onClick={removeCurrentAvatar}>Remove current avatar</button>
+             </div>
+
+         </div>
         </React.Fragment>
     )
 }
