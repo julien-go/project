@@ -13,7 +13,7 @@ const Disconnect = () => {
         axios.get(`${BASE_URL}/disconnect`)
             .then((res)=>{
             // console.log(res)
-             res.data.response && navigate("/", {replace: true})
+             res.data.response && navigate("/login", {replace: true})
             })
             .catch((err) => {
             console.log(err)

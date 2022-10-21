@@ -55,26 +55,22 @@ const AddPost = () => {
         <Fragment>
             <h1>Ajouter un nouveau post</h1>
             {msg !== '' && <p className='form_error_msg'>{msg}</p> }
-            <form onSubmit={addNewPost} encType="multipart/form-data">
-                <div>
-                    <label name='categories'>
-                        Centre(s) d'intérêt(s):
-                        <SelectMultipleCategories  changeSelectedCategories={changeSelectedCategories}/>
-                    </label>
-                </div>
-                <div>
-                    <label name='textcontent'>
-                        <textarea onChange={(e) => setTextContent(e.target.value)} value={textContent} name='textcontent' minLength='50' maxLength='500'>
-                        </textarea>
-                    </label>
-                </div>
-                <div>
-                    <label name='image'>
-                        <input type='file' name='image'/>
-                    </label>
-                </div>
-                <input type='submit' value='Submit'/>
-            </form>
+            <div className='form_container add_post_container'>
+                    <form onSubmit={addNewPost} encType="multipart/form-data">
+                        <label name='categories'>
+                            Centre(s) d'intérêt(s):
+                            <SelectMultipleCategories  changeSelectedCategories={changeSelectedCategories}/>
+                        </label>
+                        <label name='textcontent'>
+                            <textarea onChange={(e) => setTextContent(e.target.value)} value={textContent} name='textcontent' rows='5' minLength='50' maxLength='500' placeholder='Écris ici...'>
+                            </textarea>
+                        </label>
+                        <label name='image'>
+                            <input type='file' name='image'/>
+                        </label>
+                    <input type='submit' value='Submit'/>
+                </form>
+            </div>
         </Fragment>
         )
 }

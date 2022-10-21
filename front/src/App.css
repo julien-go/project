@@ -116,16 +116,20 @@ footer {
 /**********************Logo*************************/
 
 .logo_container {
-  background: var(--gradient-orange);
+  background-color: var(--pale-blue);
   text-align: center;
   font-family: CarterOne-Regular;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgb(44, 62, 80) 0px -15px 15px -15px;
 }
 
 .logo {
+  background: var(--gradient-orange);
   font-size: 3em;
   color: white;
   text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
-
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 
@@ -148,6 +152,7 @@ header{
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
+  z-index: 1000;
 }
 
 .empty_bar_header {
@@ -199,7 +204,7 @@ header{
   /*border-radius: 20px;*/
   background-color: var(--pale-blue);
   color: var(--marine-blue);
-  /*padding: 0 0.5em;*/
+  padding: 0.1em 0;
   font-size: 1.75em;
   display: flex;
   align-items: center;
@@ -227,6 +232,7 @@ header{
   /*color: white;*/
   text-decoration: none;
   color: var(--blue);
+  /*padding: 0;*/
 }
 
 .user_bar ul li a svg {
@@ -249,11 +255,15 @@ header{
 
 .admin_navlink {
   font-size: 0.75em;
-  background-color: var(--downvote-color);
-  padding: 0.3em;
+  font-weight: bold;
+  background-color: var(--pale-orange);
+  padding: 0.2em;
   border-radius: 10px;
 }
 
+.admin_navlink:hover {
+  
+}
 
 /**********************FEED*************************/
 .feed {
@@ -268,9 +278,12 @@ header{
 
 .refresh_container{
   display: flex;
-  align-items: start;
-  justify-content: center;
   padding: 0 0 0 0.5em;
+}
+
+.refresh_container .action_btn {
+  font-size: 1.06em;
+  
 }
 
 .action_btn {
@@ -290,7 +303,9 @@ header{
     color: var(--orange);
 }
 
+
 /*POST*/
+
 .post {
   background: rgb(2,0,36);
   background: var(--gradient-pale-violet);
@@ -396,6 +411,23 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   padding: 0.5em;
 }
 
+.delete_btn {
+  margin: auto;
+  width: fit-content;
+  background: none;
+  border: none;
+  color: var(--downvote-color);
+  transition: all 0.4s ease;
+  padding: 0.3em;
+}
+
+.delete_btn:hover {
+  color: var(--pale-orange);
+}
+
+.delete_btn svg {
+  font-size: 1.7em;
+}
 
 /*VOTEBAR*/
 .score {
@@ -458,7 +490,8 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   width: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 85vh;
+  /*min-height: 75vh;*/
+  height:auto;
 }
 
 form {
@@ -476,6 +509,8 @@ form {
   max-width: 100%;
 }
 
+
+
 form label {
   display: flex;
   flex-direction: column;
@@ -489,9 +524,23 @@ form label {
 .form_container form input{
   border: none;
   display: flex;
-  font-size: 1.35em;
+  font-size: 1.1em;
   /*border: 2px solid var(--marine-blue);*/
   border-radius: 5px;
+  padding: 0.2em;
+}
+
+.form_container form input:focus{
+  color: var(--marine-blue);
+  background-color: white;
+  border: none;
+}
+
+.form_container form input:-webkit-autofill{
+  color: var(--marine-blue);
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
 }
 
 .form_container form input[type=submit], .form_container .action_btn {
@@ -516,14 +565,33 @@ form label {
   color: red;
 }
 
+
 .react_select_container {
   width: 85%;
   /*margin: auto;*/
 }
 
-input[type=file] {
-  font-size: 0.1em;
+.add_post_container .react_select_container {
+  width: 100%;
 }
+
+.form_container textarea{
+  resize: none;
+  padding: 0.25em;
+  border: none;
+  border-radius: 5px;
+}
+.form_container input[type=file] {
+  font-size: 0.60em;
+}
+
+.register_container, .login_container {
+  min-height: 72vh;
+}
+.modif_profile_container {
+  min-height: 50vh;
+}
+
 /**********************PAR CATEGORIES*************************/
 
 .nav_categories {
@@ -558,10 +626,11 @@ input[type=file] {
 
 /**********************PROFILE************************/
 .profile {
-  height: 75vh;
+  height: auto;
 }
 
-.modif_profile_container, .profile_infos_container {
+.profile_infos_container, .profile_actions_container {
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap:1em;
@@ -574,9 +643,12 @@ input[type=file] {
   color: var(--marine-blue);
 }
 
-.modif_profile_container .action_btn{
+.profile_actions_container {
+  padding-bottom: 2em;
+}
+
+.profile_actions_container .action_btn{
   font-size: 1.1em;
-  width: 75%;
 }
 
 /*MODIFY PROFILE*/
@@ -586,6 +658,8 @@ input[type=file] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height:auto;
+  min-height: 68vh;
 }
 .modify_avatar form {
   max-width: 100%;
@@ -615,16 +689,11 @@ input[type=file] {
 }
 
 
-
-
-
-
-
-
-
-
-
 /**********************My categories************************/
+.mycategories {
+  height: auto;
+  padding-bottom: 2em;
+}
 .mycategories_list {
   display: flex;
   justify-content: space-evenly;
@@ -662,10 +731,38 @@ input[type=file] {
   padding: 0.5em 0.2em;
 }
 
-
-.mycategories .bloc_title {
+.bloc_title {
   font-size: 1.35em;
   text-align: center;
 }
 
-/**********************My categories************************/
+
+/**********************Delete Account************************/
+
+.delete_account_container {
+  min-height: 75vh; 
+  height: auto;
+  width: 100%;
+  padding: 0.5em 1.70em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+}
+
+.delete_account_container svg{
+  color: var(--downvote-color);
+  width: 2.8em;
+  height: 2.8em;
+}
+
+.important_msg {
+  color: var(--downvote-color);
+  font-size: 1.35em;
+  font-weight: bold;
+}
+
+.delete_account_container .action_btn {
+  font-size: 1.1em;
+  
+}

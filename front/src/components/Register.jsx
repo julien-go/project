@@ -40,7 +40,7 @@ const Register = () => {
                             } else {
                                 setErrorMsg('')
                                 dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
-                                navigate("/", {replace: true});
+                                navigate("/my-categories", {replace: true});
                             }
                         })
                         .catch((err) => {
@@ -54,7 +54,7 @@ const Register = () => {
     
     return (
         <React.Fragment>
-            <div className='form_container'>
+            <div className='form_container register_container'>
                 <h1>Inscription</h1>
                 {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
                 <form onSubmit={submitRegister}>

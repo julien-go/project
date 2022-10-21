@@ -77,7 +77,7 @@ const Profile = () => {
                 <div className='separator'></div>
                 
                 {profileName === state.username && 
-                    <div className='modif_profile_container'>
+                    <div className='profile_actions_container'>
                         <h3 className='bloc_title'>Gestion du profil</h3>
                         <button className='action_btn' onClick={redirectModifAvatar}>Modify/Add avatar</button>
                         <button className='action_btn' onClick={redirectModifProfile}>Modify profile informations</button>

@@ -13,6 +13,7 @@ import { removeAvatar } from '../controllers/removeAvatar.js'
 import getCategories from '../controllers/getCategories.js'
 import getMyCategories from '../controllers/getMyCategories.js'
 import addPost from '../controllers/addPost.js'
+import deletePost from '../controllers/deletePost.js'
 import followCategories from '../controllers/followCategories.js'
 import unfollowCategories from '../controllers/unfollowCategories.js'
 import getCategoryFeed from '../controllers/getCategoryFeed.js'
@@ -57,6 +58,8 @@ router.get("/api/get-score/:postid", getScore);
 router.post("/api/upvote", upVote);
 router.post("/api/downvote", downVote);
 router.post("/api/annul-vote", annulVote);
+router.post("/api/delete-post", deletePost);
+
 // Admin routes 
 router.post("/api/admin/add-categorie", addCategorie);
 

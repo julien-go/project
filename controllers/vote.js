@@ -51,7 +51,7 @@ export const downVote = (req, res) => {
 
     const userId = req.body.userId
     const postId = parseInt(req.body.postId)
-    console.log(postId)
+    // console.log(postId)
     const newScore = req.body.score - 1;
     console.log(newScore)
 

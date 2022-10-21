@@ -29,17 +29,17 @@ const addPost = (req, res) => {
                 res.json({response: false, msg: 'No selected category'})
         } else {
             if(!verifyLength(textContent, 500)){
-                console.log(2)
+                // console.log(2)
                 res.json({response: false, msg: 'Too many characters'})
             } else {
                 if(textContent.toString().length < 20){
-                    console.log(3)
+                    // console.log(3)
                     res.json({response: false, msg: 'Not enough characters'})
                 } else {
-                    console.log(4)
+                    // console.log(4)
                     pool.query(insertPost, [userId, textContent, new Date()], (err, post, fields) => {
                         if (err) throw err;
-                        console.log(5)
+                        // console.log(5)
                         // console.log(post)
                         const postId = post.insertId;
                         

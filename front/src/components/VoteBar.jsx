@@ -50,6 +50,7 @@ const VoteBar = (props) => {
             if(vote.type === 'up'){
                 annulVote()
             }
+            
         } else {
                 axios.post(`${BASE_URL}/upvote`, {
                     userId,

@@ -1,10 +1,11 @@
 import {Fragment, useContext, useState, useEffect} from 'react'
-import {useLocation, useNavigate, NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {AppContext} from '../reducer/reducer'
 import BASE_URL from "../config.js"
 import axios from 'axios'
 
 import VoteBar from './VoteBar'
+import DeletePost from './DeletePost'
 
 const HomeFeed = () => {
     const [state, dispatch] = useContext(AppContext)
@@ -74,8 +75,8 @@ const HomeFeed = () => {
         })
     }
     
-    const refresh = (e) => {
-        e.preventDefault();
+    const refresh = () => {
+        // e.preventDefault();
         getCategoriesId()
     }
     
@@ -105,20 +106,20 @@ const HomeFeed = () => {
     }, [postsId])
     
 
-    // useEffect(()=> {
-    //      console.log(posts)
-    //     // console.log(categoriesId)
-    // })
+    useEffect(()=> {
+        //  console.log(posts)
+        // console.log(categoriesId)
+    })
     
     return (
         <Fragment>
             <div className='feed'>
-                <form className='refresh_container' onSubmit={e => refresh(e)}>
-                    <input className='action_btn' type='submit' value='Rafraichir la page'/>
-                </form>
+                <div className='refresh_container' >
+                    <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>
+                </div>
               {posts.map((e, i)=> {
                     return (
-                    <div key={i} id={e.id} className='post'>
+                    <div key={e.id} id={e.id} className='post'>
                         <div className="post_header">
                             <NavLink className='post_user' to={`/profile/${e.username}`}>
                                 <p className='username'>{e.username}</p>
@@ -134,9 +135,7 @@ const HomeFeed = () => {
                             <p>{e.text_content}</p>
                             
                             {e.image !== undefined &&
-                            <div className='post_img_container'>
                             <img src={`http://juliengodard.sites.3wa.io:9300/img/${e.image.url}`} alt={`${e.username}'s uploaded picture`} className="post_img"/>
-                            </div>
                             }
                         </div> 
                         
@@ -146,7 +145,9 @@ const HomeFeed = () => {
                         <div className='date_container'>
                             <div className='date'>{e.publication_date}</div>
                         </div>
-                        
+                        {(state.id === e.user_id || state.isAdmin) && 
+                            <DeletePost postId={e.id} img={e.image} refresh={refresh}/>
+                        }
                     </div>
                 )
                 })} 

@@ -57,7 +57,7 @@ const ModifyAvatar = () => {
         <div className='form_container modify_avatar'>
             <h1>Ajouter/Modifier l'avatar</h1>
             {msg !== '' && <p>{msg}</p>}
-            <form  onSubmit={addNewAvatar} encType="multipart/form-data">
+            <form onSubmit={addNewAvatar} encType="multipart/form-data">
                 <label name='avatar'>
                     <input className='input_file' type='file' name='avatar' required/>
                     <input type='submit' value='Submit'/>
@@ -68,7 +68,6 @@ const ModifyAvatar = () => {
                 {deleteMsg !== '' && <p>{deleteMsg}</p>}
             <button className='action_btn' onClick={removeCurrentAvatar}>Remove current avatar</button>
              </div>
-
          </div>
         </React.Fragment>
     )

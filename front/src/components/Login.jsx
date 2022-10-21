@@ -43,7 +43,7 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <div className='form_container'>
+            <div className='form_container login_container'>
                 <h1>Connexion</h1>
                 {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
                 <form onSubmit={submitLogin}>

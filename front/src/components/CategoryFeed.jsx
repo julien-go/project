@@ -5,6 +5,8 @@ import BASE_URL from "../config.js"
 import axios from 'axios'
 
 import VoteBar from './VoteBar'
+import DeletePost from './DeletePost'
+
 
 const CategoryFeed = () => {
     const [state, dispatch] = useContext(AppContext);
@@ -45,10 +47,9 @@ const CategoryFeed = () => {
         }
     }
     
-    const refresh = (e) => {
-        e.preventDefault();
+    const refresh = () => {
         console.log('refresh')
-        getParams()
+        getLastPosts()
     }
     
     const compareId = (a, b) => {
@@ -72,9 +73,9 @@ const CategoryFeed = () => {
             <h1>{thisCategory}</h1>
             {msg !== '' && <p>{msg}</p>}
             <div className='feed'>
-                <form className='refresh_container' onSubmit={e => refresh(e)}>
-                    <input className='action_btn' type='submit' value='Rafraichir la page'/>
-                </form>
+                <div className='refresh_container' >
+                    <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>
+                </div>
             {posts.map((e, i)=> {
                 return (
                 <div key={i} id={e.id} className='post'>
@@ -95,13 +96,15 @@ const CategoryFeed = () => {
                         {posts[i].image !== undefined && <img src={`http://juliengodard.sites.3wa.io:9300/img/${posts[i].image.url}`} alt={`${e.username}'s uploaded picture`} className="post_img"/>}
                     </div>
                     
-                                            
                         <div className='vote_bar'>
                             <VoteBar post_id={e.id} user_id={state.id} score={e.score}/>
                         </div>
                         <div className='date_container'>
                             <div className='date'>{e.publication_date}</div>
                         </div>
+                        {(state.id === e.user_id || state.isAdmin) && 
+                            <DeletePost postId={e.id} img={e.image} refresh={refresh}/>
+                        }
                 </div>
                 )
             })}
