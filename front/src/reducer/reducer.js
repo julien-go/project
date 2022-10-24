@@ -1,6 +1,7 @@
 import React from 'react';
 
-const initialState = {id: null, username: '',
+const initialState = {id: null, 
+                    username: '',
                     email: '',
                     isLogged: false, 
                     isAdmin: false,
@@ -11,7 +12,6 @@ const AppContext = React.createContext([]);
 
 const reducer = (state, action) => {
     switch(action.type) {
-        
         case 'LOGIN': 
             return {...state, id: action.payload.id, username: action.payload.username, email: action.payload.email , isLogged: true};
         case 'LOGOUT': 

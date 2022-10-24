@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+import {pool} from '../config/database.js';
 import verifyLength from '../components/verifyLength/index.js';
 import checkAcceptedExtensions from '../components/checkExtension/index.js'
 import fs from 'fs';

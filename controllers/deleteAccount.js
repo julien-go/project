@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+import {pool} from '../config/database.js';
 import {defaultAvatarId} from '../config/defaultAvatar.js'
 
 const deleteAccount = (req, res) => {

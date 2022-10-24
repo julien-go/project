@@ -39,6 +39,8 @@ const Register = () => {
                                 setErrorMsg(res.data.errorMsg);
                             } else {
                                 setErrorMsg('')
+                                localStorage.setItem('jwtToken', res.data.token)
+                                axios.defaults.headers.common['Authorization'] = 'Bearer '+res.data.token
                                 dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
                                 navigate("/my-categories", {replace: true});
                             }

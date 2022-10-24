@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import router from './routes/router.js';
 import session from 'express-session';
 import parseurl from 'parseurl';
+import middleware from './controllers/middleware.js'
 
 const app = express();
 app.use(express.static("public"))
@@ -42,6 +43,9 @@ app.use((req, res, next)=>{
         next();
     }
 })
+
+
+app.use(middleware)
 
 app.use('/', router)
 

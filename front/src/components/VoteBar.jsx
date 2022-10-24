@@ -3,6 +3,15 @@ import BASE_URL from "../config.js"
 import axios from 'axios';
 import {ImArrowUp , ImArrowDown} from "react-icons/im";
 
+/*
+1 - 
+
+
+
+
+
+*/
+
 const VoteBar = (props) => {
     
     const [vote, setVote] = useState({voted: false, type: ''})

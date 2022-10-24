@@ -18,6 +18,8 @@ const DeleteAccount = () => {
             })
             .then((res)=> {
                 if(res.data.response){
+                    localStorage.removeItem('jwtToken')
+                    delete axios.defaults.headers.common['Authorization']
                     dispatch({type: 'LOGOUT'})
                     navigate('/register', {replace: true})
                 }

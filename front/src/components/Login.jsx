@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react';
+import { useState, Fragment, useContext } from 'react';
 import {useNavigate} from 'react-router-dom'
 import BASE_URL from "../config.js"
 import axios from 'axios';
@@ -12,25 +11,31 @@ const Login = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const navigate = useNavigate();
     
-    const [state, dispatch] = React.useContext(AppContext)
+    const [state, dispatch] = useContext(AppContext)
 
     const submitLogin = (e) => {
+        const dataUser = {
+            email,
+            password
+        }
         e.preventDefault();
-            if (!verifyLength(email, 255)){
-                setErrorMsg('connection error')
-            } else {
+        
+        if (!verifyLength(email, 255)){
+            setErrorMsg('connection error')
+        } else {
             axios.post(`${BASE_URL}/login`, {
                 email,
                 password
             })
             .then((res) =>{
-                if (res.data.errorMsg !== ''){
+                console.log(res.data)
+                if (!res.data.response){
                     setErrorMsg(res.data.errorMsg);
                 } else {
                     setErrorMsg('')
-                    if(res.data.isAdmin == true){
-                        dispatch({type: 'ISADMIN'})
-                    }
+                    localStorage.setItem('jwtToken', res.data.token)
+                    axios.defaults.headers.common['Authorization'] = 'Bearer '+res.data.token
+                    res.data.admin && dispatch({type: 'ISADMIN'})
                     dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
                     navigate("/", {replace: true});
                 }
@@ -42,7 +47,7 @@ const Login = () => {
     }
 
     return (
-        <React.Fragment>
+        <Fragment>
             <div className='form_container login_container'>
                 <h1>Connexion</h1>
                 {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
@@ -58,7 +63,7 @@ const Login = () => {
                     <input type='submit' value='Submit'/>
                 </form>
             </div>
-        </React.Fragment>
+        </Fragment>
         )
 }
 

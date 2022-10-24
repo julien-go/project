@@ -1,8 +1,9 @@
-import pool from '../config/database.js';
+import {pool} from '../config/database.js';
 import bcrypt from 'bcrypt';
 import verifyLength from '../components/verifyLength/index.js';
 import {checkSpecialCharacters} from '../components/regEx/index.js';
 import {defaultAvatarId} from '../config/defaultAvatar.js'
+import {generateResponse} from "../controllers/login.js"
 
 const registerUser = (req, res) => {
     // console.log(req.body)
@@ -45,13 +46,12 @@ const registerUser = (req, res) => {
                                     pool.query(newUser, params, (err, user, fields) => {
                                         if (err) throw err
                                         
-                                        pool.query(getId, [req.body.username.toLowerCase()], (err, result, fields) => {
+                                        pool.query(getId, [req.body.username.toLowerCase()], async (err, result, fields) => {
                                             if (err) throw err;
-                                            
-                                            req.session.username = req.body.username.toLowerCase()
-                                            // console.log(req.session.username)
-                                            req.session.isAdmin = false;
-                                            res.json({response:true, errorMsg: '', isAdmin: false, username: req.session.username, email: req.body.email, id: result[0].id})
+                                            const userData = {username: req.body.username.toLowerCase(), email: req.body.email, id: user.insertId, role_id: 2}
+                                            const passwordMatch = true;
+                                            const response = await generateResponse(userData, passwordMatch)
+                                            res.json({...response})
                                         })
                                     })
                                 })

@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+import {pool} from '../config/database.js';
 
 export const getScore = (req, res) => {
     const selectScore = 'SELECT score FROM posts_scores WHERE post_id = ?'

@@ -466,10 +466,10 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 }
 
 .green {
-  background-color: var(--upvote-color);
+ background-color: #72DC5F;
 }
 .green:hover {
-  background-color: #72DC5F;
+  background-color: var(--upvote-color);
 }
 
 .grey {
@@ -477,11 +477,11 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 }
 
 .red {
-  background-color: var(--downvote-color);
+  background-color: #FF6D6D
 }
 
 .red:hover {
-  background-color: #FF6D6D
+  background-color: var(--downvote-color);
 }
 
 /**********************FORM*************************/

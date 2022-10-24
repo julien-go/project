@@ -2,6 +2,7 @@ import express from 'express'
 
 import registerUser from '../controllers/register.js'
 import loginUser from '../controllers/login.js'
+import isLogged from '../controllers/isLogged.js'
 import disconnectUser from '../controllers/disconnect.js'
 import addCategorie from '../controllers/admin/addCategorie.js'
 import { uploadAvatar } from '../controllers/uploadAvatar.js'
@@ -18,9 +19,9 @@ import followCategories from '../controllers/followCategories.js'
 import unfollowCategories from '../controllers/unfollowCategories.js'
 import getCategoryFeed from '../controllers/getCategoryFeed.js'
 
-import getHomeFeedCategories from '../controllers/getHomeFeedCategories.js'
-import getHomeFeedPosts from '../controllers/getHomeFeedPosts.js'
-import getHomeFeedInfos from '../controllers/getHomeFeedInfos.js'
+import getHomeFeed from '../controllers/getHomeFeed.js'
+// import getHomeFeedPosts from '../controllers/getHomeFeedPosts.js'
+// import getHomeFeedInfos from '../controllers/getHomeFeedInfos.js'
 
 import {verifyVote, upVote, downVote, getScore, annulVote} from '../controllers/vote.js'
 
@@ -30,6 +31,8 @@ const router = express.Router();
 router.post("/api/register", registerUser)
 
 router.post("/api/login", loginUser)
+
+router.post("/api/isLogged", isLogged);
 
 // User routes
 router.get("/api/disconnect", disconnectUser)
@@ -47,9 +50,8 @@ router.post("/api/unfollow-categories", unfollowCategories);
 router.get("/api/get-categories", getCategories);
 router.get("/api/get-mycategories/:id", getMyCategories);
 
-router.get("/api/get-homefeed-categories/:id", getHomeFeedCategories);
-router.get("/api/get-homefeed-posts/:id", getHomeFeedPosts);
-router.get("/api/get-homefeed-infos/:id", getHomeFeedInfos);
+router.get("/api/get-homefeed/:id", getHomeFeed);
+
 
 router.get("/api/get-categoryfeed/:id", getCategoryFeed);
 

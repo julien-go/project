@@ -1,17 +1,34 @@
-import React from 'react'
+import {Fragment, useEffect, useContext}from 'react'
 import { NavLink } from 'react-router-dom'
 import {AppContext} from '../reducer/reducer.js'
-import NavCategories from './NavCategories'
+import BASE_URL from "../config.js"
+import axios from 'axios'
 import { ImHome, ImList, ImPlus, ImStarFull, ImExit, ImUser } from "react-icons/im";
 
 const Nav = () => {
     
-    const [state, dispatch]= React.useContext(AppContext)
+    const [state, dispatch]= useContext(AppContext)
     const urlMyProfile = `profile/${state.username}`
     
-    // React.useEffect(() => {
-    //     console.log(state.id)
-    // })
+    useEffect(() => {
+        console.log(state)
+        const token = localStorage.getItem("jwtToken")
+        // console.log(token)
+        if(!state.isLogged && token){
+          axios.post(`${BASE_URL}/isLogged`,{token})
+          .then((res) => {
+            //   console.log(res.data)
+            if(res.data.token){
+              axios.defaults.headers.common['Authorization'] = 'Bearer '+res.data.token
+            }
+            res.data.logged && dispatch({type:'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
+            res.data.admin && dispatch({type:'ISADMIN'})
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        }
+    })
 
     return (
         <header>
@@ -33,13 +50,13 @@ const Nav = () => {
                         </NavLink>
                     </li>
                     {state.isAdmin &&
-                        <React.Fragment>
+                        <Fragment>
                             <li>
                                 <NavLink className='admin_navlink' to="admin">
                                 ADMIN
                                 </NavLink>
                             </li>
-                        </React.Fragment>
+                        </Fragment>
                     }
                 </ul>
                 <p className='username'>{state.username}</p>
@@ -47,7 +64,7 @@ const Nav = () => {
             <nav className='navbar'>
                 <ul>
                     {state.isLogged &&
-                        <React.Fragment>
+                        <Fragment>
                             <li>
                                 <NavLink to="/">
                                     <ImHome/>
@@ -69,10 +86,10 @@ const Nav = () => {
                                     <ImExit className='disconnect_btn'/>
                                 </NavLink>
                             </li>
-                        </React.Fragment>
+                        </Fragment>
                     }
                     {!state.isLogged &&
-                        <React.Fragment>
+                        <Fragment>
                             <li>
                                 <NavLink to="register">
                                 REGISTER
@@ -83,7 +100,7 @@ const Nav = () => {
                                 LOGIN
                                 </NavLink>
                             </li>
-                        </React.Fragment>
+                        </Fragment>
                     }
                 </ul>
             </nav>

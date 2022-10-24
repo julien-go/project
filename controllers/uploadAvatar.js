@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+import {pool} from '../config/database.js';
 import formidable from 'formidable';
 import fs from 'fs';
 import checkAcceptedExtensions from '../components/checkExtension/index.js'

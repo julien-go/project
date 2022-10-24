@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+import {pool} from '../config/database.js';
 import verifyLength from '../components/verifyLength/index.js';
 import {checkSpecialCharacters} from '../components/regEx/index.js';
 

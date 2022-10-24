@@ -9,75 +9,30 @@ import DeletePost from './DeletePost'
 
 const HomeFeed = () => {
     const [state, dispatch] = useContext(AppContext)
-    const [categoriesId, setCategoriesId] = useState([])
-    const [postsId, setPostsId] = useState([])
     const [posts, setPosts] = useState([])
-    
+    const [msg, setMsg] = useState('')
     // // On récupère les id des catégories auxquelles le user est abonné
-    const getCategoriesId = () => {
-        let allCategories = []
-        if(state.id !== null){
-            axios.get(`${BASE_URL}/get-homefeed-categories/${state.id}`)
-            .then((res)=> {
-                if(res.data.response && res.data.myCategories){
-                    for(let i = 0; i < res.data.myCategories.length; i++){
-                        allCategories.push(res.data.myCategories[i].id)
-                        setCategoriesId([...allCategories])
-                    }
-                }
-            })
-            .catch((err)=> {
-                console.log(err)
-            })
-        }
-    }
-    
-    // // On récupère pour chaque catégories, tout les articles associés
-    const getPostsId = () => {
-        let allPostsId = []
-        categoriesId.map((e, i)=> {
-            axios.get(`${BASE_URL}/get-homefeed-posts/${e}`)
-            .then((res)=> {
-                if(res.data.response){
-                    // console.log(res.data.postsId)
-                    for(let i = 0; i < res.data.postsId.length; i++){
-                        if(!allPostsId.includes(res.data.postsId[i].id)){
-                            allPostsId.push(res.data.postsId[i].id)
-                        }
-                        // console.log(res.data.postsId[i].id)
-                    }
-                    setPostsId([...allPostsId.sort().reverse()])
-                    // console.log(postsId)
-                }
-            })
-            .catch((err)=> {
-                console.log(err)
-            })
-        })
-    }
     
     // On récupère les infos de chaque posts
     const getPosts = () => {
-        let postsToShow = [];
-        postsId.map((e, i) => {
-            axios.get(`${BASE_URL}/get-homefeed-infos/${postsId[i]}`)
+            axios.get(`${BASE_URL}/get-homefeed/${state.id}`)
             .then((res)=> {
                 if(res.data.response){
-                    // console.log(res.data.post)
-                    postsToShow.push(res.data.post)
-                    setPosts([...postsToShow.sort(compareId)
-                    ])
+                    console.log(res.data)
+                    setMsg('')                
+                } else {
+                    setMsg('No posts here, follow categories to get a feed')
                 }
             })
             .catch((err)=> {
                 console.log(err)
             })
-        })
+        
     }
     
     const refresh = () => {
         // e.preventDefault();
-        getCategoriesId()
+        getPosts()
     }
     
     const compareId = (a, b) => {
@@ -85,31 +40,11 @@ const HomeFeed = () => {
         if(a.id > b.id) return -1
         else return 0
     }
-    
-    // Au chargement du composant
-    useEffect(() => {
-        getCategoriesId();
-    }, [])
-    
-    // A l'update du state categoriesId
-    useEffect(() => {
-        if(categoriesId !== [] || categoriesId !== null){
-            getPostsId();
-        }
-    }, [categoriesId])
-    
+
     // A l'update du state postsId
     useEffect(() => {
-        if(postsId !== [] || postsId !== null){
-            getPosts();
-        }
-    }, [postsId])
-    
-
-    useEffect(()=> {
-        //  console.log(posts)
-        // console.log(categoriesId)
-    })
+            // getPosts();
+    }, [])
     
     return (
         <Fragment>
