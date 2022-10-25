@@ -1,37 +1,46 @@
+import {Fragment, useContext, useState, useEffect} from 'react'
+import {NavLink} from 'react-router-dom'
+import BASE_URL from "../config.js"
+import axios from 'axios'
+import {AppContext} from '../reducer/reducer'
+import VoteBar from './VoteBar'
+import DeletePost from './DeletePost'
 
 const HallOfFame = () => {
+    const [state, dispatch] = useContext(AppContext)
+    const [posts, setPosts] = useState([])
     
-     const getPosts = () => {
-        let postsToShow = [];
-        postsId.map((e, i) => {
-            axios.get(`${BASE_URL}/get-homefeed-infos/${postsId[i]}`)
-            .then((res)=> {
-                if(res.data.response){
-                    // console.log(res.data.post)
-                    postsToShow.push(res.data.post)
-                    setPosts([...postsToShow.sort(compareId)
-                    ])
-                }
-            })
-            .catch((err)=> {
-                console.log(err)
-            })
+    const getPosts = () => {
+        axios.get(`${BASE_URL}/get-hall-of-fame`)
+        .then((res)=> {
+            console.log(res.data)
+            if(res.data.response){
+                setPosts([...res.data.posts].sort(compareScore))                
+            }
+        })
+        .catch((err)=> {
+            console.log(err)
         })
     }
       
     const refresh = () => {
         // e.preventDefault();
-        getCategoriesId()
+        getPosts();
     }
     
-    const compareId = (a, b) => {
-        if(a.id < b.id) return 1
-        if(a.id > b.id) return -1
+    const compareScore = (a, b) => {
+        if(a.score < b.score) return 1
+        if(a.score > b.score) return -1
         else return 0
     }
     
+    useEffect(()=> {
+       getPosts() 
+    }, [])
+    
   return (
       <Fragment>
+        <h1>Hall of fame</h1>
         <div className='feed'>
                 <div className='refresh_container' >
                     <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>

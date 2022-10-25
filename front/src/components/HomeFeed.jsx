@@ -1,3 +1,4 @@
+
 import {Fragment, useContext, useState, useEffect} from 'react'
 import {NavLink} from 'react-router-dom'
 import {AppContext} from '../reducer/reducer'
@@ -6,6 +7,7 @@ import axios from 'axios'
 
 import VoteBar from './VoteBar'
 import DeletePost from './DeletePost'
+import { GiPodium } from "react-icons/gi";
 
 const HomeFeed = () => {
     const [state, dispatch] = useContext(AppContext)
@@ -17,9 +19,11 @@ const HomeFeed = () => {
     const getPosts = () => {
             axios.get(`${BASE_URL}/get-homefeed/${state.id}`)
             .then((res)=> {
+                console.log(res.data)
                 if(res.data.response){
-                    console.log(res.data)
-                    setMsg('')                
+                    setMsg('')
+                    setPosts(res.data.posts.sort(compareId))
+                    // getPostsCategories()
                 } else {
                     setMsg('No posts here, follow categories to get a feed')
                 }
@@ -27,7 +31,6 @@ const HomeFeed = () => {
             .catch((err)=> {
                 console.log(err)
             })
-        
     }
     
     const refresh = () => {
@@ -43,15 +46,29 @@ const HomeFeed = () => {
 
     // A l'update du state postsId
     useEffect(() => {
-            // getPosts();
+            getPosts();
     }, [])
+    
     
     return (
         <Fragment>
+
             <div className='feed'>
-                <div className='refresh_container' >
-                    <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>
+                <h1>Home</h1>
+                <div className='homefeed_action_bar'>
+                    <div className='refresh_container' >
+                            <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>
+                    </div>
+                    <div>
+                        <NavLink to='/hall-of-fame'>
+                            <button className='action_btn hall_of_fame_btn'>
+                                <GiPodium/>
+                                 <p>Hall Of Fame</p>
+                            </button>
+                        </NavLink>
+                    </div>
                 </div>
+                
               {posts.map((e, i)=> {
                     return (
                     <div key={e.id} id={e.id} className='post'>
@@ -92,3 +109,4 @@ const HomeFeed = () => {
     )
 }
 export default HomeFeed;
+

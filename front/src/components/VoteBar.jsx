@@ -23,7 +23,6 @@ const VoteBar = (props) => {
     const downSelectedColor = 'red vote_btn';
     const notSelectedColor = 'grey vote_btn';
     
-    
     const getScore = () => {
         axios.get(`${BASE_URL}/get-score/${props.post_id}`)
         .then((res) => {
@@ -59,7 +58,6 @@ const VoteBar = (props) => {
             if(vote.type === 'up'){
                 annulVote()
             }
-            
         } else {
                 axios.post(`${BASE_URL}/upvote`, {
                     userId,

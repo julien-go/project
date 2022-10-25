@@ -13,6 +13,7 @@ const Admin = () => {
         <Fragment>
             <h1>Tableau d'administration</h1>
             <Statistics/>
+            <div className='separator'></div>
             <AddNewCategorie/>
             <div className='separator'></div>
         </Fragment>

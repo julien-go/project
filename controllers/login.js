@@ -13,6 +13,8 @@ export const generateResponse = async (userDataSQL,passwordMatch) => {
     // console.log(userDataSQL)
     const ADMIN_ROLE_ID = 1
     const isAdmin = userDataSQL.role_id === ADMIN_ROLE_ID
+    
+    
     const userData = { 
         username: userDataSQL.username,
         email:userDataSQL.email,
@@ -23,7 +25,6 @@ export const generateResponse = async (userDataSQL,passwordMatch) => {
     const token = await generateToken(userData)
     const sucessJson = {response:true, isAdmin, token, errorMsg: '', username: userDataSQL.username, email:userDataSQL.email,id: userDataSQL.id}
     const failJson = {response:false, errorMsg:'connection error'}
-    
     return passwordMatch ? sucessJson : failJson
 }
 
@@ -49,6 +50,7 @@ const loginUser = (req, res) => {
                             const userData = {...user[0], email: req.body.email}
                             const passwordMatch = await bcrypt.compare(req.body.password, userData.password)
                             const response = await generateResponse(userData, passwordMatch)
+                            console.log(response)
                             res.json({...response})
                         }
                     })

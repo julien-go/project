@@ -36,6 +36,7 @@
   --gradient-marine-blue: linear-gradient(335deg, rgba(2,0,36,1) 0%, rgba(44,50,142,1) 0%, rgba(62,73,246,1) 100%);
   
   --gradient-pale-violet:linear-gradient(189deg, rgba(239,249,255,1) 0%, rgba(239,242,255,1) 100%);
+  
   --gradient-orange: linear-gradient(189deg, rgba(25,33,83,1) 58%, rgba(123,77,255,1) 100%);
 }
 /**********************GLOBAL**************************/
@@ -48,6 +49,7 @@
 }
 
 body {
+  background-color: var(--pale-blue);
   width: 100vw;
   height: 100vh;
   font-family: JosefinSans;
@@ -55,20 +57,20 @@ body {
 
 main {
   background-color: var(--pale-blue);
-  padding: 0 0 15vh 0;
 }
 
 h1 {
   color: var(--blue);
-  font-size: 1.6em;
+  font-size: 1.6rem;
+  overflow-wrap:normal; 
   text-align: center;
-  padding: 0.65em;
+  padding: 1.25rem 2.5rem;
   text-transform: uppercase;
   font-weight: bold;
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 a {
@@ -77,7 +79,6 @@ a {
 
 p {
   display: block;
-  /*overflow: hidden;*/
 }
 
 nav {
@@ -116,20 +117,16 @@ footer {
 /**********************Logo*************************/
 
 .logo_container {
-  background-color: var(--pale-blue);
   text-align: center;
   font-family: CarterOne-Regular;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  box-shadow: rgb(44, 62, 80) 0px -15px 15px -15px;
-}
-
-.logo {
+  position: relative;
   background: var(--gradient-orange);
   font-size: 3em;
   color: white;
-  text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.25);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 
@@ -137,6 +134,13 @@ footer {
   color: var(--blue);
 }
 
+.logo_container .return_btn {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.4rem;
+  padding: 0.5rem 0.75rem;
+}
 
 /**********************HEADER*************************/
 
@@ -271,19 +275,42 @@ header{
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  padding: 0 0.2em 0.6em 0.2em;
-  min-height: 85vh;
+  padding: 0 0.2em 15vh 0.2em;
+  min-height: 73vh;
+  overflow: scroll;
   /*background-color: var(--bg-light);*/
+}
+
+.homefeed_action_bar {
+  display: flex;
+  font-size: 1.5em;
+  justify-content: space-around;
+  padding: 0rem 0.75rem 0.5rem 0.75rem;
+}
+.homefeed_action_bar > div{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.homefeed_action_bar .hall_of_fame_btn {
+  background-color: var(--pale-orange);
+  display: flex;
+  gap:0.2rem;
+  align-items: center;
+}
+
+.homefeed_action_bar a {
+  text-decoration: none;
+}
+
+.hall_of_fame_btn svg {
+  font-size: 1.2em;
 }
 
 .refresh_container{
   display: flex;
   padding: 0 0 0 0.5em;
-}
-
-.refresh_container .action_btn {
-  font-size: 1.06em;
-  
 }
 
 .action_btn {
@@ -304,16 +331,18 @@ header{
 }
 
 
+
 /*POST*/
 
 .post {
+  height: fit-content;
   background: rgb(2,0,36);
   background: var(--gradient-pale-violet);
   /*border: 1px solid var(--marine-blue);*/
   border-radius: 25px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /*overflow: hidden;*/
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -349,6 +378,8 @@ header{
 
 
 .post_header {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
   background: rgb(255, 255, 255);
   background: var(--gradient-blue);
   padding: 0.5em 0;
@@ -440,7 +471,6 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   justify-content: space-around;
 }
 
-
 .vote_buttons_container {
   display: flex;
   justify-content: center;
@@ -491,6 +521,7 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   display: flex;
   flex-direction: column;
   /*min-height: 75vh;*/
+  /*height: 67vh;*/
   height:auto;
 }
 
@@ -508,8 +539,6 @@ form {
 .form_container form{
   max-width: 100%;
 }
-
-
 
 form label {
   display: flex;
@@ -540,7 +569,6 @@ form label {
   color: var(--marine-blue);
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-
 }
 
 .form_container form input[type=submit], .form_container .action_btn {
@@ -565,14 +593,13 @@ form label {
   color: red;
 }
 
-
 .react_select_container {
   width: 85%;
-  /*margin: auto;*/
 }
 
 .add_post_container .react_select_container {
   width: 100%;
+  min-height: 69vh;
 }
 
 .form_container textarea{
@@ -586,7 +613,9 @@ form label {
 }
 
 .register_container, .login_container {
-  min-height: 72vh;
+ min-height: 90vh;
+ overflow-y: hidden;
+ 
 }
 .modif_profile_container {
   min-height: 50vh;
@@ -595,16 +624,21 @@ form label {
 /**********************PAR CATEGORIES*************************/
 
 .nav_categories {
-  font-size: 1.4em;
-  padding: 0.75em 0 0 0;
+  font-size: 1.6rem;
+  padding: 0.75em 0 20vh 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 65vh;
+  overflow: scroll;
+  height: fit-content;
+  width: 100%;
 }
+
+
 .nav_categories ul  {
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 1em
 }
 .nav_categories ul li{
@@ -627,6 +661,7 @@ form label {
 /**********************PROFILE************************/
 .profile {
   height: auto;
+  padding-bottom: 15vh;
 }
 
 .profile_infos_container, .profile_actions_container {
@@ -636,6 +671,7 @@ form label {
   gap:1em;
   justify-content: center;
   align-items: center;
+  
 }
 
 .profile_name {
@@ -692,7 +728,9 @@ form label {
 /**********************My categories************************/
 .mycategories {
   height: auto;
-  padding-bottom: 2em;
+  padding-bottom: 18vh;
+  min-height: 110vh;
+  overflow: scroll;
 }
 .mycategories_list {
   display: flex;
@@ -727,7 +765,6 @@ form label {
   align-items: center;
 }
 .mycategories .action_btn{
-  width: 70%;
   padding: 0.5em 0.2em;
 }
 

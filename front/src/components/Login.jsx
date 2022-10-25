@@ -35,7 +35,7 @@ const Login = () => {
                     setErrorMsg('')
                     localStorage.setItem('jwtToken', res.data.token)
                     axios.defaults.headers.common['Authorization'] = 'Bearer '+res.data.token
-                    res.data.admin && dispatch({type: 'ISADMIN'})
+                    res.data.isAdmin && dispatch({type: 'ISADMIN'})
                     dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
                     navigate("/", {replace: true});
                 }

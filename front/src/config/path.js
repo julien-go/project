@@ -11,6 +11,7 @@ import DeleteAccount from '../components/DeleteAccount'
 import MyCategories from '../components/MyCategories'
 import CategoryFeed from '../components/CategoryFeed'
 import NavCategories from '../components/NavCategories'
+import HallOfFame from '../components/HallOfFame'
 
 import AddPost from '../components/AddPost'
 
@@ -28,7 +29,8 @@ export const routes = [
     {path: '/add-post', element: <AddPost />},
     {path: '/my-categories', element: <MyCategories />},
     {path: '/category/:name', element: <CategoryFeed />},
-    {path: '/categories', element: <NavCategories/>}
+    {path: '/categories', element: <NavCategories/>},
+    {path: '/hall-of-fame', element: <HallOfFame/>}
 ]
 
 export const userPath = [
@@ -41,7 +43,8 @@ export const userPath = [
     '/add-post',
     '/my-categories',
     '/category/:name',
-    '/categories'
+    '/categories',
+    '/hall-of-fame'
 ]
 
 export const adminPath = [

@@ -28,7 +28,7 @@ const NavCategories = () => {
     }, [])
     
     return (
-        <div>
+        <Fragment>
             <h1>Par catégories :</h1>
             <nav className='nav_categories'>
                 <ul>
@@ -41,7 +41,7 @@ const NavCategories = () => {
                     )}
                 </ul>
             </nav>
-        </div>
+        </Fragment>
         )
 }
 

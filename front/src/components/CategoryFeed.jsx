@@ -26,14 +26,11 @@ const CategoryFeed = () => {
         if(thisCategory !== '' && thisCategory !== undefined){
             axios.get(`${BASE_URL}/get-categoryfeed/${thisCategory}`)
             .then((res)=> {
-                // console.log(res)
-                // console.log(res.data.posts)
+                console.log(res.data)
+                console.log(res.data.posts)
                 if(res.data.response || res.data.posts !== []){
-                        const postsToShow = res.data.posts
-                        setPosts([...postsToShow].sort(compareId));
-                        // console.log(posts)
+                        setPosts([...res.data.posts].sort(compareId));
                         setMsg('')
-                        
                 } else {
                         setPosts([])
                         setMsg('No posts here !')
@@ -70,9 +67,10 @@ const CategoryFeed = () => {
 
     return (
         <Fragment>
-            <h1>{thisCategory}</h1>
+            
             {msg !== '' && <p>{msg}</p>}
             <div className='feed'>
+                <h1>{thisCategory}</h1>
                 <div className='refresh_container' >
                     <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>
                 </div>
@@ -95,7 +93,6 @@ const CategoryFeed = () => {
                         
                         {posts[i].image !== undefined && <img src={`http://juliengodard.sites.3wa.io:9300/img/${posts[i].image.url}`} alt={`${e.username}'s uploaded picture`} className="post_img"/>}
                     </div>
-                    
                         <div className='vote_bar'>
                             <VoteBar post_id={e.id} user_id={state.id} score={e.score}/>
                         </div>
@@ -113,3 +110,4 @@ const CategoryFeed = () => {
     )
 }
 export default CategoryFeed;
+

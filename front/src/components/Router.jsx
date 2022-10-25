@@ -1,11 +1,14 @@
+import {useContext} from 'react'
+import {AppContext} from '../reducer/reducer'
 import {Routes, Route} from "react-router-dom";
 import Middleware from "./Middleware"
+import ReturnButton from './ReturnButton'
 
 import {routes} from "../config/path"
 
             
 const Router = () => {
-    
+    const [state, dispatch] = useContext(AppContext)
     return (
         <main>
         <Routes>

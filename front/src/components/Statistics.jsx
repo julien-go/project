@@ -6,16 +6,23 @@ const Statistics = () => {
     
     const [stats, setStats] = useState({});
     
-    
     useEffect(()=> {
-        axios.get()
+        axios.get(`${BASE_URL}/admin/get-stats`)
+        .then((res) => {
+            res.data.response && setStats(res.data.stats)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }, [])
     
     return (
         <Fragment>
             <h2 className='bloc_title'>Statistiques</h2>
             <div className='stats_container'>
-                
+                <p>Nombre total d'utilisateurs : {stats.usersCount}</p>
+                <p>Nombre total de posts: {stats.postsCount}</p>
+                <p>Nombre de posts aujourd'hui: {stats.postsToday}</p>
             </div>
         </Fragment>
         )
