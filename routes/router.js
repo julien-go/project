@@ -15,6 +15,7 @@ import getCategories from '../controllers/getCategories.js'
 import getMyCategories from '../controllers/getMyCategories.js'
 import addPost from '../controllers/addPost.js'
 import deletePost from '../controllers/deletePost.js'
+import reportPost from '../controllers/reportPost.js'
 import followCategories from '../controllers/followCategories.js'
 import unfollowCategories from '../controllers/unfollowCategories.js'
 
@@ -25,6 +26,7 @@ import getHallOfFame from '../controllers/getHallOfFame.js'
 // import getHomeFeedInfos from '../controllers/getHomeFeedInfos.js'
 
 import getStats from '../controllers/admin/getStats.js'
+import getReports from '../controllers/admin/getReports.js'
 import {verifyVote, upVote, downVote, getScore, annulVote} from '../controllers/vote.js'
 
 const router = express.Router();
@@ -64,9 +66,11 @@ router.post("/api/downvote", downVote);
 router.post("/api/annul-vote", annulVote);
 
 router.post("/api/delete-post", deletePost);
+router.post("/api/report-post", reportPost);
 
 // Admin routes 
 router.post("/api/admin/add-categorie", addCategorie);
 router.get('/api/admin/get-stats', getStats)
+router.get('/api/admin/get-reports', getReports)
 
 export default router;

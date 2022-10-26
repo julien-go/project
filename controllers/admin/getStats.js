@@ -6,7 +6,6 @@ const getStats = (req, res) => {
     
     pool.query(selectStats, [new Date(), new Date()], (err, stats, fields) => {
         if (err) throw err
-        console.log(stats)
         res.json({response: true, stats: stats[0]})
     })
 }

@@ -40,11 +40,13 @@ const HallOfFame = () => {
     
   return (
       <Fragment>
-        <h1>Hall of fame</h1>
         <div className='feed'>
+            <h1>Hall of fame</h1>
+            <div className='feed_action_bar'>
                 <div className='refresh_container' >
                     <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>
                 </div>
+            </div>
               {posts.map((e, i)=> {
                     return (
                     <div key={e.id} id={e.id} className='post'>

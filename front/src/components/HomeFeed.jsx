@@ -7,6 +7,7 @@ import axios from 'axios'
 
 import VoteBar from './VoteBar'
 import DeletePost from './DeletePost'
+import ReportPost from './ReportPost'
 import { GiPodium } from "react-icons/gi";
 
 const HomeFeed = () => {
@@ -55,7 +56,7 @@ const HomeFeed = () => {
 
             <div className='feed'>
                 <h1>Home</h1>
-                <div className='homefeed_action_bar'>
+                <div className='feed_action_bar'>
                     <div className='refresh_container' >
                             <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>
                     </div>
@@ -100,6 +101,7 @@ const HomeFeed = () => {
                         {(state.id === e.user_id || state.isAdmin) && 
                             <DeletePost postId={e.id} img={e.image} refresh={refresh}/>
                         }
+                        <ReportPost postId={e.id}/>
                     </div>
                 )
                 })} 

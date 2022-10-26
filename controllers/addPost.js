@@ -5,7 +5,6 @@ import fs from 'fs';
 import formidable from 'formidable';
 
 const addPost = (req, res) => {
-    
     const insertPost = "INSERT INTO posts (user_id, text_content, publication_date) VALUES (?, ?, ?)" // 1
     const insertScore = 'INSERT INTO posts_scores (post_id, score) VALUES (?, 0)' // 2
     const insertPostCategorie = 'INSERT INTO posts_categories (post_id, categorie_id) VALUES (?, ?)' // 3
@@ -53,7 +52,6 @@ const addPost = (req, res) => {
                         pool.query(insertScore, [postId], (err, score, fields) => {
                             if (err) throw err;
                             // console.log(6)
-
                             if(!files.files){
                                 console.log('successfully added without img')
                                 res.json({response: true})
@@ -89,7 +87,6 @@ const addPost = (req, res) => {
         }
     })
 }
-
 
 /*
 - Si image => insertImg et fs.copyfile (recup de l'id en reponse)

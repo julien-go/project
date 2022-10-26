@@ -11,7 +11,7 @@ PROJET RESEAU SOCIAL :
     Composant Home :
         - Composant MostPopularCarousel qui tourne sur le 5 posts les plus populaires du jour
         - Composant HomeFeed qui affiche tout les posts qui correspondent aux centres d'intérêts choisis par l'utilisateur, avec upvote-downvote
-    Composant MostPopular : Liste des posts les plus populaires du site (moins de 24h)
+    Composant HallOfFame : Liste des posts ayant plus de 10 likes classé par les plus likés OK
     
     Composant Categorie : Liste des posts d'une catégorie spécifique OK 
     
@@ -31,7 +31,7 @@ PROJET RESEAU SOCIAL :
     
     // ADMIN //
 
-    Composant Statistics : Affichages des stats du sites, nb d'users etc...
+    Composant Statistics : Affichages des stats du sites, nb d'users etc... OK
     Composant AddCategories : Form qui ajoute des nouvelles catégories OK
     OPTIONNEL : 
         Composant Moderation : Affiche les posts signalés et choix suppression ou maintien
@@ -85,3 +85,13 @@ PROJET RESEAU SOCIAL :
         -Moderation POST
     
     
+signalement/modération : 
+
+composant btn signalement a ajouter sur les posts = 
+     au clic  => un form avec textarea et submit s'affiche
+     le signalement est enregistré dans la bdd 
+     
+page admin: lien vers composant modération = 
+    liste des signalement avec justification:
+    2 choix: supprimer signalement ou supprimer post & signalement
+     

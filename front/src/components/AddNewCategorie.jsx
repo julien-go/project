@@ -38,7 +38,7 @@ const AddNewCategorie = () => {
     return (
             <Fragment>
                 <h2 className='bloc_title'>Ajouter une nouvelle catégorie</h2>
-                <div className='form_container'>
+                <div className='form_container add_categorie_container'>
                     {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
                     <form onSubmit={addCategorie}>
                         <label name='name'>

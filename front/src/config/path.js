@@ -12,6 +12,7 @@ import MyCategories from '../components/MyCategories'
 import CategoryFeed from '../components/CategoryFeed'
 import NavCategories from '../components/NavCategories'
 import HallOfFame from '../components/HallOfFame'
+import Moderation from '../components/Moderation'
 
 import AddPost from '../components/AddPost'
 
@@ -30,7 +31,9 @@ export const routes = [
     {path: '/my-categories', element: <MyCategories />},
     {path: '/category/:name', element: <CategoryFeed />},
     {path: '/categories', element: <NavCategories/>},
-    {path: '/hall-of-fame', element: <HallOfFame/>}
+    {path: '/hall-of-fame', element: <HallOfFame/>},
+    {path: '/moderation', element: <Moderation/>}
+    
 ]
 
 export const userPath = [
@@ -48,7 +51,8 @@ export const userPath = [
 ]
 
 export const adminPath = [
-    "/admin"
+    "/admin",
+    "/moderation"
 ]
 
 export const notConnectedPath = [
