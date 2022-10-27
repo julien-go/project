@@ -5,6 +5,8 @@ import BASE_URL from "../config.js"
 import axios from "axios";
 import {AppContext} from '../reducer/reducer.js'
 
+import UserPosts from './UserPosts'
+
 const Profile = () => {
     const [state, dispatch] = React.useContext(AppContext)
     
@@ -63,28 +65,29 @@ const Profile = () => {
     
     return (
         <Fragment>
-        <div className='profile'>
-            <h1>Profil</h1>
-                <div className='profile_infos_container'>
-                    {msg !== '' && <p>{msg}</p>}
-                    {userInfos.email !== '' && <h2 className='username profile_name'>{profileName}</h2>}
-                    {userInfos.avatarPath !== '' && <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${userInfos.avatarPath}`} alt={`${profileName}'s avatar`} className="user_avatar profile_avatar"/>}
-                    <div className='profile_infos'>
-                        <p>Nombre de posts : {userInfos.postCount}</p>
-                        <p>Inscrit depuis le : {userInfos.registrationDate}</p>
+            <div className='profile'>
+                <h1>Profil</h1>
+                    <div className='profile_infos_container'>
+                        {msg !== '' && <p>{msg}</p>}
+                        {userInfos.email !== '' && <h2 className='username profile_name'>{profileName}</h2>}
+                        {userInfos.avatarPath !== '' && <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${userInfos.avatarPath}`} alt={`${profileName}'s avatar`} className="user_avatar profile_avatar"/>}
+                        <div className='profile_infos'>
+                            <p>Nombre de posts : {userInfos.postCount}</p>
+                            <p>Inscrit depuis le : {userInfos.registrationDate}</p>
+                        </div>
                     </div>
-                </div>
-                <div className='separator'></div>
-                
-                {profileName === state.username && 
-                    <div className='profile_actions_container'>
-                        <h3 className='bloc_title'>Gestion du profil</h3>
-                        <button className='action_btn' onClick={redirectModifAvatar}>Modify/Add avatar</button>
-                        <button className='action_btn' onClick={redirectModifProfile}>Modify profile informations</button>
-                        <button className='action_btn' onClick={redirectDeleteAccount}>Delete my profile</button>
-                    </div>
-                }
-        </div>
+                    <div className='separator'></div>
+                    
+                    {profileName === state.username && 
+                        <div className='profile_actions_container'>
+                            <h2 className='bloc_title'>Gestion du profil</h2>
+                            <button className='action_btn' onClick={redirectModifAvatar}>Modify/Add avatar</button>
+                            <button className='action_btn' onClick={redirectModifProfile}>Modify profile informations</button>
+                            <button className='action_btn' onClick={redirectDeleteAccount}>Delete my profile</button>
+                        </div>
+                    }
+                    {userInfos.postCount > 0 && <UserPosts username={profileName.toLowerCase()}/>}
+            </div>
         </Fragment>
         )
 }
