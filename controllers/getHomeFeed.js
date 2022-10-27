@@ -23,7 +23,7 @@ const getAllPosts= async (userId) => {
     return posts
 }
 
-const getAllPostCategories = async (array) => {
+export const getAllPostCategories = async (array) => {
     const selectCategoriesPost = 'SELECT name FROM categories JOIN posts_categories ON categories.id = posts_categories.categorie_id WHERE posts_categories.post_id = ?'
     const data = []
     for(let i = 0; i<= array.length; i++){
@@ -37,13 +37,29 @@ const getAllPostCategories = async (array) => {
     }
 }
 
+export const getPostImage = async (array) => {
+    const selectUrl = 'SELECT url FROM images JOIN posts ON posts.image_id = images.id WHERE posts.id = ?'
+    const data = []
+    for(let i = 0; i<= array.length; i++){
+        if(i === array.length){
+            return data
+        } else {
+            // traitement 
+            const image = await asyncQuery(selectUrl, [array[i].id])
+            data.push({...array[i], image: image[0]})
+        }
+    }
+}
+
 const getHomeFeed = async (req, res) => {
     const userId = req.params.id;
     const selectMyCategories = 'SELECT categories.id FROM categories JOIN users_categories ON users_categories.categorie_id = categories.id JOIN users ON users.id = users_categories.user_id WHERE users.id = ? ORDER BY categories.id DESC';
     const myCategories = await asyncQuery(selectMyCategories,[userId])
-    const postsList = await getAllPosts(userId)
-    const posts = await getAllPostCategories(postsList)
+    const posts1 = await getAllPosts(userId)
+    const posts2 = await getAllPostCategories(posts1)
+    const posts = await getPostImage(posts2)
     
+    console.log(posts)
     if(posts === []){
         res.json({response: false})
     } else {

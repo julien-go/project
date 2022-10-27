@@ -1,4 +1,5 @@
 import {pool, asyncQuery} from '../config/database.js';
+import {getPostImage, getAllPostCategories} from '../controllers/getHomeFeed.js'
 
 const getAllPosts= async () => {
     const minimumScore = 10;
@@ -7,24 +8,12 @@ const getAllPosts= async () => {
     return posts
 }
 
-const getAllPostCategories = async (array) => {
-    const selectCategoriesPost = 'SELECT name FROM categories JOIN posts_categories ON categories.id = posts_categories.categorie_id WHERE posts_categories.post_id = ?'
-    const data = []
-    for(let i = 0; i<= array.length; i++){
-        if(i === array.length){
-            return data
-        } else {
-            // traitement 
-            const categories = await asyncQuery(selectCategoriesPost, [array[i].id])
-            data.push({...array[i], categories})
-        }
-    }
-}
 
 const getHallOfFame = async (req, res) => {
     // On sélectionne tout les posts ayant un score d'au moins 10
-    const postsList = await getAllPosts()
-    const posts = await getAllPostCategories(postsList)
+    const posts1 = await getAllPosts()
+    const posts2 = await getAllPostCategories(posts1)
+    const posts = await getPostImage(posts2)
     if(posts === []){
         res.json({response: false})
     } else {

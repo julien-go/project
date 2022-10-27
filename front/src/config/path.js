@@ -33,7 +33,6 @@ export const routes = [
     {path: '/categories', element: <NavCategories/>},
     {path: '/hall-of-fame', element: <HallOfFame/>},
     {path: '/moderation', element: <Moderation/>}
-    
 ]
 
 export const userPath = [

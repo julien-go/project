@@ -3,6 +3,7 @@ import {useNavigate, NavLink} from 'react-router-dom'
 import BASE_URL from "../config.js"
 import axios from "axios";
 import DeletePost from './DeletePost'
+import {ImCheckmark, ImCross} from "react-icons/im";
 
 const Moderation = () => {
     
@@ -12,7 +13,6 @@ const Moderation = () => {
     const getReports = () => {
         axios.get(`${BASE_URL}/admin/get-reports`)
         .then((res)=> {
-            console.log(res.data.reports)
             if(res.data.response){
                 setMsg('')
                 setReports(res.data.reports)
@@ -25,10 +25,32 @@ const Moderation = () => {
         })
     }
     
-    const compareId = (a, b) => {
-        if(a.id < b.id) return 1
-        if(a.id > b.id) return -1
-        else return 0
+    const annulReport = (id) => {
+        console.log(id)
+        axios.post(`${BASE_URL}/admin/annul-report`, {
+            id})
+        .then((res)=> {
+            res.data.response && refresh()
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+    
+    const deletePostReport = (reportId, postId) => {
+        console.log(postId)
+        if(postId && reportId){
+            axios.post(`${BASE_URL}/admin/delete-post-report`, 
+                {   reportId,
+                    postId
+                })
+            .then((res)=> {
+                res.data.response && refresh()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
     }
     
     const refresh = () => {
@@ -37,42 +59,47 @@ const Moderation = () => {
     
     useEffect(()=> {
         getReports()
-        console.log(0)
     }, [])
+    
+    
     return (
         <Fragment>
-            <div className='feed'>
+           <div className='feed'>
             <h1>Tableau de modération</h1>
-                  {reports.map((e, i)=> {
+                {msg && <p>{msg}</p>}
+                  {reports.map((element, i)=> {
                         return (
-                        <div key={e.id} id={e.post_id} className='post'>
+                        <div key={element.id} id={element.post_id} className='post'>
                             <div className="post_header">
-                                <NavLink className='post_user' to={`/profile/${e.username}`}>
-                                    <p className='username'>{e.post_username}</p>
+                                <NavLink className='post_user' to={`/profile/${element.username}`}>
+                                    <p className='username'>{element.post_username}</p>
                                 </NavLink>
                             </div>
                            <div className='post_content'>
-                                <p>{e.text_content}</p>
-                                {e.image !== undefined &&
-                                <img src={`http://juliengodard.sites.3wa.io:9300/img/${e.image.url}`} alt={`${e.username}'s uploaded picture`} className="post_img"/>
+                                <p>{element.text_content}</p>
+                                {element.image !== undefined &&
+                                <img src={`http://juliengodard.sites.3wa.io:9300/img/${element.image.url}`} alt={`${element.username}'s uploaded picture`} className="post_img"/>
                                 }
                             </div> 
                             <div className='report_description'>
                                 <h3>Résumé du signalement</h3>
-                                <p>{e.user_id}</p>
-                                <p>{e.report_message}</p>
-                                <p>{e.report_date}</p>
+                                <p>Id de l'utilisateur : {element.user_id}</p>
+                                <p>Objet : {element.report_message}</p>
+                                <p>Date :{element.report_date}</p>
                             </div>
-                            <div>
-                                <button>Keep</button>
+                            <div className='moderation_bar'>
+                                <button className='validate_btn' onClick={(e) => annulReport(reports[i].id)}>
+                                    <ImCheckmark/>
+                                </button>
+                                <button className='delete_btn' onClick={(e) => deletePostReport(reports[i].id, reports[i].post_id)}>
+                                    <ImCross/>
+                                </button>
                             </div>
-                            <DeletePost postId={e.id} img={e.image} refresh={refresh}/>
                         </div>
                     )
                     })} 
                     
                 </div>
-
         </Fragment>
         )
 }

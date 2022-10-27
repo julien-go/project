@@ -40,11 +40,9 @@ const modifyProfileInfos = (req, res) => {
                                     let params = [req.body.username.toLowerCase(), req.body.email, req.body.id]
                                         pool.query(updateInfos, params, (err, user, fields) => {
                                             if (err) throw err
-                                            
-                                            req.session.username = req.body.username.toLowerCase()
+
                                             // console.log(req.session.username)
-                                            req.session.isAdmin = false;
-                                            res.json({response:true, errorMsg: '', username: req.body.username, email: req.body.email, isAdmin: req.session.isAdmin, id: req.body.id})
+                                            res.json({response:true, errorMsg: '', username: req.body.username, email: req.body.email, isAdmin: false, id: req.body.id})
                                         })
                                 }
                             }

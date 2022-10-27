@@ -1,12 +1,9 @@
 import {Fragment, useContext, useState, useEffect} from 'react'
-import {useNavigate} from 'react-router-dom'
 import { ImCross } from "react-icons/im";
-import {AppContext} from '../reducer/reducer'
 import BASE_URL from "../config.js"
 import axios from 'axios'
 
 const DeletePost = (props) => {
-    const navigate = useNavigate()
     
     const removePost = (e) => {
         if(props.postId){

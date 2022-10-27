@@ -12,12 +12,7 @@ const deleteAccount = (req, res) => {
     } else {
         pool.query(deleteUser, [req.body.id], (err, result, fields)=>{
             if (err) throw err
-            req.session.destroy((err) =>{
-        		if (err) throw err
-        		
-        		console.log('compte supprimmé')
-        		res.json({response: true})
-	        })
+        	console.log('compte supprimé')
         })
     }
 }

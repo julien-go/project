@@ -405,6 +405,11 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   padding: 0.25em 0;
 }
 
+.post_user .username {
+  max-width: 100%;
+  padding-left: 1rem;
+}
+
 .little_avatar {
   max-width: 75px;
   height: 75px;
@@ -449,14 +454,20 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   padding: 0.5em;
 }
 
-.delete_btn {
+.delete_btn, .validate_btn {
   margin: auto;
   width: fit-content;
   background: none;
   border: none;
-  color: var(--downvote-color);
   transition: all 0.4s ease;
   padding: 0.3em;
+}
+.delete_btn {
+    color: var(--downvote-color);
+}
+
+.validate_btn {
+  color: var(--upvote-color);
 }
 
 .delete_btn:hover {
@@ -826,4 +837,41 @@ form label {
 
 .add_categorie_container {
   min-height: 75vh;
+}
+
+/*Modération*/
+.report_description {
+  display: flex;
+  flex-direction: column;
+  gap:0.5rem;
+  color: white;
+  background: var(--gradient-blue);
+  width: 90%;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+  border: 0.2rem solid var(--downvote-color);
+}
+
+.report_description p{
+  overflow-wrap: break-word
+}
+
+.moderation_bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.moderation_bar button {
+  margin: 0;
+}
+
+.moderation_bar button svg {
+    font-size: 1.5rem;
+    width: 2rem;
+    height: 2rem;
 }

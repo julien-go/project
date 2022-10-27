@@ -29,6 +29,8 @@ import getStats from '../controllers/admin/getStats.js'
 import getReports from '../controllers/admin/getReports.js'
 import {verifyVote, upVote, downVote, getScore, annulVote} from '../controllers/vote.js'
 
+import {annulReport, deletePostReport} from '../controllers/admin/moderation.js'
+
 const router = express.Router();
 
 // Not connected routes
@@ -72,5 +74,7 @@ router.post("/api/report-post", reportPost);
 router.post("/api/admin/add-categorie", addCategorie);
 router.get('/api/admin/get-stats', getStats)
 router.get('/api/admin/get-reports', getReports)
+router.post('/api/admin/annul-report', annulReport)
+router.post('/api/admin/delete-post-report', deletePostReport)
 
 export default router;
