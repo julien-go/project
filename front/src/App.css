@@ -96,7 +96,7 @@ nav {
 .username {
   text-transform: capitalize;
   color: white;
-  font-size: 1.2em;
+  font-size: 1.65rem;
   font-weight: bold;
 }
 
@@ -118,6 +118,7 @@ footer {
 /**********************Logo*************************/
 
 .logo_container {
+  z-index: 1000;
   text-align: center;
   font-family: CarterOne-Regular;
   width: 100%;
@@ -383,15 +384,20 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   max-height:100%;
 }
 
-
 .post_header {
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   background: rgb(255, 255, 255);
   background: var(--gradient-blue);
-  padding: 0.5em 0;
+  padding: 0.5rem 0 0 0.5rem;
   display: flex;
   justify-content: space-between;
+  position: relative;
+}
+
+.post_header .delete_report_bar {
+  position: absolute;
+  right: 0;
 }
 
 .post_user{
@@ -407,7 +413,6 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
 
 .post_user .username {
   max-width: 100%;
-  padding-left: 1rem;
 }
 
 .little_avatar {
@@ -454,29 +459,97 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   padding: 0.5em;
 }
 
-.delete_btn, .validate_btn {
-  margin: auto;
+.delete_btn, .validate_btn, .report_btn, .close_modal_btn {
   width: fit-content;
-  background: none;
+  background: var(--pale-blue);
   border: none;
   transition: all 0.4s ease;
-  padding: 0.3em;
+  padding: 0 0.45rem;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  
 }
-.delete_btn {
+.delete_btn, .report_btn, .close_modal_btn {
     color: var(--downvote-color);
+    height: 2rem
 }
 
 .validate_btn {
   color: var(--upvote-color);
 }
 
-.delete_btn:hover {
+.delete_btn:hover, .report_btn:hover {
   color: var(--pale-orange);
 }
 
-.delete_btn svg {
-  font-size: 1.7em;
+.delete_btn svg, .report_btn svg {
+  font-size: 1rem;
 }
+
+.delete_report_bar {
+  display: flex;
+  padding: 0 0.5rem;
+}
+
+/*MODAL*/
+
+.modal_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1040;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report_form {
+  background-color: var(--pale-blue);
+  position: relative;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 25px;
+  z-index: 100;
+  text-align: center;
+  gap: 2rem;
+  padding: 1rem 2.5rem;
+}
+
+.report_form form {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem
+}
+
+.modal_container .close_modal_btn {
+  position: absolute;
+  right: 0.5rem;
+}
+
+
+/*.modal-fullscreen .modal-content {*/
+/*    height: 100%;*/
+/*    border: 0;*/
+/*    border-radius: 0;*/
+/*}*/
+/*.modal-content {*/
+/*    position: relative;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    width: 100%;*/
+    /*color: var(--bs-modal-color);*/
+/*    pointer-events: auto;*/
+/*    background-color: var(--bs-modal-bg);*/
+/*    background-clip: padding-box;*/
+    /*border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);*/
+    /*border-radius: var(--bs-modal-border-radius);*/
+/*    outline: 0;*/
+/*}*/
 
 /*VOTEBAR*/
 .score {
@@ -622,7 +695,7 @@ form label {
   width: 100%;
 }
 
-.form_container textarea{
+textarea{
   resize: none;
   padding: 0.25em;
   border: none;

@@ -1,11 +1,14 @@
 import {Fragment, useContext, useState, useEffect} from 'react'
-import { ImCross } from "react-icons/im";
+import { ImBin, ImCross } from "react-icons/im";
 import BASE_URL from "../config.js"
 import axios from 'axios'
 
 const DeletePost = (props) => {
     
+    const [active, setActive] = useState(false)
+    
     const removePost = (e) => {
+        e.preventDefault()
         if(props.postId){
             axios.post(`${BASE_URL}/delete-post/`, {
                 postId: props.postId,
@@ -26,9 +29,24 @@ const DeletePost = (props) => {
     
      return (
         <Fragment>
-            <button className='delete_btn' onClick={(e) => removePost(e)}>
-                <ImCross/>
-            </button>
+            <div className='delete_container'>
+                <button className='delete_btn' onClick={(e) => setActive(true)}>
+                    <ImBin/>
+                </button>  
+                {active &&
+                    <div className='modal_container'>
+                        <div className='report_form'>
+                            <button className='close_modal_btn' onClick={() => setActive(false)}>
+                                <ImCross/>
+                            </button>
+                            <h3 className='bloc_title'>Voulez-vous supprimer le post ?</h3>
+                            <form onSubmit={(e) => removePost(e)}>
+                                <input className='action_btn' type='submit' value='Supprimer'/>
+                            </form>
+                        </div>                 
+                    </div>
+            }
+            </div>
         </Fragment> 
     )
 }

@@ -1,11 +1,11 @@
 import {Fragment, useContext, useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { ImWarning } from "react-icons/im";
+import { ImWarning, ImCross } from "react-icons/im";
 import BASE_URL from "../config.js"
 import axios from 'axios'
 
-import {AppContext} from '../reducer/reducer'
 
+import {AppContext} from '../reducer/reducer'
 
 const ReportPost = (props) => {
     const [state, dispatch] = useContext(AppContext)
@@ -15,10 +15,8 @@ const ReportPost = (props) => {
     const [reportMsg, setReportMsg] = useState('')
     
     const submitReport = (e) => {
-        console.log(1)
         e.preventDefault()
         if(reportMsg.length < 150 && reportMsg.length > 10){
-            console.log(1)
             const params = {userId: state.id, username: state.username, msg:reportMsg, postId: props.postId}
             axios.post(`${BASE_URL}/report-post`, params)
             .then((res)=> {
@@ -42,14 +40,18 @@ const ReportPost = (props) => {
                 <ImWarning/>
             </button>
             {active &&
-                <Fragment>
-                    <button onClick={() => setActive(false)}>Fermer</button>
-                    <p>Signaler un post inadéquat</p>
-                    <form onSubmit={(e) => submitReport(e)}>
-                        <textarea name='reportMsg' placeholder='Raison(s) du signalement' minLength='10' maxLength='150' onChange={(e) => setReportMsg(e.target.value)}/>
-                        <input type='submit' value='Signaler'/>
-                    </form>
-                </Fragment>
+                    <div className='modal_container'>
+                        <div className='report_form'>
+                            <button className='close_modal_btn' onClick={() => setActive(false)}>
+                                <ImCross/>
+                            </button>
+                            <h3 className='bloc_title'>Signaler un post inadéquat</h3>
+                            <form onSubmit={(e) => submitReport(e)}>
+                                <textarea name='reportMsg' placeholder='Raison(s) du signalement' minLength='10' maxLength='150' onChange={(e) => setReportMsg(e.target.value)}/>
+                                <input className='action_btn' type='submit' value='Signaler'/>
+                            </form>
+                        </div>                 
+                    </div>
             }
         </div> 
          }

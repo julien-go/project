@@ -86,6 +86,7 @@ const Profile = () => {
                             <button className='action_btn' onClick={redirectDeleteAccount}>Delete my profile</button>
                         </div>
                     }
+                    <div className='separator'></div>
                     {userInfos.postCount > 0 && <UserPosts username={profileName.toLowerCase()}/>}
             </div>
         </Fragment>

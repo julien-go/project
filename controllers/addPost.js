@@ -28,30 +28,22 @@ const addPost = (req, res) => {
                 res.json({response: false, msg: 'No selected category'})
         } else {
             if(!verifyLength(textContent, 500)){
-                // console.log(2)
                 res.json({response: false, msg: 'Too many characters'})
             } else {
                 if(textContent.toString().length < 20){
-                    // console.log(3)
                     res.json({response: false, msg: 'Not enough characters'})
                 } else {
-                    // console.log(4)
                     pool.query(insertPost, [userId, textContent, new Date()], (err, post, fields) => {
                         if (err) throw err;
-                        // console.log(5)
-                        // console.log(post)
                         const postId = post.insertId;
                         
                         for(let i=0; i < categories.length; i++){
                             pool.query(insertPostCategorie, [postId, categories[i]], (err, cats, fields) => {
                                 if (err) throw err;
-                                // console.log('0000')
                             })
-                                // console.log(cats)
                         }
                         pool.query(insertScore, [postId], (err, score, fields) => {
                             if (err) throw err;
-                            // console.log(6)
                             if(!files.files){
                                 console.log('successfully added without img')
                                 res.json({response: true})
