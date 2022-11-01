@@ -92,3 +92,4 @@ export const annulVote = (req, res) => {
         }
     })
 }
+

@@ -29,6 +29,9 @@ const ModifyProfile = () => {
                     if(!checkRegExEmail(email)){
                         setErrorMsg("Email format is not valid")
                     } else {
+                        console.log(state.username)
+                        if(state.username.toLowerCase() !== username || state.email !== email){
+                            console.log(state.username.toLowerCase())
                         axios.post(`${BASE_URL}/modify-profile`, {
                             username,
                             email,
@@ -48,6 +51,7 @@ const ModifyProfile = () => {
                         .catch((err) => {
                             console.log(err)
                         })
+                        }
                     }
                 }
             }

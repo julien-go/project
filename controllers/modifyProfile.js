@@ -1,57 +1,107 @@
-import {pool} from '../config/database.js';
+import {pool, asyncQuery} from '../config/database.js';
 import verifyLength from '../components/verifyLength/index.js';
-import {checkSpecialCharacters} from '../components/regEx/index.js';
+import {checkSpecialCharacters, checkRegExEmail} from '../components/regEx/index.js';
+import {generateResponse} from "../controllers/login.js"
 
-const modifyProfileInfos = (req, res) => {
+const verifyUsername = async (name, id) => {
+    const compareUsername = 'SELECT id FROM users WHERE username = ? AND id != ?';
+    
+    const result = await asyncQuery(compareUsername,[name, id])
+    if(result[0]){
+        return false
+    } else {
+        return true
+    }
+}
+
+const verifyEmail = async (email, id) => {
+    const compareEmail = 'SELECT id FROM users WHERE email = ? AND id != ?'
+    
+    const result = await asyncQuery(compareEmail,[email, id])
+    if(result[0]){
+        return false
+    } else {
+        return true
+    }
+}
+
+const asyncVerifyLength = async (input, maxLength) => {
+    
+    const result = await verifyLength(input, maxLength)
+    if(!result){
+        return false
+    } else {
+        return true
+    }
+}
+
+const verifyUsernameCharacters = async (name) => {
+    
+    const result = await checkSpecialCharacters(name)
+    
+    if(!result || name.includes(' ')){
+        return false
+    } else {
+        return true
+    }
+}
+
+const verifyEmailRegex = async (email) => {
+    
+    const result = await checkRegExEmail(email)
+    if(!result){
+        return false
+    } else {
+        return true
+    }
+}
+
+
+const modifyProfileInfos = async (req, res) => {
     const updateInfos = 'UPDATE users SET username = ?, email = ? WHERE id = ?'
-    const compareEmail = 'SELECT id FROM users WHERE email = ?'
-    const compareUsername = 'SELECT id FROM users WHERE username = ?';
-    console.log(req.body);
     
+    const username = req.body.username.toLowerCase();
     
-    if (!verifyLength(req.body.email, 255) || (!verifyLength(req.body.username, 20))){
+    // console.log(req.body);
+    const nameNotTooLong = await asyncVerifyLength(username, 20);
+    const emailNotTooLong = await asyncVerifyLength(req.body.email, 255)
+    
+    if(!nameNotTooLong || !emailNotTooLong){
         res.json({response:false, errorMsg: 'Too many characters in an input'})
     } else {
-            pool.query(compareEmail, [req.body.email], (error, users1, fields) => {
-                if (error) throw error;
-                console.log(users1)
+        
+        const usernameIsValid = await verifyUsernameCharacters(username)
+        
+        if(!usernameIsValid){
+            res.json({response:false, errorMsg: `Empty spaces and/or special characters are not allowed in username`})   
+        } else {
             
-                if(users1.id){
-                    if(users1.id !== req.body.id){
-                        console.log('2')
-                    res.json({response:false, errorMsg: 'This email is already taken'})
-                    }
+            const emailIsValid = await verifyEmailRegex(req.body.email)
+            if(!emailIsValid){
+                res.json({response:false, errorMsg: `Email format not valid`})   
+            } else {
+                
+                const nameAvailable = await verifyUsername(username, req.body.id);
+                if(!nameAvailable){
+                    res.json({response:false, errorMsg: 'This username is already taken'})
                 } else {
                     
-                    pool.query(compareUsername, [req.body.username], (error, users2, fields) => {
-                        if (error) throw error;
-                
-                        if(users2.id){
-                            if(users2.id !== req.body.id) {
-                            res.json({response:false, errorMsg: 'This username is already taken'})
-                            }
-                        } else {
-                            if(req.body.username.includes(' ')) {
-                                res.json({response:false, errorMsg: 'Empty spaces not allowed in username'})
-                            } else {
-                                if(!checkSpecialCharacters(req.body.username)) {
-                                    res.json({response:false, errorMsg: ` Special characters not allowed in username`})
-                                } else {
-                                    let params = [req.body.username.toLowerCase(), req.body.email, req.body.id]
-                                        pool.query(updateInfos, params, (err, user, fields) => {
-                                            if (err) throw err
-
-                                            // console.log(req.session.username)
-                                            res.json({response:true, errorMsg: '', username: req.body.username, email: req.body.email, isAdmin: false, id: req.body.id})
-                                        })
-                                }
-                            }
-                        }
-                    
-                    })
+                    const emailAvailable = await verifyEmail(req.body.email, req.body.id);
+                    if(!emailAvailable){
+                        res.json({response:false, errorMsg: 'This email is already taken'})
+                    } else {
+                        pool.query(updateInfos, [username, req.body.email, req.body.id], async (err, user, fields) => {
+                            if (err) throw err
+                            const userData = {username: username, email: req.body.email, id: req.body.id, role_id: 2}
+                            const response = await generateResponse(userData, true)
+                            
+                            res.json({...response, errorMsg: ''})
+                        })
+                    }
                 }
-            })
+            }
+        }
     }
-}  
+}
 
 export default modifyProfileInfos;

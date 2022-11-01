@@ -66,6 +66,7 @@ router.post("/api/upvote", upVote);
 router.post("/api/downvote", downVote);
 router.post("/api/annul-vote", annulVote);
 
+
 router.post("/api/delete-post", deletePost);
 router.post("/api/report-post", reportPost);
 

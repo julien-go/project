@@ -25,19 +25,14 @@
   --pale-violet: #F3F1FF;
   --orange: #de8321; 
   --pale-orange: #ffa84c;
-  --bg-light:#FFF7F0;
   
   --upvote-color: #589756 ;
   --downvote-color: #C54F4F ;
   --novote-color: #E5E5E5;
   
   --gradient-blue:  linear-gradient(189deg, rgba(123,77,255,1) 0%, rgba(86,147,235,1) 100%);
-  
   --gradient-marine-blue: linear-gradient(335deg, rgba(2,0,36,1) 0%, rgba(44,50,142,1) 0%, rgba(62,73,246,1) 100%);
-  
-  --gradient-pale-violet:linear-gradient(189deg, rgba(239,249,255,1) 0%, rgba(239,242,255,1) 100%);
-  
-  --gradient-orange: linear-gradient(189deg, rgba(25,33,83,1) 58%, rgba(123,77,255,1) 100%);
+  --gradient-marine-violet: linear-gradient(189deg, rgba(25,33,83,1) 58%, rgba(123,77,255,1) 100%);
 }
 /**********************GLOBAL**************************/
 * {
@@ -125,7 +120,7 @@ footer {
   height: 4rem;
   position: sticky;
   top: 0;
-  background: var(--gradient-orange);
+  background: var(--gradient-marine-violet);
   font-size: 2.5rem;
   color: white;
   text-shadow: 2px 2px 3px rgba(255,255,255,0.25);
@@ -159,7 +154,7 @@ header{
   width: 100vw;
   position: fixed;
   bottom: 0;
-  background: var(--gradient-orange);
+  background: var(--gradient-marine-violet);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   box-shadow: rgb(44, 62, 80) 0px -15px 15px -15px;
   border-top-left-radius: 20px;
@@ -286,7 +281,6 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   padding: 0 0.2em 15vh 0.2em;
   min-height: 73vh;
   overflow: scroll;
-  /*background-color: var(--bg-light);*/
 }
 
 .feed_action_bar {
@@ -344,13 +338,11 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
 
 .post {
   height: fit-content;
-  background: rgb(2,0,36);
-  background: var(--gradient-pale-violet);
-  /*border: 1px solid var(--marine-blue);*/
+  background: var(--pale-blue);
+  background: linear-gradient(0deg, rgba(213,231,255,1) 0%, rgba(234,243,255,1) 77%);
   border-radius: 25px;
   display: flex;
   flex-direction: column;
-  /*overflow: hidden;*/
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -681,6 +673,7 @@ form label {
 }
 
 .form_error_msg {
+  text-align: center;
   color: red;
 }
 

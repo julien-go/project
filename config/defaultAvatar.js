@@ -1,1 +1,1 @@
-export const defaultAvatarId = 91;
+export const defaultAvatarId = 141;

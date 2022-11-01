@@ -10,9 +10,9 @@ const getProfileInfos = (req, res) => {
     
     pool.query(getInfos, [currentUsername], (err, user, fields) => {
         if (err) throw err
-        console.log(user)
+        // console.log(user)
         pool.query(getStats, [currentUsername], (err, postCount, fields)=> {
-            console.log(postCount)
+            // console.log(postCount)
             if (err) throw err;
                 if(!user[0]){
                     res.json({response: false, email: '', role: '', avatarPath: '', registrationDate: ''});
