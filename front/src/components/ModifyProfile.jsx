@@ -44,6 +44,7 @@ const ModifyProfile = () => {
                                 setErrorMsg(res.data.errorMsg);
                             } else {
                                 setErrorMsg('')
+                                localStorage.setItem('jwtToken', res.data.token)
                                 dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
                                 navigate(`/profile/${username}`, {replace: true});
                             }

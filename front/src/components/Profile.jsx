@@ -1,5 +1,5 @@
 import React from 'react'
-import {useContext, useEffect, useState, Fragment} from "react";
+import {useEffect, useState, Fragment} from "react";
 import {useLocation, useNavigate} from 'react-router-dom'
 import BASE_URL from "../config.js"
 import axios from "axios";
@@ -31,7 +31,7 @@ const Profile = () => {
             axios.get(`${BASE_URL}/profile/${name}`)
             .then((res)=> {
                 if(!res.data.response){
-                    setMsg("This profile doesn't exists")
+                    setMsg("Erreur de chargement du profil")
                     setUserInfos(initialInfos);
                 } else {
                     setMsg('')

@@ -7,7 +7,7 @@ export const verifyLength = (stringToTest, maxLength) => {
 }
 
 export const checkRegExPassword = (password) =>{
-    const regEx =/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    const regEx =/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\.\-\_])(?=.{8,})/;
     
     if(regEx.test(password)){
         return true

@@ -10,47 +10,52 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [secondPassword, setSecondPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const navigate = useNavigate();
     const [state, dispatch] = React.useContext(AppContext)
     
     const submitRegister = (e) => {
         e.preventDefault();
-        if (!verifyLength(email, 255) || !verifyLength(username, 20)){
-            setErrorMsg('Too many characters on an input')
+        if(password !== secondPassword){
+            setErrorMsg('Les mots de passe ne correspondent pas')
         } else {
-            if(username.includes(' ')){
-                setErrorMsg('Empty spaces not allowed in username')
+           if (!verifyLength(email, 255) || !verifyLength(username, 20)){
+            setErrorMsg('Too many characters on an input')
             } else {
-                if(!checkRegExPassword(password)){
-                    setErrorMsg('Password must be at least 8 characters and must contain at least 1 uppercase character, 1 lowercase character, 1 number and 1 special character');
+                if(username.includes(' ')){
+                    setErrorMsg('Empty spaces not allowed in username')
                 } else {
-                    if(!checkRegExEmail(email)){
-                        setErrorMsg("Email's format is not valid")
+                    if(!checkRegExPassword(password)){
+                        setErrorMsg('Password must be at least 8 characters and must contain at least 1 uppercase character, 1 lowercase character, 1 number and 1 special character');
                     } else {
-                        axios.post(`${BASE_URL}/register`, {
-                            username,
-                            email,
-                            password
-                        })
-                        .then((res) =>{
-                            // console.log(res)
-                            if (res.data.errorMsg !== ''){
-                                setErrorMsg(res.data.errorMsg);
-                            } else {
-                                setErrorMsg('')
-                                localStorage.setItem('jwtToken', res.data.token)
-                                axios.defaults.headers.common['Authorization'] = 'Bearer '+res.data.token
-                                dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
-                                navigate("/my-categories", {replace: true});
-                            }
-                        })
-                        .catch((err) => {
-                            console.log(err)
-                        })
-                    }
-                } 
-            }
+                        if(!checkRegExEmail(email)){
+                            setErrorMsg("Email's format is not valid")
+                        } else {
+                            axios.post(`${BASE_URL}/register`, {
+                                username,
+                                email,
+                                password
+                            })
+                            .then((res) =>{
+                                // console.log(res)
+                                if (res.data.errorMsg !== ''){
+                                    setErrorMsg(res.data.errorMsg);
+                                } else {
+                                    setErrorMsg('')
+                                    localStorage.setItem('jwtToken', res.data.token)
+                                    axios.defaults.headers.common['Authorization'] = 'Bearer '+res.data.token
+                                    dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
+                                    navigate("/my-categories", {replace: true});
+                                }
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                            })
+                        }
+                    } 
+                }
+            } 
         }
     }
     
@@ -61,7 +66,7 @@ const Register = () => {
                 {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
                 <form onSubmit={submitRegister}>
                         <label name='username'>
-                            Username
+                            Pseudo
                             <input type='text' name='username' maxLength='20' autoComplete='username' value={username} onChange= {(e) => setUsername(e.target.value)} required/>
                         </label>
                         <label name='email'>
@@ -69,8 +74,12 @@ const Register = () => {
                             <input type='email' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
                         </label>
                         <label name='password'>
-                            Password
+                            Mot de passe
                             <input type='password' name='password' maxLength='255' value={password}  autoComplete='new-password' onChange= {(e) => setPassword(e.target.value)} required/>
+                        </label>
+                        <label name='secondpassword'>
+                            Verification du mot de passe
+                            <input type='password' name='secondpassword' maxLength='255' value={secondPassword}  autoComplete='new-password' onChange= {(e) => setSecondPassword(e.target.value)} required/>
                         </label>
                     <input type='submit' value='Submit'/>
                 </form>

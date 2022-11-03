@@ -20,7 +20,9 @@ const Post = ({post, refresh}) => {
                 </NavLink>
                 <ul className='post_categories'>
                 {post.categories.map((element, j) => 
-                    <li key={j} className='label_category'>{element.name}</li>
+                    <li key={j} className='label_category'>
+                        <p>{element.name}</p>
+                    </li>
                 )}
                 </ul>
                 

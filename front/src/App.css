@@ -21,6 +21,7 @@
 :root {
   --blue: rgba(76,106,255,1);
   --marine-blue: #2C328E;
+  --marine-blue-transparent: rgba(44, 50, 142, 0.15);
   --pale-blue: #eaf3ff;
   --pale-violet: #F3F1FF;
   --orange: #de8321; 
@@ -110,6 +111,10 @@ footer {
   width: 100%;
 }
 
+  *::-webkit-scrollbar {
+  display: none;
+  }
+
 /**********************Logo*************************/
 
 .logo_container {
@@ -151,7 +156,7 @@ footer {
 header{
   /*border-top: 0.5em solid var(--marine-blue);*/
   /*border: 2px solid black;*/
-  width: 100vw;
+  width: 100%;
   position: fixed;
   bottom: 0;
   background: var(--gradient-marine-violet);
@@ -165,6 +170,7 @@ header{
 
 .empty_bar_header {
   height: 0.35rem;
+  width: 100%;
 }
 /*NAVBAR*/
 
@@ -205,15 +211,21 @@ header{
   color: var(--pale-orange);
 }
 
+.nav_text {
+  display: none;
+}
+
 /*NAV USER*/
 
 .user_bar {
+  width: 100%;
   border-radius: 20px;
   color: var(--marine-blue);
-  padding: 0.1em 0;
+  padding: 0.1em;
   font-size: 1.75em;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: rgb(180,212,255);
 background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 100%);
  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
@@ -252,12 +264,26 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   color: var(--marine-blue);
 }
 
-.user_bar .username {
+.user_bar .username_role_container {
   font-weight: normal;
   color: black;
-  padding-top: 0.15em;
-  width: 50%;
+  width: 47%;
   text-align: center;
+  display : flex;
+  justify-content: center;
+  gap: 5rem
+}
+
+.user_bar .username_role_container .username {
+  color: black;
+  font-size: 2rem;
+  padding: 0.15em;
+  display: flex;
+}
+
+.username_role_container a {
+  text-decoration: none;
+  font-size: 2rem;
 }
 
 .admin_navlink {
@@ -272,13 +298,21 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   
 }
 
+.nav_notconnected {
+  width: 100%;
+  display: flex;
+  justify-content:space-around;
+}
+
 /**********************FEED*************************/
 .feed {
+  width:100%;
   background-color: var(--pale-blue);
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.5em;
-  padding: 0 0.2em 15vh 0.2em;
+  padding: 0 0 15vh 0;
   min-height: 73vh;
   overflow: scroll;
 }
@@ -287,10 +321,10 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   display: flex;
   font-size: 1.5em;
   justify-content: space-around;
-  padding: 0rem 0.75rem 0.5rem 0.75rem;
+  padding: 0rem 1rem 0.5rem 8rem;
 }
 .feed_action_bar > div{
-  width: 50%;
+  /*width: 50%;*/
   display: flex;
   justify-content: center;
 }
@@ -312,11 +346,10 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
 
 .refresh_container{
   display: flex;
-  padding: 0 0 0 0.5em;
 }
 
 .action_btn {
-  font-size: 0.65em;
+  font-size: 1.075rem;
   color: var(--marine-blue);
   background-color: var(--novote-color);
   border: none;
@@ -337,6 +370,7 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
 /*POST*/
 
 .post {
+  width: 95%;
   height: fit-content;
   background: var(--pale-blue);
   background: linear-gradient(0deg, rgba(213,231,255,1) 0%, rgba(234,243,255,1) 77%);
@@ -381,15 +415,17 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   border-top-right-radius: 25px;
   background: rgb(255, 255, 255);
   background: var(--gradient-blue);
-  padding: 0.5rem 0 0 0.5rem;
   display: flex;
   justify-content: space-between;
   position: relative;
+  padding: 0.5rem;
+  
 }
 
 .post_header .delete_report_bar {
   position: absolute;
-  right: 0;
+  top: 0.1rem;
+  right: 0.1rem;
 }
 
 .post_user{
@@ -397,10 +433,10 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 1.4em;
+  font-size: 1.2rem;
   text-decoration: none;
   width: 50%;
-  padding: 0.25em 0;
+  padding: 0.25em 0.2em;
 }
 
 .post_user .username {
@@ -408,8 +444,8 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
 }
 
 .little_avatar {
-  max-width: 75px;
-  height: 75px;
+  max-width: 5rem;
+  height: 5rem;
   border: 1px solid var(--marine-blue);
   border-radius: 0.5em;
 }
@@ -524,25 +560,6 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 }
 
 
-/*.modal-fullscreen .modal-content {*/
-/*    height: 100%;*/
-/*    border: 0;*/
-/*    border-radius: 0;*/
-/*}*/
-/*.modal-content {*/
-/*    position: relative;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    width: 100%;*/
-    /*color: var(--bs-modal-color);*/
-/*    pointer-events: auto;*/
-/*    background-color: var(--bs-modal-bg);*/
-/*    background-clip: padding-box;*/
-    /*border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);*/
-    /*border-radius: var(--bs-modal-border-radius);*/
-/*    outline: 0;*/
-/*}*/
-
 /*VOTEBAR*/
 .score {
   font-weight: bold;
@@ -600,23 +617,25 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 /**********************FORM*************************/
 
 .form_container{
+  text-align: center;
   width: 100%;
   display: flex;
   flex-direction: column;
-  /*min-height: 75vh;*/
   /*height: 67vh;*/
-  height:auto;
+  overflow: scroll;
+  padding-bottom: 20vh;
 }
 
 form {
   font-size: 1.5em;
   width: 100%;
   height: 100%;
-  padding: 1em 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem
 }
 
 .form_container form{
@@ -627,7 +646,6 @@ form label {
   display: flex;
   flex-direction: column;
   width: 90%;
-  padding: 0.75em;
   gap: 0.15em;
   font-weight: bold;
   margin: auto;
@@ -639,7 +657,7 @@ form label {
   font-size: 1.1em;
   /*border: 2px solid var(--marine-blue);*/
   border-radius: 5px;
-  padding: 0.2em;
+  /*padding: 0.2em;*/
 }
 
 .form_container form input:focus{
@@ -655,14 +673,12 @@ form label {
 }
 
 .form_container form input[type=submit], .form_container .action_btn {
-  margin-top: 1em;
   color: var(--marine-blue);
   background-color: var(--novote-color);
-  font-size:0.9em;
+  font-size:1.075rem;
   border: none;
   padding: 0.3em;
   border-radius: 5px;
-  /*text-decoration: underline;*/
   font-weight: bold;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
@@ -675,6 +691,11 @@ form label {
 .form_error_msg {
   text-align: center;
   color: red;
+  padding: 0.5rem 0;
+}
+
+label[name=categories] .react_select_container {
+  margin-top: 1rem;
 }
 
 .react_select_container {
@@ -724,7 +745,7 @@ textarea{
 .nav_categories ul  {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   gap: 1em
 }
 .nav_categories ul li{
@@ -815,7 +836,6 @@ textarea{
 .mycategories {
   height: auto;
   padding-bottom: 18vh;
-  min-height: 110vh;
   overflow: scroll;
 }
 .mycategories_list {
@@ -850,13 +870,16 @@ textarea{
   justify-content: center;
   align-items: center;
 }
-.mycategories .action_btn{
-  padding: 0.5em 0.2em;
-}
 
 .bloc_title {
   font-size: 1.35em;
   text-align: center;
+}
+
+.bloc_mycategories form .react_select_container{
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem
 }
 
 
@@ -892,17 +915,17 @@ textarea{
 
 
 /**********************Admin************************/
-
+.admin_bloc_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem
+}
 
 .stats_container {
   width: 70%;
   margin: auto;
   text-align: center;
-
-}
-
-.add_categorie_container {
-  min-height: 75vh;
 }
 
 /*Modération*/
@@ -940,4 +963,211 @@ textarea{
     font-size: 1.5rem;
     width: 2rem;
     height: 2rem;
+}
+
+
+/**************************************************************************************************/
+/*********************************************MEDIA QUERIES****************************************/
+/**************************************************************************************************/
+
+/****************************TABLETTE***********************************/
+@media (min-width: 600px) {
+  
+  h1 {
+    font-size: 2.75rem;
+  }
+  
+  .action_btn, .form_container .action_btn, .form_container form input[type=submit] {
+    font-size: 2rem;
+  }
+  
+  main {
+    font-size: 1.5em;
+    width:85vw;
+    margin: auto;
+  }
+
+  .username {
+    font-size: 2.5rem;
+    max-width: 40vw;
+  }
+  
+  header {
+    min-height: 6vh;
+    width: 100%;
+  }
+  
+  .navbar {
+    padding: 1rem 5rem;
+    height: 100%;
+  }
+  .navbar li a {
+    font-size: 1.75rem;
+  }
+  
+  .user_bar {
+    font-size: 3rem;
+    
+  }
+  
+  .logo_container {
+    height: 8vh;
+    font-size: 3.25rem;
+  }
+  
+  
+  .logo_container .return_btn {
+    height: 4rem;
+    width: 4rem;
+    font-size: 2.5rem;
+  }
+  
+  /*FEED*/
+  .feed {
+    padding-bottom: 20vh;
+  }
+  
+  .feed::-webkit-scrollbar {
+  display: none;
+  }
+  
+  .feed_action_bar {
+    width: 100%;
+    padding: 0 0 2rem 0;
+  }
+  
+  .post .username {
+    font-size: 1.5em;
+    padding-bottom: 0.25rem;
+  }
+  
+  .little_avatar {
+    max-width: 7rem;
+    height: 7rem;
+  }
+  
+  .label_category {
+    padding: 0.75rem 0.85rem;
+  }
+  .label_category p{
+    height: 100%;
+    font-size: 1.1em;
+    
+  }
+  
+  .report_btn, .delete_btn {
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .report_btn svg, .delete_btn svg{
+    font-size: 1.75rem;
+  }
+  
+  /*NAV Categories*/
+  
+  .nav_categories {
+    font-size: 2.5rem;
+  }
+  
+}
+
+@media (min-width: 1200px) {
+  
+  * {
+  font-size: 1em;
+  }
+  
+  .logo_container {
+    z-index: 1001;
+    font-size: 4rem;
+    border-radius: inherit;
+    background: none;
+    box-shadow: none;
+    width: 25vw;
+    position: fixed
+  }
+  
+  .logo_container .return_btn {
+    position: fixed;
+    width: 5rem;
+    height: 5rem;
+    top: 20vh;
+    right: 9vw;
+    border-radius: 1.5rem;
+    background-color: var(--marine-blue);
+    opacity: 0.75;
+  }
+  
+  header {
+    display: flex;
+    flex-direction: column;
+    border-radius: inherit;
+    bottom: inherit;
+    top: 0;
+    box-shadow: none;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  }
+  
+  main {
+    padding: 20vh 0 0 0;
+    font-size: 1.5em;
+    width:65vw;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /*NAV*/
+  .navbar {
+    order: -2;
+    height:10vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .navbar ul {
+    width: 75%;
+  }
+  
+  .empty_bar_header {
+    order: 2;
+    height: 1vh;
+  }
+  
+  .nav_text {
+    display: inherit;
+    font-size: 2rem;
+    font-weight: bold;
+    transition: 0.3s all ease;
+  }
+  
+  .navbar a:hover .nav_text{
+    color: var(--pale-blue);
+  }
+  
+  .user_bar a:hover .nav_text {
+    color: var(--marine-blue);
+  }
+  
+  .nav_icon {
+    display: none;
+  }
+  
+  /*FEED*/
+  
+  .feed, .profile, .mycategories {
+    border-top-left-radius: 5rem;
+    border-top-right-radius: 5rem;
+    border-top: 2px var(--marine-blue-transparent) solid;
+  }
+  
+  .profile .feed {
+    border: none;
+  }
 }

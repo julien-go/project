@@ -84,14 +84,14 @@ const Moderation = () => {
                             <div className='report_description'>
                                 <h3>Résumé du signalement</h3>
                                 <p>Id de l'utilisateur : {element.user_id}</p>
-                                <p>Objet : {element.report_message}</p>
-                                <p>Date :{element.report_date}</p>
+                                <p>Objet du signalement : {element.report_message}</p>
+                                <p>Date : {element.report_date}</p>
                             </div>
                             <div className='moderation_bar'>
-                                <button className='validate_btn' onClick={(e) => annulReport(reports[i].id)}>
+                                <button className='validate_btn action_btn' onClick={(e) => annulReport(reports[i].id)}>
                                     <ImCheckmark/>
                                 </button>
-                                <button className='delete_btn' onClick={(e) => deletePostReport(reports[i].id, reports[i].post_id)}>
+                                <button className='delete_btn action_btn' onClick={(e) => deletePostReport(reports[i].id, reports[i].post_id)}>
                                     <ImCross/>
                                 </button>
                             </div>

@@ -54,7 +54,7 @@ const HomeFeed = () => {
         <Fragment>
 
             <div className='feed'>
-                <h1>Home</h1>
+                <h1>ACCUEIL</h1>
                 <div className='feed_action_bar'>
                     <div className='refresh_container' >
                             <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>

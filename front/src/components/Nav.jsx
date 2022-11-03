@@ -41,25 +41,27 @@ const Nav = () => {
                 <ul>
                     <li>
                         <NavLink to={urlMyProfile}>
-                            <ImUser/>
+                            <ImUser className='nav_icon'/>
+                            <p className='nav_text'>Mon profil</p>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="my-categories">
-                            <ImStarFull/>
+                            <ImStarFull className='nav_icon'/>
+                            <p className='nav_text'>Mes Centres d'intérêts</p>
                         </NavLink>
                     </li>
+                </ul>
+                <div className='username_role_container'>
+                    <p className='username'>{state.username}</p>
                     {state.isAdmin &&
                         <Fragment>
-                            <li>
                                 <NavLink className='admin_navlink' to="admin">
                                 ADMIN
                                 </NavLink>
-                            </li>
                         </Fragment>
                     }
-                </ul>
-                <p className='username'>{state.username}</p>
+                </div>
             </div> }
             <nav className='navbar'>
                 <ul>
@@ -67,40 +69,44 @@ const Nav = () => {
                         <Fragment>
                             <li>
                                 <NavLink to="/">
-                                    <ImHome/>
+                                    <ImHome className='nav_icon'/>
+                                    <p className='nav_text'>Accueil</p>
                                 </NavLink>
                             </li>
 
                             <li>
                                 <NavLink to="add-post">
-                                    <ImPlus/>
+                                    <ImPlus className='nav_icon'/>
+                                    <p className='nav_text'>Ajouter un post</p>
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to="categories">
-                                    <ImList/>
+                                    <ImList className='nav_icon'/>
+                                    <p className='nav_text'>Par catégorie</p>
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to="disconnect">
-                                    <ImExit className='disconnect_btn'/>
+                                    <ImExit className='nav_icon disconnect_btn'/>
+                                    <p className='nav_text disconnect_btn'>Déconnexion</p>
                                 </NavLink>
                             </li>
                         </Fragment>
                     }
                     {!state.isLogged &&
-                        <Fragment>
+                        <div className='nav_notconnected'>
                             <li>
                                 <NavLink to="register">
-                                REGISTER
+                                INSCRIPTION
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to="login">
-                                LOGIN
+                                CONNEXION
                                 </NavLink>
                             </li>
-                        </Fragment>
+                        </div>
                     }
                 </ul>
             </nav>

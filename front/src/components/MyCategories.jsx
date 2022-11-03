@@ -112,25 +112,29 @@ const MyCategories = () => {
                         )}
                 </ul>
                 <div className='separator'></div>
-                <h2 className='bloc_title'>Ajouter abonnement(s)</h2>
-                <form onSubmit={submitAdd}>
-                    <div className='react_select_container'>
-                        <label>
-                            <Select onChange={(e)=> changeToAdd(e)} value={toAdd} className='react-select' styles={customSelectStyles} isMulti options={otherCategories} name='toAdd' required/>
-                        </label>
-                        <input className='action_btn' type="submit" value="Ajouter un abonnement"/>
-                    </div>
-                </form>
+                <div className='bloc_mycategories'>
+                    <h2 className='bloc_title'>Ajouter abonnement(s)</h2>
+                    <form onSubmit={submitAdd}>
+                        <div className='react_select_container'>
+                            <label>
+                                <Select onChange={(e)=> changeToAdd(e)} value={toAdd} className='react-select' styles={customSelectStyles} isMulti options={otherCategories} name='toAdd' required/>
+                            </label>
+                            <input className='action_btn' type="submit" value="Ajouter un abonnement"/>
+                        </div>
+                    </form>
+                </div>
                 <div className='separator'></div>
-                <h2 className='bloc_title'>Supprimer abonnement(s)</h2>
-                <form onSubmit={submitRemove}>
+                <div className='bloc_mycategories'>
+                    <h2 className='bloc_title'>Supprimer abonnement(s)</h2>
+                    <form onSubmit={submitRemove}>
                     <div className='react_select_container'>
                         <label>
-                            <Select onChange={(e)=> changeToRemove(e)} value={toRemove} className='react-select' styles={customSelectStyles} isMulti options={myCategories} name='toRemove' required/>
+                            <Select menuPlacement='top' onChange={(e)=> changeToRemove(e)} value={toRemove} className='react-select' styles={customSelectStyles} isMulti options={myCategories} name='toRemove' required/>
                         </label>
                         <input className='action_btn' type="submit" value="Supprimer un abonnement"/>
                     </div>
                 </form>
+                </div>
             </div>
         </Fragment>
     )
