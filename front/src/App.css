@@ -29,7 +29,7 @@
   
   --upvote-color: #589756 ;
   --downvote-color: #C54F4F ;
-  --novote-color: #E5E5E5;
+  --novote-color:#FEF9EF ;
   
   --gradient-blue: linear-gradient(189deg, rgba(123,77,255,1) 0%, rgba(86,147,235,1) 100%);
   --gradient-marine-blue: linear-gradient(335deg, rgba(2,0,36,1) 0%, rgba(44,50,142,1) 0%, rgba(62,73,246,1) 100%);
@@ -106,8 +106,6 @@ nav {
 footer {
   background-color: var(--marine-blue);
   color: white;
-  /*position: fixed;*/
-  /*bottom: 0;*/
   width: 100%;
 }
 
@@ -933,6 +931,12 @@ textarea{
   
 }
 
+.add_categorie_container label {
+  padding-top:1vh;
+  font-size: 1.25rem;
+  font-weight: inherit;
+}
+
 
 /**********************Admin************************/
 .admin_bloc_container {
@@ -949,18 +953,41 @@ textarea{
 }
 
 /*Modération*/
+
+.reported_post h2 {
+  color: white;
+  padding: 1rem;
+}
+
+.reported_post .username {
+  font-size: 1rem;
+  color: var(--pale-orange);
+}
+
+.reported_post .post_header {
+  gap: inherit;
+  flex-direction: column;
+  text-align: center;
+}
+
+.reported_post .post_header .post_user {
+  gap: inherit;
+  width: 100%;
+  flex-direction: row;
+  text-align: center;
+}
+
 .report_description {
   display: flex;
   flex-direction: column;
   gap:0.5rem;
   color: white;
-  background: var(--gradient-blue);
+  background: var(--orange);
   width: 90%;
   margin: auto;
   padding: 1rem;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
-  border: 0.2rem solid var(--downvote-color);
 }
 
 .report_description p{
@@ -977,14 +1004,21 @@ textarea{
 
 .moderation_bar button {
   margin: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.85rem;
+  transition: 0.5s all ease;
 }
 
 .moderation_bar button svg {
     font-size: 1.5rem;
-    width: 2rem;
-    height: 2rem;
+    margin: 0.25rem;
+   
 }
 
+.validate_btn:hover {
+  color:#5FB869  ;
+}
 
 /**************************************************************************************************/
 /*********************************************MEDIA QUERIES****************************************/
@@ -1093,6 +1127,10 @@ textarea{
     font-size: 2.5rem;
   }
   
+  .profile_avatar {
+    width: 40vw;
+    height: 40vw;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -1115,11 +1153,12 @@ textarea{
     position: fixed;
     width: 5rem;
     height: 5rem;
-    top: 20vh;
+    top: 30vh;
     right: 9vw;
     border-radius: 1.5rem;
     background-color: var(--marine-blue);
     opacity: 0.75;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
   }
   
   header {
@@ -1135,7 +1174,7 @@ textarea{
   }
   
   main {
-    padding: 20vh 0 0 0;
+    padding: 25vh 0 0 0;
     font-size: 1.5em;
     width:65vw;
     max-width: 1200px;
@@ -1165,7 +1204,7 @@ textarea{
   .nav_text {
     display: inherit;
     white-space: nowrap;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: bold;
     text-transform: uppercase;
     transition: 0.3s all ease;
@@ -1205,4 +1244,9 @@ textarea{
   .profile .feed {
     border: none;
   }
+  .profile_avatar {
+    width: 25vw;
+    height: 25vw;
+  }
+  
 }

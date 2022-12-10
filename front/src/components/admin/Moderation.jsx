@@ -26,7 +26,6 @@ const Moderation = () => {
     }
     
     const annulReport = (id) => {
-        console.log(id)
         axios.post(`${BASE_URL}/admin/annul-report`, {
             id})
         .then((res)=> {
@@ -38,7 +37,6 @@ const Moderation = () => {
     }
     
     const deletePostReport = (reportId, postId) => {
-        console.log(postId)
         if(postId && reportId){
             axios.post(`${BASE_URL}/admin/delete-post-report`, 
                 {   reportId,
@@ -69,10 +67,11 @@ const Moderation = () => {
                 {msg && <p>{msg}</p>}
                   {reports.map((element, i)=> {
                         return (
-                        <div key={element.id} id={element.post_id} className='post'>
+                        <div key={element.id} id={element.post_id} className='post reported_post'>
                             <div className="post_header">
+                                <h2>Post signalé</h2>
                                 <NavLink className='post_user' to={`/profile/${element.username}`}>
-                                    <p className='username'>{element.post_username}</p>
+                                    <p className='username'>Auteur : {element.post_username}</p>
                                 </NavLink>
                             </div>
                            <div className='post_content'>

@@ -42,10 +42,12 @@ const AddNewCategorie = () => {
                     {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
                     <form onSubmit={addCategorie}>
                         <label name='name'>
+                            Nom de la catégorie : 
                             <input type='text' name='name' maxLength='20' value={newCategorie.name}
                             onChange={(e) => setNewCategorie({...newCategorie, name: e.target.value})} required/>
                         </label>
                         <label name='description'>
+                            Description : 
                             <input type='text' name='description' maxLength='255' value={newCategorie.descript} onChange={(e) => setNewCategorie({...newCategorie, descript: e.target.value})} required/>
                         </label>
                         <input className='action_btn' type='submit' value='Ajouter'/>
