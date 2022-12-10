@@ -1,5 +1,5 @@
 import { useState, Fragment, useEffect} from 'react'
-import BASE_URL from "../config.js"
+import BASE_URL from "../../config.js"
 import axios from "axios";
 
 const Statistics = () => {

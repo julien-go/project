@@ -117,7 +117,7 @@ const MyCategories = () => {
                     <form onSubmit={submitAdd}>
                         <div className='react_select_container'>
                             <label>
-                                <Select onChange={(e)=> changeToAdd(e)} value={toAdd} className='react-select' styles={customSelectStyles} isMulti options={otherCategories} name='toAdd' required/>
+                                <Select onChange={(e)=> changeToAdd(e)} value={toAdd} className='react-select' styles={customSelectStyles} isMulti isSearchable={false} options={otherCategories} name='toAdd' required/>
                             </label>
                             <input className='action_btn' type="submit" value="Ajouter un abonnement"/>
                         </div>
@@ -129,7 +129,7 @@ const MyCategories = () => {
                     <form onSubmit={submitRemove}>
                     <div className='react_select_container'>
                         <label>
-                            <Select menuPlacement='top' onChange={(e)=> changeToRemove(e)} value={toRemove} className='react-select' styles={customSelectStyles} isMulti options={myCategories} name='toRemove' required/>
+                            <Select menuPlacement='top' onChange={(e)=> changeToRemove(e)} value={toRemove} className='react-select' styles={customSelectStyles} isMulti isSearchable={false} options={myCategories} name='toRemove' required/>
                         </label>
                         <input className='action_btn' type="submit" value="Supprimer un abonnement"/>
                     </div>

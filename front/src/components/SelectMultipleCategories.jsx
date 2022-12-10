@@ -36,7 +36,7 @@ const SelectMultipleCategories = ({selectedCategories, changeSelectedCategories}
 
     return (
         <div className='react_select_container'>
-            <Select onChange={(e)=> changeSelectedCategories(e)} value={selectedCategories} className='react-select' styles={customSelectStyles} isMulti options={categories} name='categories' required/>
+            <Select onChange={(e)=> changeSelectedCategories(e)} value={selectedCategories} className='react-select' styles={customSelectStyles} isMulti isSearchable={false} options={categories} name='categories' required/>
         </div>
         
     )

@@ -1,8 +1,8 @@
 import { useState, Fragment, useEffect} from 'react'
 import {useNavigate, NavLink} from 'react-router-dom'
-import BASE_URL from "../config.js"
+import BASE_URL from "../../config.js"
 import axios from "axios";
-import DeletePost from './DeletePost'
+import DeletePost from '../DeletePost'
 import {ImCheckmark, ImCross} from "react-icons/im";
 
 const Moderation = () => {

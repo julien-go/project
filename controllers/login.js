@@ -4,13 +4,8 @@ import verifyLength from '../components/verifyLength/index.js';
 import {asyncQuery} from '../config/database.js';
 import {generateToken} from "../controllers/token.js"
 
-// const getUserData = async (email) => {
-//     let getUserSQL = "SELECT * FROM users WHERE email = ?";
-//     const userDataSQL = await asyncQuery(getUserSQL,[email])
-//     return userDataSQL[0]
-// }
+
 export const generateResponse = async (userDataSQL,passwordMatch) => {
-    // console.log(userDataSQL)
     const ADMIN_ROLE_ID = 1
     const isAdmin = userDataSQL.role_id === ADMIN_ROLE_ID
     
@@ -29,7 +24,6 @@ export const generateResponse = async (userDataSQL,passwordMatch) => {
 }
 
 const loginUser = (req, res) => {
-    // console.log(req.params)
         const checkUser = 'SELECT id, password, username, role_id FROM users WHERE email = ?';
         if (!verifyLength(req.body.email, 255)){
             res.json({response:false, errorMsg: 'connection error'})

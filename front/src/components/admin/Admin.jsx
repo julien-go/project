@@ -1,8 +1,8 @@
 import {Fragment} from 'react'
 import {NavLink} from 'react-router-dom'
-import BASE_URL from "../config.js"
+import BASE_URL from "../../config.js"
 import axios from "axios";
-import {verifyLength} from '../utils/utils.js'
+import {verifyLength} from '../../utils/utils.js'
 
 import AddNewCategorie from './AddNewCategorie'
 import Statistics from './Statistics'

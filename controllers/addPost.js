@@ -12,18 +12,16 @@ const addPost = (req, res) => {
     const updatePostImg = 'UPDATE posts SET image_id = ? WHERE id = ?' // 5
     
     const form = formidable({keepExtensions: true});
+    const maxSize = 2000000;
+    const acceptedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
     
     form.parse(req, (err, fields, files) => {
         if (err) throw err;
-        // console.log(fields)
         const categories = fields.categories.split(',');
-        // console.log(categories)
         const textContent = fields.textContent;
         
         const userId = fields.userId;
-        // console.log(userId)
         
-        console.log(categories)
         if(!categories[0]){
                 res.json({response: false, msg: 'No selected category'})
         } else {
@@ -42,25 +40,28 @@ const addPost = (req, res) => {
                                 if (err) throw err;
                             })
                         }
-                        pool.query(insertScore, [postId], (err, score, fields) => {
+                        pool.query(insertScore, [postId], async (err, score, fields) => {
                             if (err) throw err;
                             if(!files.files){
                                 console.log('successfully added without img')
                                 res.json({response: true})
                             } else {
-                                    const file = files.files;
-                                    const newFilename = file.newFilename;
-                                    const oldPath = file.filepath;
-                                    const newPath = `public/img/${newFilename}`;
-                                if(!checkAcceptedExtensions(file)){
-                                    res.json({response: false, msg: 'Format not accepted'})
+                                const file = files.files;
+                                const newFilename = file.newFilename;
+                                const oldPath = file.filepath;
+                                const newPath = `public/img/${newFilename}`;
+                                const isExtensionValid = await checkAcceptedExtensions(file, acceptedExtensions);
+                                    
+                                if(!isExtensionValid){
+                                    res.json({response: false, msg: 'Problème de format du fichier'})
                                 } else {
+                                    if(file.size > maxSize) {
+                                        res.json({response: false, msg: 'Image trop volumineuse (max: 2mo)'}) 
+                                    } else {
                                     fs.copyFile(oldPath, newPath, (err)=> {
                                         if (err) throw err;
                                         pool.query(insertImg, [newFilename], (err, img, fields) =>{
                                             if (err) throw err;
-                                            // console.log(img)
-                                            console.log(7)
                                             const imgId = img.insertId;
                                             
                                             pool.query(updatePostImg, [imgId, postId], (err, result, fields) => {
@@ -70,6 +71,7 @@ const addPost = (req, res) => {
                                             })
                                         })
                                     })
+                                }
                                 }
                             }
                         })

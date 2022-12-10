@@ -45,7 +45,7 @@ const DeletePost = (props) => {
                             </form>
                         </div>                 
                     </div>
-            }
+                }
             </div>
         </Fragment> 
     )

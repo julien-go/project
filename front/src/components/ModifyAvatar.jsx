@@ -27,7 +27,7 @@ const ModifyAvatar = () => {
             if(res.data.response){
                 navigate(`/profile/${state.username}`)
             } else {
-                setDeleteMsg(res.data.msg);
+                setMsg(res.data.msg);
             }
         })
         .catch((err) => {

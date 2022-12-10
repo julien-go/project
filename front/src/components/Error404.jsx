@@ -1,11 +1,11 @@
-import React from 'react'
+import {Fragment} from 'react'
 
 const Error404 = () => {
     return (
-        <React.Fragment>
+        <Fragment>
             <h1>ERROR 404</h1>
             <p>Nothing here !</p>
-        </React.Fragment>
+        </Fragment>
     )
 };
 

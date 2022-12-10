@@ -1,6 +1,7 @@
 import {Fragment, useContext, useState, useEffect} from 'react'
 import {NavLink} from 'react-router-dom'
 import {AppContext} from '../reducer/reducer'
+import { ImCross } from "react-icons/im";
 
 
 import VoteBar from './VoteBar'
@@ -10,6 +11,7 @@ import ReportPost from './ReportPost'
 
 const Post = ({post, refresh}) => {
     const [state, dispatch] = useContext(AppContext)
+    const [imgActive, setImgActive] = useState(false)
     
     return ( 
         <div id={post.id} className='post'>
@@ -37,7 +39,19 @@ const Post = ({post, refresh}) => {
                 <p>{post.text_content}</p>
                 
                 {post.image !== undefined &&
-                <img src={`http://juliengodard.sites.3wa.io:9300/img/${post.image.url}`} alt={`${post.username}'s uploaded picture`} className="post_img"/>
+                    <Fragment>
+                        <img onClick={()=> setImgActive(true)} src={`http://juliengodard.sites.3wa.io:9300/img/${post.image.url}`} alt={`${post.username}'s uploaded picture`} className="post_img"/>
+                        {imgActive &&
+                            <div className='modal_container'>
+                                <div className='bigger_post_img_container'>
+                                    <button className='close_modal_btn' onClick={() => setImgActive(false)}>
+                                        <ImCross/>
+                                    </button>
+                                    <img src={`http://juliengodard.sites.3wa.io:9300/img/${post.image.url}`} alt={`${post.username}'s uploaded picture`} className="bigger_post_img"/>
+                                </div>                 
+                            </div>
+                        }
+                    </Fragment>
                 }
             </div> 
             

@@ -64,9 +64,9 @@ const Nav = () => {
                 </div>
             </div> }
             <nav className='navbar'>
-                <ul>
+                
                     {state.isLogged &&
-                        <Fragment>
+                        <ul>
                             <li>
                                 <NavLink to="/">
                                     <ImHome className='nav_icon'/>
@@ -92,10 +92,11 @@ const Nav = () => {
                                     <p className='nav_text disconnect_btn'>Déconnexion</p>
                                 </NavLink>
                             </li>
-                        </Fragment>
+                        </ul>
                     }
+                
                     {!state.isLogged &&
-                        <div className='nav_notconnected'>
+                        <ul className='nav_notconnected'>
                             <li>
                                 <NavLink to="register">
                                 INSCRIPTION
@@ -106,9 +107,8 @@ const Nav = () => {
                                 CONNEXION
                                 </NavLink>
                             </li>
-                        </div>
+                        </ul>
                     }
-                </ul>
             </nav>
         </header>
         )

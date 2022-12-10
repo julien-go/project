@@ -31,7 +31,7 @@
   --downvote-color: #C54F4F ;
   --novote-color: #E5E5E5;
   
-  --gradient-blue:  linear-gradient(189deg, rgba(123,77,255,1) 0%, rgba(86,147,235,1) 100%);
+  --gradient-blue: linear-gradient(189deg, rgba(123,77,255,1) 0%, rgba(86,147,235,1) 100%);
   --gradient-marine-blue: linear-gradient(335deg, rgba(2,0,36,1) 0%, rgba(44,50,142,1) 0%, rgba(62,73,246,1) 100%);
   --gradient-marine-violet: linear-gradient(189deg, rgba(25,33,83,1) 58%, rgba(123,77,255,1) 100%);
 }
@@ -97,8 +97,8 @@ nav {
 }
 
 .user_avatar {
-  width: 12em;
-  height: 12em;
+  width: 12rem;
+  height: 12rem;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -114,6 +114,23 @@ footer {
   *::-webkit-scrollbar {
   display: none;
   }
+  
+/********************** BUTTONS *************************/
+.action_btn {
+  font-size: 1.075rem;
+  color: var(--marine-blue);
+  background-color: var(--novote-color);
+  border: none;
+  padding: 0.3em;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.action_btn:active {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 0px 0px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    color: var(--orange);
+}
 
 /**********************Logo*************************/
 
@@ -126,14 +143,21 @@ footer {
   position: sticky;
   top: 0;
   background: var(--gradient-marine-violet);
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   color: white;
-  text-shadow: 2px 2px 3px rgba(255,255,255,0.25);
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.05);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 }
 
+.logo_link {
+  text-decoration: none;
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+  
 
 .first_letter {
   color: var(--blue);
@@ -172,8 +196,8 @@ header{
   height: 0.35rem;
   width: 100%;
 }
-/*NAVBAR*/
 
+/*NAVBAR*/
 .navbar {
   font-size: 0.8em;
   padding: 0.7em 2em;
@@ -227,6 +251,9 @@ header{
   align-items: center;
   justify-content: space-between;
   background: rgb(180,212,255);
+background: -webkit-linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 100%);
+background: -moz-linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 100%);
+background: -o-linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 100%);
 background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 100%);
  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
@@ -267,23 +294,21 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
 .user_bar .username_role_container {
   font-weight: normal;
   color: black;
-  width: 47%;
+  width: 60%;
+  gap: 0.2em;
   text-align: center;
   display : flex;
   justify-content: center;
-  gap: 5rem
 }
 
 .user_bar .username_role_container .username {
   color: black;
-  font-size: 2rem;
   padding: 0.15em;
   display: flex;
 }
 
 .username_role_container a {
   text-decoration: none;
-  font-size: 2rem;
 }
 
 .admin_navlink {
@@ -292,16 +317,20 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   background-color: var(--pale-orange);
   padding: 0.2em;
   border-radius: 10px;
-}
-
-.admin_navlink:hover {
-  
+  display: flex;
+  align-items: center;
 }
 
 .nav_notconnected {
   width: 100%;
+  height:100%;
   display: flex;
-  justify-content:space-around;
+  justify-content:space-evenly;
+  align-items:center;
+}
+
+.nav_notconnected .active {
+  color: var(--novote-color);
 }
 
 /**********************FEED*************************/
@@ -319,12 +348,12 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
 
 .feed_action_bar {
   display: flex;
+  justify-content: center;
   font-size: 1.5em;
-  justify-content: space-around;
-  padding: 0rem 1rem 0.5rem 8rem;
+  gap: 0.75rem;
 }
+
 .feed_action_bar > div{
-  /*width: 50%;*/
   display: flex;
   justify-content: center;
 }
@@ -344,31 +373,7 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   font-size: 1.2em;
 }
 
-.refresh_container{
-  display: flex;
-}
-
-.action_btn {
-  font-size: 1.075rem;
-  color: var(--marine-blue);
-  background-color: var(--novote-color);
-  border: none;
-  padding: 0.3em;
-  border-radius: 5px;
-  /*text-decoration: underline;*/
-  font-weight: bold;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-}
-
-.action_btn:active {
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 0px 0px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    color: var(--orange);
-}
-
-
-
 /*POST*/
-
 .post {
   width: 95%;
   height: fit-content;
@@ -407,7 +412,7 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
 .post_img {
   border: 1px solid var(--marine-blue);
   max-width:100%;
-  max-height:100%;
+  max-height:50vh;
 }
 
 .post_header {
@@ -419,7 +424,6 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   justify-content: space-between;
   position: relative;
   padding: 0.5rem;
-  
 }
 
 .post_header .delete_report_bar {
@@ -470,7 +474,6 @@ background: linear-gradient(174deg, rgba(180,212,255,1) 0%, rgba(234,243,255,1) 
   color: var(--pale-violet);
   background: var(--gradient-marine-blue);
   padding: 0.7em 0.4em;
-  /*border: solid 1px rgba(255,255,255, 0.25);*/
   border-radius: 50px;
   text-align: center;
 box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -497,9 +500,10 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   
 }
-.delete_btn, .report_btn, .close_modal_btn {
+.delete_btn, .report_btn {
     color: var(--downvote-color);
-    height: 2rem
+    height: 1.75rem;
+    margin: 0.05rem;
 }
 
 .validate_btn {
@@ -520,7 +524,6 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 }
 
 /*MODAL*/
-
 .modal_container {
   position: fixed;
   top: 0;
@@ -534,17 +537,27 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   justify-content: center;
 }
 
+.close_modal_btn {
+  background: white;
+    color: var(--downvote-color);
+    height: 2.15rem;
+}
+
+.close_modal_btn:active {
+  color: var(--orange);
+}
+
 .report_form {
   background-color: var(--pale-blue);
   position: relative;
-  width: 90%;
+  /*width: 90%;*/
   display: flex;
   flex-direction: column;
   border-radius: 25px;
   z-index: 100;
   text-align: center;
   gap: 2rem;
-  padding: 1rem 2.5rem;
+  padding: 1rem 5rem;
 }
 
 .report_form form {
@@ -557,6 +570,23 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 .modal_container .close_modal_btn {
   position: absolute;
   right: 0.5rem;
+}
+
+.bigger_post_img_container {
+  background-color: var(--pale-blue);
+  position: relative;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 25px;
+  z-index: 100;
+  padding: 1rem 2.5rem;
+}
+
+.bigger_post_img {
+  width: 90%;
+   max-height: 88vh;
 }
 
 
@@ -584,7 +614,7 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   border-radius: 1em;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  transition: all 0.1s ease;
+  transition: all 0.3s ease;
 }
 
 .up_arrow {
@@ -598,9 +628,6 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 .green {
  background-color: #72DC5F;
 }
-.green:hover {
-  background-color: var(--upvote-color);
-}
 
 .grey {
   background-color: var(--novote-color);
@@ -610,10 +637,6 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   background-color: #FF6D6D
 }
 
-.red:hover {
-  background-color: var(--downvote-color);
-}
-
 /**********************FORM*************************/
 
 .form_container{
@@ -621,7 +644,6 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
   width: 100%;
   display: flex;
   flex-direction: column;
-  /*height: 67vh;*/
   overflow: scroll;
   padding-bottom: 20vh;
 }
@@ -655,9 +677,7 @@ form label {
   border: none;
   display: flex;
   font-size: 1.1em;
-  /*border: 2px solid var(--marine-blue);*/
   border-radius: 5px;
-  /*padding: 0.2em;*/
 }
 
 .form_container form input:focus{
@@ -1015,7 +1035,6 @@ textarea{
     font-size: 3.25rem;
   }
   
-  
   .logo_container .return_btn {
     height: 4rem;
     width: 4rem;
@@ -1084,7 +1103,7 @@ textarea{
   
   .logo_container {
     z-index: 1001;
-    font-size: 4rem;
+    font-size: 3.5rem;
     border-radius: inherit;
     background: none;
     box-shadow: none;
@@ -1127,12 +1146,15 @@ textarea{
   .navbar {
     order: -2;
     height:10vh;
+    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
   }
   .navbar ul {
     width: 75%;
+    justify-content: inherit;
+    gap: 4rem
   }
   
   .empty_bar_header {
@@ -1142,8 +1164,10 @@ textarea{
   
   .nav_text {
     display: inherit;
-    font-size: 2rem;
+    white-space: nowrap;
+    font-size: 1.25rem;
     font-weight: bold;
+    text-transform: uppercase;
     transition: 0.3s all ease;
   }
   
@@ -1154,6 +1178,17 @@ textarea{
   .user_bar a:hover .nav_text {
     color: var(--marine-blue);
   }
+  
+  .user_bar ul {
+    padding: 0;
+  }
+  
+  .user_bar ul a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   
   .nav_icon {
     display: none;

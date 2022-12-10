@@ -1,8 +1,7 @@
-import Home from '../components/Home'
 import Register from '../components/Register'
 import Login from '../components/Login'
+import Home from '../components/Home'
 import Disconnect from '../components/Disconnect'
-import Admin from '../components/Admin'
 import ModifyAvatar from '../components/ModifyAvatar'
 import Error404 from '../components/Error404'
 import Profile from '../components/Profile'
@@ -12,7 +11,9 @@ import MyCategories from '../components/MyCategories'
 import CategoryFeed from '../components/CategoryFeed'
 import NavCategories from '../components/NavCategories'
 import HallOfFame from '../components/HallOfFame'
-import Moderation from '../components/Moderation'
+
+import Admin from '../components/admin/Admin'
+import Moderation from '../components/admin/Moderation'
 
 import AddPost from '../components/AddPost'
 
