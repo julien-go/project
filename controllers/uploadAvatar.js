@@ -44,7 +44,6 @@ export const uploadAvatar = (req, res) => {
                         
                         pool.query(addAvatar, [newFilename], (err, avatar, fields) => {
                             if (err) throw err;
-                            console.log(avatar)
                             const newId = avatar.insertId;
                             
                             pool.query(checkAvatarUser, [currentUsername], (err, user, fields) => {
@@ -53,7 +52,6 @@ export const uploadAvatar = (req, res) => {
                                 
                                 pool.query(changeId, [newId, currentUsername], (err, updatedUser, fields) => {
                                     if (err) throw err;
-                                    console.log(oldId)
                                     if(oldId !== null && oldId !== defaultAvatarId){
                                         
                                         pool.query(oldAvatarPath, [oldId], (err, oldAvatar, fields) => {
@@ -64,13 +62,13 @@ export const uploadAvatar = (req, res) => {
                                                 
                                                 pool.query(deleteOld, [oldId], (err, user, fields)=> {
                                                     if (err) throw err;
-                                                    res.json({response: true, msg: 'successfully replaced'})
+                                                    res.json({response: true, msg: 'Remplacé avec succès !'})
                                                 })
                                             });
                                         })
                                         
                                     } else {
-                                        res.json({response: true, msg: 'successfully added'})
+                                        res.json({response: true, msg: 'Ajouté avec succès !'})
                                     }
                                 })
                             })

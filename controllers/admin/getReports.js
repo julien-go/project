@@ -9,7 +9,6 @@ const getAllPosts= async () => {
 
 const getPostImage = async (array) => {
     const selectUrl = 'SELECT url FROM images JOIN posts ON posts.image_id = images.id WHERE posts.id = ?'
-    console.log(array)
     const data = []
     for(let i = 0; i<= array.length; i++){
         if(i === array.length){
@@ -23,10 +22,10 @@ const getPostImage = async (array) => {
 }
 
 const getReports = async (req, res) => {
-    
+    // On va chercher la liste de tout les reports
     const reportsList = await getAllPosts();
+    // On va chercher les images contenues dans les posts signalés
     const reports = await getPostImage(reportsList)
-    // console.log(reports)
     res.json({response: true, reports})
 
 }

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, Fragment } from 'react'
 import {useNavigate} from 'react-router-dom'
 import BASE_URL from "../../config.js"
@@ -6,32 +5,34 @@ import axios from "axios";
 import {verifyLength} from '../../utils/utils.js'
 
 const AddNewCategorie = () => {
-    
-        const initialNewCat = {name: '', descript: ''};
+    const initialNewCat = {name: '', descript: ''};
     const [newCategorie, setNewCategorie] = useState(initialNewCat)
     const [errorMsg, setErrorMsg] = useState('')
     const navigate = useNavigate();
     
     const addCategorie = (e) => {
+        //On vérifie si les champs sont remplis conformément, si oui on envoie un requête à l'api qui ajoute la nouvelle catégorie a la bdd
         e.preventDefault();
-        
-        if(!verifyLength(newCategorie.name, 20) || !verifyLength(newCategorie.name, 255)){
-            setErrorMsg('Too many characters in an input')
+        if(!verifyLength(newCategorie.name, 20)){
+            setErrorMsg('Nom de catégorie: Trop de caractères (max: 20)')
         } else {
-            let name = newCategorie.name;
-            let descript = newCategorie.descript;
-            setErrorMsg('')
-            
-            axios.post(`${BASE_URL}/admin/add-categorie`, {
-                name,
-                descript
-            })
-            .then((res) =>{
-                res.data.response && setNewCategorie(initialNewCat)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+            if(!verifyLength(newCategorie.descript, 255)){
+                setErrorMsg('Description:  Trop de caractères (max: 500)')
+            } else {
+                let name = newCategorie.name;
+                let descript = newCategorie.descript;
+                setErrorMsg('')
+                axios.post(`${BASE_URL}/admin/add-categorie`, {
+                    name,
+                    descript
+                })
+                .then((res) =>{
+                    res.data.response && setNewCategorie(initialNewCat)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            }
         }
     }
     
@@ -56,5 +57,4 @@ const AddNewCategorie = () => {
             </Fragment>    
     )
 }
-
 export default AddNewCategorie;

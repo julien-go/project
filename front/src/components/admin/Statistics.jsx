@@ -7,6 +7,7 @@ const Statistics = () => {
     const [stats, setStats] = useState({});
     
     useEffect(()=> {
+        // Au chargement de la page, on envoie une requête à l'api qui récupère les statistiques du site
         axios.get(`${BASE_URL}/admin/get-stats`)
         .then((res) => {
             res.data.response && setStats(res.data.stats)

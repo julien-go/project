@@ -11,9 +11,9 @@ const HallOfFame = () => {
     const [posts, setPosts] = useState([])
     
     const getPosts = () => {
+        // On envoie une requête à l'api qui récupère les posts ayant au moins 10likes
         axios.get(`${BASE_URL}/get-hall-of-fame`)
         .then((res)=> {
-            console.log(res.data)
             if(res.data.response){
                 setPosts([...res.data.posts].sort(compareScore))                
             }
@@ -24,11 +24,11 @@ const HallOfFame = () => {
     }
       
     const refresh = () => {
-        // e.preventDefault();
         getPosts();
     }
     
     const compareScore = (a, b) => {
+        // On compare les scores des posts afin de les afficher du mieux noté au moins bien
         if(a.score < b.score) return 1
         if(a.score > b.score) return -1
         else return 0
@@ -44,7 +44,7 @@ const HallOfFame = () => {
             <h1>Hall of fame</h1>
             <div className='feed_action_bar'>
                 <div className='refresh_container' >
-                    <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>
+                    <button onClick={()=> refresh} className='action_btn' >Rafraîchir la page</button>
                 </div>
             </div>
               {posts.map((e, i)=> {

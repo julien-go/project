@@ -7,10 +7,10 @@ import { ImWarning } from "react-icons/im";
 
 const DeleteAccount = () => {
     const [state, dispatch] = useContext(AppContext)
-    
     const navigate = useNavigate();
     
     const deleteUserAccount = (e) => {
+        // On envoie une requête à l'api qui supprime le compte de l'utilisateur
         e.preventDefault()
         if(state.username !== '') {
             axios.post(`${BASE_URL}/delete-account`, {
@@ -18,6 +18,7 @@ const DeleteAccount = () => {
             })
             .then((res)=> {
                 if(res.data.response){
+                    console.log(res.data)
                     localStorage.removeItem('jwtToken')
                     delete axios.defaults.headers.common['Authorization']
                     dispatch({type: 'LOGOUT'})
@@ -31,21 +32,20 @@ const DeleteAccount = () => {
     }
     
     const redirectBack= (e) => {
+        // On redirige la navigation vers la page profil
         e.preventDefault();
         navigate(`/profile/${state.username}`, {replace: true});
     }
     
     return (
         <Fragment>
-        <h1>Suppression du compte utilisateur</h1>
-        <div className='delete_account_container'>
-            <ImWarning/>
-            <p className='important_msg'>Attention, toute suppression de compte est définitive. Les données correspondantes seront supprimées et impossible à récuperer.</p>
-            <button className='action_btn' onClick={deleteUserAccount}>Valider la suppression du compte</button>
-            <button className='action_btn' onClick={redirectBack}>Retour</button>
-        </div>
-
-            
+            <h1>Suppression du compte utilisateur</h1>
+            <div className='delete_account_container'>
+                <ImWarning/>
+                <p className='important_msg'>Attention, toute suppression de compte est définitive. Les données correspondantes seront supprimées et impossible à récuperer.</p>
+                <button className='action_btn' onClick={deleteUserAccount}>Valider la suppression du compte</button>
+                <button className='action_btn' onClick={redirectBack}>Retour</button>
+            </div>
         </Fragment>    
     )
 }

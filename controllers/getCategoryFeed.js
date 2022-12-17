@@ -10,13 +10,18 @@ const getAllPosts= async (categoryName) => {
 
 const getCategoryFeed = async (req, res) => {
     const name = req.params.id;
+    
+    // On récupère tout les posts correspondant à cette catégorie
     const posts1 = await getAllPosts(name)
+    
+    // On récupère  et ajoute la liste de toutes les catégories relatives à chaque post
     const posts2 = await getAllPostCategories(posts1)
+    
+    // On récupère et ajoute les images relatives à chaque posts
     const posts = await getPostImage(posts2)
     if(posts === []){
         res.json({response: false})
     } else {
-        console.log(1)
         res.json({response: true, posts})
     }
 }

@@ -14,6 +14,7 @@ const Login = () => {
     const [state, dispatch] = useContext(AppContext)
 
     const submitLogin = (e) => {
+        // Si les informations sont correctes, on e
         const dataUser = {
             email,
             password
@@ -21,7 +22,7 @@ const Login = () => {
         e.preventDefault();
         
         if (!verifyLength(email, 255)){
-            setErrorMsg('connection error')
+            setErrorMsg('Erreur de connexion')
         } else {
             axios.post(`${BASE_URL}/login`, {
                 email,
@@ -57,7 +58,7 @@ const Login = () => {
                             <input type='mail' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
                         </label>
                         <label name='password'>
-                            Password
+                            Mot de passe
                             <input type='password' name='password' maxLength='255' value={password} autoComplete='current-password' onChange= {(e) => setPassword(e.target.value)} required/>
                         </label>
                     <input type='submit' value='Submit'/>

@@ -17,41 +17,45 @@ const ModifyProfile = () => {
     
     const submitModif = (e) => {
         e.preventDefault();
-        if (!verifyLength(email, 255) || !verifyLength(username, 20)){
-            setErrorMsg('Too many characters on an input')
+        if (!verifyLength(email, 255)){
+            setErrorMsg('Email : Trop de caractères')
         } else {
-            if(username.includes(' ')){
-                setErrorMsg('Empty spaces not allowed in username')
+            if (!verifyLength(username, 20)){
+            setErrorMsg('Nom : Trop de caractères')
             } else {
-                if(!checkSpecialCharacters(username)){
-                    setErrorMsg('Special characters not allowed in username')
+                if(username.includes(' ')){
+                    setErrorMsg(`Les espaces ne sont pas autorisés dans le nom d'utilisateur`)
                 } else {
-                    if(!checkRegExEmail(email)){
-                        setErrorMsg("Email format is not valid")
+                    if(!checkSpecialCharacters(username)){
+                        setErrorMsg(`Les caractères spéciaux ne sont pas autorisés dans le nom d'utilisateur`)
                     } else {
-                        console.log(state.username)
-                        if(state.username.toLowerCase() !== username || state.email !== email){
-                            console.log(state.username.toLowerCase())
-                        axios.post(`${BASE_URL}/modify-profile`, {
-                            username,
-                            email,
-                            currentUsername: currentUser.username,
-                            id: currentUser.id
-                        })
-                        .then((res) =>{
-                            // console.log(res)
-                            if (res.data.errorMsg !== ''){
-                                setErrorMsg(res.data.errorMsg);
-                            } else {
-                                setErrorMsg('')
-                                localStorage.setItem('jwtToken', res.data.token)
-                                dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
-                                navigate(`/profile/${username}`, {replace: true});
+                        if(!checkRegExEmail(email)){
+                            setErrorMsg(`Email: Format non valide`)
+                        } else {
+                            console.log(state.username)
+                            if(state.username.toLowerCase() !== username || state.email !== email){
+                                console.log(state.username.toLowerCase())
+                            axios.post(`${BASE_URL}/modify-profile`, {
+                                username,
+                                email,
+                                currentUsername: currentUser.username,
+                                id: currentUser.id
+                            })
+                            .then((res) =>{
+                                // console.log(res)
+                                if (res.data.errorMsg !== ''){
+                                    setErrorMsg(res.data.errorMsg);
+                                } else {
+                                    setErrorMsg('')
+                                    localStorage.setItem('jwtToken', res.data.token)
+                                    dispatch({type: 'LOGIN', payload: {id: res.data.id, username: res.data.username, email: res.data.email}})
+                                    navigate(`/profile/${username}`, {replace: true});
+                                }
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                            })
                             }
-                        })
-                        .catch((err) => {
-                            console.log(err)
-                        })
                         }
                     }
                 }
@@ -72,14 +76,14 @@ const ModifyProfile = () => {
                 {errorMsg !== '' && <p className='form_error_msg'>{errorMsg}</p>}
                 <form onSubmit={submitModif}>
                         <label name='username'>
-                            Username
+                            Nom d'utilisateur
                             <input type='text' name='username' maxLength='20' autoComplete='username' value={username} onChange= {(e) => setUsername(e.target.value)} required/>
                         </label>
                         <label name='email'>
                             Email
                             <input type='email' name='email' maxLength='255' value={email} onChange= {(e) => setEmail(e.target.value)} required/>
                         </label>
-                    <input className='action_btn' type='submit' value='Submit'/>
+                    <input className='action_btn' type='submit' value='Modifier'/>
                 </form>
             </div>
         </React.Fragment>

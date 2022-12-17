@@ -62,41 +62,45 @@ const modifyProfileInfos = async (req, res) => {
     
     const username = req.body.username.toLowerCase();
     
-    // console.log(req.body);
+    // On vérifie si le nom entré n'est pas trop long
     const nameNotTooLong = await asyncVerifyLength(username, 20);
     const emailNotTooLong = await asyncVerifyLength(req.body.email, 255)
     
-    if(!nameNotTooLong || !emailNotTooLong){
-        res.json({response:false, errorMsg: 'Too many characters in an input'})
+    if(!nameNotTooLong){
+        res.json({response:false, errorMsg: 'Nom : Trop de caractères'})
     } else {
+            if(!emailNotTooLong){
+            res.json({response:false, errorMsg: 'Email : Trop de caractères'})
+            } else {
         
-        const usernameIsValid = await verifyUsernameCharacters(username)
-        
-        if(!usernameIsValid){
-            res.json({response:false, errorMsg: `Empty spaces and/or special characters are not allowed in username`})   
-        } else {
+            const usernameIsValid = await verifyUsernameCharacters(username)
             
-            const emailIsValid = await verifyEmailRegex(req.body.email)
-            if(!emailIsValid){
-                res.json({response:false, errorMsg: `Email format not valid`})   
+            if(!usernameIsValid){
+                res.json({response:false, errorMsg: `Les espaces et/ou caractères spéciaux ne sont pas autorisés dans le nom d'utilisateur`})   
             } else {
                 
-                const nameAvailable = await verifyUsername(username, req.body.id);
-                if(!nameAvailable){
-                    res.json({response:false, errorMsg: 'This username is already taken'})
+                const emailIsValid = await verifyEmailRegex(req.body.email)
+                if(!emailIsValid){
+                    res.json({response:false, errorMsg: `Email: Format non valide`})   
                 } else {
                     
-                    const emailAvailable = await verifyEmail(req.body.email, req.body.id);
-                    if(!emailAvailable){
-                        res.json({response:false, errorMsg: 'This email is already taken'})
+                    const nameAvailable = await verifyUsername(username, req.body.id);
+                    if(!nameAvailable){
+                        res.json({response:false, errorMsg: "Ce nom d'utilisateur est déjà pris !" })
                     } else {
-                        pool.query(updateInfos, [username, req.body.email, req.body.id], async (err, user, fields) => {
-                            if (err) throw err
-                            const userData = {username: username, email: req.body.email, id: req.body.id, role_id: 2}
-                            const response = await generateResponse(userData, true)
-                            
-                            res.json({...response, errorMsg: ''})
-                        })
+                        
+                        const emailAvailable = await verifyEmail(req.body.email, req.body.id);
+                        if(!emailAvailable){
+                            res.json({response:false, errorMsg: "Cette adresse email est déjà prise "})
+                        } else {
+                            pool.query(updateInfos, [username, req.body.email, req.body.id], async (err, user, fields) => {
+                                if (err) throw err
+                                const userData = {username: username, email: req.body.email, id: req.body.id, role_id: 2}
+                                const response = await generateResponse(userData, true)
+                                
+                                res.json({...response, errorMsg: ''})
+                            })
+                        }
                     }
                 }
             }

@@ -1,4 +1,3 @@
-//import logo from './logo.svg';
 import React from 'react'
 import {BrowserRouter, Navigate} from "react-router-dom";
 

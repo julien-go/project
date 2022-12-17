@@ -2,7 +2,7 @@ import {Fragment, useContext, useState, useEffect} from 'react'
 import {NavLink} from 'react-router-dom'
 import {AppContext} from '../reducer/reducer'
 import { ImCross } from "react-icons/im";
-
+import Linkify from 'react-linkify';
 
 import VoteBar from './VoteBar'
 import DeletePost from './DeletePost'
@@ -36,7 +36,9 @@ const Post = ({post, refresh}) => {
                 </div>
             </div>
            <div className='post_content'>
-                <p>{post.text_content}</p>
+                <p>
+                    {post.text_content}
+                </p>
                 
                 {post.image !== undefined &&
                     <Fragment>

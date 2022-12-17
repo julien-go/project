@@ -1,8 +1,10 @@
 import {pool} from '../../config/database.js';
 
 
+const deleteReport = 'DELETE FROM reported_posts WHERE id = ?'
+
 export const annulReport = (req, res)=> {
-    const deleteReport = 'DELETE FROM reported_posts WHERE id = ?'
+    
     const reportId = req.body.id;
     pool.query(deleteReport, [reportId], (err, result, fields) => {
         if (err) throw err
@@ -11,7 +13,6 @@ export const annulReport = (req, res)=> {
 }
 
 export const deletePostReport= (req, res)=> {
-    const deleteReport = 'DELETE FROM reported_posts WHERE id = ?'
     const deletePost = 'DELETE FROM posts WHERE id = ?'
     const reportId = req.body.reportId;
     const postId = req.body.postId

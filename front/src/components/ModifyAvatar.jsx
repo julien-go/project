@@ -13,16 +13,13 @@ const ModifyAvatar = () => {
     
     const addNewAvatar = (e) => {
         e.preventDefault()
-        const username = state.username
         const files = e.target.avatar.files;
-        // console.log(files)
         const dataFile = new FormData();
         dataFile.append('username', state.username)
         dataFile.append('files', files[0], files[0].name)
         
         axios.post(`${BASE_URL}/upload-avatar`, dataFile)
         .then((res)=> {
-            // console.log(res)
             setMsg(res.data.msg);
             if(res.data.response){
                 navigate(`/profile/${state.username}`)
@@ -44,7 +41,7 @@ const ModifyAvatar = () => {
             if (res.data.response){
                 navigate(`/profile/${state.username}`)
             } else {
-                setDeleteMsg('No file to delete')
+                setDeleteMsg("Pas d'avatar à supprimer")
             }
         })
         .catch((err)=>{
@@ -60,13 +57,13 @@ const ModifyAvatar = () => {
             <form onSubmit={addNewAvatar} encType="multipart/form-data">
                 <label name='avatar'>
                     <input className='input_file' type='file' name='avatar' required/>
-                    <input type='submit' value='Submit'/>
+                    <input type='submit' value="Ajouter/Changer l'avatar"/>
                 </label>
             </form>
              <div className='separator'></div>
              <div>
                 {deleteMsg !== '' && <p>{deleteMsg}</p>}
-            <button className='action_btn' onClick={removeCurrentAvatar}>Remove current avatar</button>
+            <button className='action_btn' onClick={removeCurrentAvatar}>Supprimer l'avatar</button>
              </div>
          </div>
         </React.Fragment>

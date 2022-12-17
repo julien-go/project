@@ -10,14 +10,12 @@ export const removeAvatar = (req, res) => {
 
     pool.query(checkAvatar, [req.body.id], (err, avatar, fields)=> {
         if (err) throw err;
-            console.log(avatar)
         
         if(avatar[0].url.includes('default.jpg')){
-            res.json({response: false, msg: "You don't have an avatar"})
+            res.json({response: false, msg: "Pas d'avatar à supprimer"})
         } else {
             pool.query(deleteAvatar, [req.body.id], (err, result, fields) => {
                 if (err) throw err;
-                console.log(result)
                 const path = `public/avatars/${avatar[0].url}`
                 fs.unlink(path, (err)=> {
                     if (err) throw err;

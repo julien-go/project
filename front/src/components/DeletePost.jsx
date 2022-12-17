@@ -8,6 +8,7 @@ const DeletePost = (props) => {
     const [active, setActive] = useState(false)
     
     const removePost = (e) => {
+        // On envoie une requête à l'api qui supprime le post
         e.preventDefault()
         if(props.postId){
             axios.post(`${BASE_URL}/delete-post/`, {
@@ -16,7 +17,6 @@ const DeletePost = (props) => {
             })
             .then((res)=> {
                 if(res.data.response){
-                    // console.log(res.data.postsId)
                     props.refresh()
                 }
             })
@@ -26,7 +26,6 @@ const DeletePost = (props) => {
         }
     }
 
-    
      return (
         <Fragment>
             <div className='delete_container'>

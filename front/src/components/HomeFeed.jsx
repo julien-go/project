@@ -13,17 +13,16 @@ const HomeFeed = () => {
     const [state, dispatch] = useContext(AppContext)
     const [posts, setPosts] = useState([])
     const [msg, setMsg] = useState('')
-    // // On récupère les id des catégories auxquelles le user est abonné
     
-    // On récupère les infos de chaque posts
     const getPosts = () => {
+        // On envoie un requête à l'api qui récupère tout les posts
             axios.get(`${BASE_URL}/get-homefeed/${state.id}`)
             .then((res)=> {
                 console.log(res.data)
                 if(res.data.response){
                     setMsg('')
+                    
                     setPosts(res.data.posts.sort(compareId))
-                    // getPostsCategories()
                 } else {
                     setMsg('No posts here, follow categories to get a feed')
                 }
@@ -34,17 +33,16 @@ const HomeFeed = () => {
     }
     
     const refresh = () => {
-        // e.preventDefault();
         getPosts()
     }
     
     const compareId = (a, b) => {
+        // On compare l'id des posts pour les classer dans l'ordre du plus récent au plus ancien
         if(a.id < b.id) return 1
         if(a.id > b.id) return -1
         else return 0
     }
 
-    // A l'update du state postsId
     useEffect(() => {
             getPosts();
     }, [])
@@ -57,7 +55,7 @@ const HomeFeed = () => {
                 <h1>ACCUEIL</h1>
                 <div className='feed_action_bar'>
                     <div className='refresh_container' >
-                            <button onClick={()=> refresh} className='action_btn'  >Rafraichir la page</button>
+                            <button onClick={()=> refresh} className='action_btn'  >Rafraîchir la page</button>
                     </div>
                     <div>
                         <NavLink to='/hall-of-fame'>

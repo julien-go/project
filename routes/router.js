@@ -3,7 +3,6 @@ import express from 'express'
 import registerUser from '../controllers/register.js'
 import loginUser from '../controllers/login.js'
 import isLogged from '../controllers/isLogged.js'
-import disconnectUser from '../controllers/disconnect.js'
 import addCategorie from '../controllers/admin/addCategorie.js'
 import { uploadAvatar } from '../controllers/uploadAvatar.js'
 import getProfileInfos from '../controllers/profile.js'
@@ -32,7 +31,7 @@ import {annulReport, deletePostReport} from '../controllers/admin/moderation.js'
 
 const router = express.Router();
 
-// Not connected routes
+// Routes 
 router.post("/api/register", registerUser)
 
 router.post("/api/login", loginUser)
@@ -40,7 +39,6 @@ router.post("/api/login", loginUser)
 router.post("/api/isLogged", isLogged);
 
 // User routes
-router.get("/api/disconnect", disconnectUser)
 router.get("/api/profile/:username", getProfileInfos);
 router.get('/api/get-user-posts/:username', getUserPosts)
 

@@ -12,6 +12,6 @@ const unfollowCategories = (req, res) => {
             if (err) throw err
         })
     }
-    res.json({response: true, msg: 'successfully deleted'})
+    res.json({response: true})
 }
 export default unfollowCategories

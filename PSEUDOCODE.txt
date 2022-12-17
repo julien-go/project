@@ -1,0 +1,85 @@
+PROJET RESEAU SOCIAL :
+
+Fonctionnalités :
+
+*****Côté utilisateur*****
+
+- Inscription : 
+    front = Composant formulaire d'inscription avec verifications
+    back = Controller qui récupère, vérifie et ajoute le nouvel utilisateur dans la BDD si les infos sont valides
+
+- Connexion : 
+    front = Composant formulaire de connexion avec verifications
+    back = Controller qui récupère, vérifie et ouvre une session si les infos sont valides
+    
+- Modification des infos :
+    front = Composant formulaire de modification avec verifications
+    back = Controller qui récupère, vérifie et ouvre une session modifie les infos utilisateur dans la BDD si les infos sont valides
+    
+- Modification/Ajout d'un avatar :
+    front = Composant formulaire ajout d'avatar avec verifications
+    back = Controller qui récupère les infos de l'avatars, et l'ajoute a la bdd et dans le dossier public/avatar si le fichier est valide
+    
+- Suppression de l'avatar : 
+    front = Bouton qui envoie une requête vers le back
+    back = Controller qui effectue lauppression de l'avatar de la bdd / du dossier public/avatar et on remet l'avatar par défaut à l'utilisateur
+    
+- Suppression du compte : 
+    front = Bouton qui emmène vers un message d'avertissement, si l'utilisateur valide, on envoie une requête au back
+    back = Controller qui supprime le compte, les posts, votes, images, avatars associés de la base de données et du fichier public
+
+- Ajout de posts : 
+    front = Composant formulaire qui ajoute un post contenant du texte et potentiellement une image, ainsi qu'un ou plusieurs tag par catégories.
+    back = Controller qui vérifie les données envoyées, et ajoute le post dans la bdd
+    
+- Suppression de posts : 
+    front = Bouton dispo pour l'auteur du post et les admin qui renvoie vers un modal de validation, qui envoie une requête de suppression
+    back = Controller qui supprime le post ainsi que l'image de la bdd
+    
+- Signalement de posts : 
+    front = Bouton qui renvoie vers un modal formulaire de signalement avec une explication a donner
+    back = POST : Controller qui récupère les infos du post et du signalement dans la bdd
+    
+- Vote pour/contre : 
+    front = Boutons up et down sur chaque post, le bouton change de couleur au vote et il faut annuler le vote en recliquant pour le modifier, un vote up incrémente le score de 1, un vote down le décremente de 1
+    back =  GET : Controller qui vérifie si un vote de l'utilisateur sur le post est deja present
+            POST : Controller qui annule le vote, ou crée un nouveau vote en fonction
+            
+- Abonnement à des centre d'intérêts :
+    front = Composant avec un formulaire abonnement aux catégories non suivies et un formulaire de désabonnement aux catégories suivies
+    back =  GET : Controller qui récupère les catégories suivies et non suivies
+            POST : Controllers qui ajoutent ou suppriment des abonnements 
+    
+- Fils d'actualités :
+    Home : 
+    front = Composant qui affiche les posts qui correspondent aux catégories suivis
+    back = Controller qui récupère les posts en question
+
+    HallOfFame = 
+    front = Composant qui affiche les posts ayant un score d'au - 10 trié par ordre décroissant
+    back = Controller qui récupère les posts en question
+    
+    Par categories = 
+    front = Composant qui affiche les posts qui correspondent a une catégore
+    back = Controller qui récupère les posts en question
+    
+- Profil :
+    front = Composant qui affiche les infos, l'avatar, et tout les posts du profil, ainsi que les paramètre si il s'agit du compte connecté
+    back = Controllers qui récupèrent les infos a afficher ainsi que tt les posts de l'utilisateur
+    
+    
+*****Côté Administrateur*****
+
+-Modération : 
+    front = Composant qui affiche les signalement et les posts en question avec bouton validation suppression
+    back =  GET : Controller qui récupère les infos de signalement et posts concernés
+            POST : Controller qui supprime le post et le signalement/ ou juste le signalement en fonction du choix de l'admin
+            
+- Ajout Catégorie
+    front = Composant formulaire qui permet d'ajouter une nouvelle catégorie/ centre d'intérêt au site
+    back = Controller qui créé la nouvelle categorie en bdd
+    
+-  Statistiques :
+    front = Composant qui affiches des statistiques du site
+    back = GET : Controller qui récupère des stats sur la bdd
+    

@@ -16,7 +16,6 @@ const SelectMultipleCategories = ({selectedCategories, changeSelectedCategories}
                 for(let i = 0; i < res.data.categories.length; i++){
                     data.push({value: res.data.categories[i].name, label: res.data.categories[i].name, id: res.data.categories[i].id})
                 }
-                // console.log(data)
                 updateCategories(data);
             } 
         })

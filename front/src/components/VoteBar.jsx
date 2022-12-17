@@ -3,15 +3,6 @@ import BASE_URL from "../config.js"
 import axios from 'axios';
 import {ImArrowUp , ImArrowDown} from "react-icons/im";
 
-/*
-1 - 
-
-
-
-
-
-*/
-
 const VoteBar = (props) => {
     
     const [vote, setVote] = useState({voted: false, type: ''})
@@ -25,6 +16,7 @@ const VoteBar = (props) => {
     
     
     const getScore = () => {
+        // Récuperation du score dans la bdd
         axios.get(`${BASE_URL}/get-score/${props.post_id}`)
         .then((res) => {
             if(res.data.response){
@@ -37,10 +29,10 @@ const VoteBar = (props) => {
     }
     
     const verifyVote = () => {
+        // On vérifie si l'utilisateur a déjà voté, et si oui, son vote
         axios.get(`${BASE_URL}/verify-vote/${props.user_id}/${props.post_id}`)
         .then((res) => {
             if(res.data.response){
-                // console.log(res.data.vote.name)
                 setVote({voted: true, type: res.data.vote.name})
             } else {
                 setVote({voted: false, type: ''})
@@ -53,6 +45,8 @@ const VoteBar = (props) => {
     }
     
     const upVote = (e) => {
+        // Si l'utilisateur n'a pas déjà voté, on vote UP
+        // Si il a déjà voté UP, on annule le vote
         e.preventDefault()
         const currentScore = score
         if(vote.voted){
@@ -79,6 +73,8 @@ const VoteBar = (props) => {
     }
 
     const downVote = (e) => {
+        // Si l'utilisateur n'a pas déjà voté, on vote DOWN
+        // Si il a déjà voté DOWN, on annule le vote
         e.preventDefault()
         const currentScore = score
         if(vote.voted){
@@ -104,7 +100,7 @@ const VoteBar = (props) => {
     }
     
     const annulVote = () => {
-        // console.log('annuler')
+        // On annule le vote en le supprimant de la bdd
         axios.post(`${BASE_URL}/annul-vote`, {
                 userId,
                 postId,
@@ -126,9 +122,6 @@ const VoteBar = (props) => {
         verifyVote()
     }, [])
     
-    useEffect(()=> {
-        // console.log(vote)
-    })
     return (
         <Fragment>
             <p className='bloc_score'>SCORE : <span className='score'>{score}</span></p>

@@ -15,13 +15,13 @@ const AddPost = () => {
     const [msg, setMsg] = useState('');
 
     const addNewPost = (e) => {
+        // On envoie une requête à l'api qui ajoute le nouveau post si il est conforme
         e.preventDefault()
         const form = new FormData();
         const files = e.target.image.files;
-        // console.log(textContent)
         
         if(textContent.length < 20){
-            setMsg('Not enough characters')
+            setMsg('Pas assez de caractères (min: 20)')
         } else {
             form.append('userId', state.id);
             form.append('categories', selectedCategories);
@@ -43,10 +43,11 @@ const AddPost = () => {
         }
     }
     
-    const changeSelectedCategories = (e)=> {
+    const changeSelectedCategories = (selected)=> {
+        // On met un array contenant les catégories sélectionnées dans un state
         let cats = []
-        for(let i = 0; i < e.length; i++){
-            cats.push(e[i].id)
+        for(let i = 0; i < selected.length; i++){
+            cats.push(selected[i].id)
         }
         setSelectedCategories(cats)
     }

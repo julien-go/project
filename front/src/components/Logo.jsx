@@ -8,7 +8,7 @@ const Logo = () => {
     return (
             <div className='logo_container' >
                 <NavLink to='/' className='logo_link'>
-                    <span className='first_letter'>So</span>cial
+                    <span className='first_letter'>O</span>pium
                 </NavLink>
                 {state.isLogged && <ReturnButton/>}
             </div>

@@ -10,9 +10,13 @@ const getAllPosts= async () => {
 
 
 const getHallOfFame = async (req, res) => {
-    // On sélectionne tout les posts ayant un score d'au moins 10
+    // On sélectionne et récupère tout les posts ayant un score d'au moins 10
     const posts1 = await getAllPosts()
+    
+    // On récupère  et ajoute la liste de toutes les catégories relatives à chaque post
     const posts2 = await getAllPostCategories(posts1)
+    
+    // On récupère et ajoute les images relatives à chaque posts
     const posts = await getPostImage(posts2)
     if(posts === []){
         res.json({response: false})

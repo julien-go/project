@@ -22,7 +22,6 @@ const Profile = () => {
         const pathTable = path.pathname.split('/');
         const name = pathTable[pathTable.length-1];
         setProfileName(name);
-        // console.log(profileName)
         profileInfos(name);
     }
     
@@ -81,9 +80,9 @@ const Profile = () => {
                     {profileName === state.username && 
                         <div className='profile_actions_container'>
                             <h2 className='bloc_title'>Gestion du profil</h2>
-                            <button className='action_btn' onClick={redirectModifAvatar}>Modify/Add avatar</button>
-                            <button className='action_btn' onClick={redirectModifProfile}>Modify profile informations</button>
-                            <button className='action_btn' onClick={redirectDeleteAccount}>Delete my profile</button>
+                            <button className='action_btn' onClick={redirectModifAvatar}>Modifier/Supprimer l'avatar</button>
+                            <button className='action_btn' onClick={redirectModifProfile}>Modifier mes informations</button>
+                            <button className='action_btn' onClick={redirectDeleteAccount}>Supprimer mon profil</button>
                         </div>
                     }
                     <div className='separator'></div>

@@ -20,17 +20,14 @@ const MyCategories = () => {
         const id = state.id
         axios.get(`${BASE_URL}/get-mycategories/${id}`)
         .then((res) => {
-            // console.log(res.data.otherCategories)
             if(res.data.categories){
                 const myData = [];
                 const otherData = [];
                 for(let i = 0; i < res.data.categories.length; i++){
                     myData.push({value: res.data.categories[i].name, label: res.data.categories[i].name, id: res.data.categories[i].id})
-                    // console.log(1)
                 }
                 for(let j = 0; j < res.data.otherCategories.length; j++){
                     otherData.push({value: res.data.otherCategories[j].name, label: res.data.otherCategories[j].name, id: res.data.otherCategories[j].id})
-                    // console.log(2)
                 }
                 setMyCategories(myData);
                 setOtherCategories(otherData)
@@ -67,7 +64,6 @@ const MyCategories = () => {
             })
             .then((res)=> {
                 if(res.data.response){
-                    console.log('added')
                     setToAdd([])
                     navigate('/')
                 }
@@ -87,7 +83,6 @@ const MyCategories = () => {
             })
             .then((res)=> {
                 if(res.data.response){
-                    console.log('deleted')
                     setToRemove([])
                     navigate('/')
                 }

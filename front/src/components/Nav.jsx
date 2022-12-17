@@ -13,11 +13,10 @@ const Nav = () => {
     useEffect(() => {
         console.log(state)
         const token = localStorage.getItem("jwtToken")
-        // console.log(token)
+        
         if(!state.isLogged && token){
           axios.post(`${BASE_URL}/isLogged`,{token})
           .then((res) => {
-            //   console.log(res.data)
             if(res.data.token){
               axios.defaults.headers.common['Authorization'] = 'Bearer '+res.data.token
             }
@@ -33,9 +32,7 @@ const Nav = () => {
     return (
         <header>
             <div className='empty_bar_header'></div>
-           {/* {state.isLogged &&
-                <NavCategories />
-            } */}
+            
             {state.isLogged &&
             <div className='user_bar'>
                 <ul>

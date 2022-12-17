@@ -11,7 +11,6 @@ const reportPost = (req, res) => {
     
     pool.query(reportRequest, [postId, userId, msg, new Date()], (err, report, fields) => {
         if (err) throw err
-        console.log(report)
         res.json({response: true})
     })
 }

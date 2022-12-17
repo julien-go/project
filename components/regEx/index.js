@@ -1,5 +1,5 @@
 export const checkRegExPassword = (password) =>{
-    const regEx =/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\.\-\_])(?=.{8,})/;
+    const regEx =/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*?\.\_\-])(?=.{8,})/;
     
     if(regEx.test(password)){
         return true
@@ -20,7 +20,7 @@ export const checkRegExEmail = (email) =>{
 
 export const checkSpecialCharacters = (input) => {
     const regEx = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g
-    if (input.match(regEx)){
+    if (regEx.test(input)){
         return true;
     } else {
         return false;

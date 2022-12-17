@@ -11,6 +11,7 @@ const Moderation = () => {
     const [msg, setMsg] = useState('');
     
     const getReports = () => {
+        // On envoie une requête à l'api qui récupère les signalements de post dans la bdd
         axios.get(`${BASE_URL}/admin/get-reports`)
         .then((res)=> {
             if(res.data.response){
@@ -26,6 +27,7 @@ const Moderation = () => {
     }
     
     const annulReport = (id) => {
+        // On envoie une requête à l'api pour supprimer le signalement
         axios.post(`${BASE_URL}/admin/annul-report`, {
             id})
         .then((res)=> {
@@ -37,6 +39,7 @@ const Moderation = () => {
     }
     
     const deletePostReport = (reportId, postId) => {
+        // On envoie une requête à l'api pour supprimer le signalement & le post problématique
         if(postId && reportId){
             axios.post(`${BASE_URL}/admin/delete-post-report`, 
                 {   reportId,
@@ -58,7 +61,6 @@ const Moderation = () => {
     useEffect(()=> {
         getReports()
     }, [])
-    
     
     return (
         <Fragment>

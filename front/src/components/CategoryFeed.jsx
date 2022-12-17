@@ -15,39 +15,38 @@ const CategoryFeed = () => {
     const path = useLocation();
     
     const getParams = () => {
+        // On récupère le nom de la catégorie dans l'url
         const pathTable = path.pathname.split('/');
         const name = pathTable[pathTable.length-1];
         setThisCategory(name);
     }
     
     const getLastPosts = () => {
+        // On envoie une requête à l'api qui récupère tout les posts liés à cette catégorie
         if(thisCategory !== '' && thisCategory !== undefined){
             axios.get(`${BASE_URL}/get-categoryfeed/${thisCategory}`)
             .then((res)=> {
-                console.log(res.data)
-                console.log(res.data.posts)
+                
                 if(res.data.response || res.data.posts !== []){
                         setPosts([...res.data.posts].sort(compareId));
                         setMsg('')
                 } else {
                         setPosts([])
-                        setMsg('No posts here !')
+                        setMsg('Pas de posts ici :)')
                 }
-            
             })
             .catch((err)=> {
-                setMsg('No posts here !')
                 console.log(err)
             })
         }
     }
     
     const refresh = () => {
-        console.log('refresh')
         getLastPosts()
     }
     
     const compareId = (a, b) => {
+        // On compare l'id des posts pour les classer dans l'ordre du plus récent au plus ancien
         if(a.id < b.id) return 1
         if(a.id > b.id) return -1
         else return 0
