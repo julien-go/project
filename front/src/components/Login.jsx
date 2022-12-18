@@ -14,11 +14,7 @@ const Login = () => {
     const [state, dispatch] = useContext(AppContext)
 
     const submitLogin = (e) => {
-        // Si les informations sont correctes, on e
-        const dataUser = {
-            email,
-            password
-        }
+        // Si les informations sont correctes, on ouvre une session avec le JWTtoken et on donne les accès en fonction du role (user/admin)
         e.preventDefault();
         
         if (!verifyLength(email, 255)){
@@ -29,7 +25,6 @@ const Login = () => {
                 password
             })
             .then((res) =>{
-                console.log(res.data)
                 if (!res.data.response){
                     setErrorMsg(res.data.errorMsg);
                 } else {

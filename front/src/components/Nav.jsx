@@ -11,7 +11,6 @@ const Nav = () => {
     const urlMyProfile = `profile/${state.username}`
     
     useEffect(() => {
-        console.log(state)
         const token = localStorage.getItem("jwtToken")
         
         if(!state.isLogged && token){
@@ -37,13 +36,13 @@ const Nav = () => {
             <div className='user_bar'>
                 <ul>
                     <li>
-                        <NavLink to={urlMyProfile}>
+                        <NavLink to={urlMyProfile} title='Mon profil'>
                             <ImUser className='nav_icon'/>
                             <p className='nav_text'>Mon profil</p>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="my-categories">
+                        <NavLink to="my-categories" title="Mes Centres d'intérêts">
                             <ImStarFull className='nav_icon'/>
                             <p className='nav_text'>Mes Centres d'intérêts</p>
                         </NavLink>
@@ -53,7 +52,7 @@ const Nav = () => {
                     <p className='username'>{state.username}</p>
                     {state.isAdmin &&
                         <Fragment>
-                                <NavLink className='admin_navlink' to="admin">
+                                <NavLink className='admin_navlink' to="admin" title="Admin">
                                 ADMIN
                                 </NavLink>
                         </Fragment>
@@ -65,26 +64,26 @@ const Nav = () => {
                     {state.isLogged &&
                         <ul>
                             <li>
-                                <NavLink to="/">
+                                <NavLink to="/" title="Accueil">
                                     <ImHome className='nav_icon'/>
                                     <p className='nav_text'>Accueil</p>
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="add-post">
+                                <NavLink to="add-post" title="Ajouter un post">
                                     <ImPlus className='nav_icon'/>
                                     <p className='nav_text'>Ajouter un post</p>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="categories">
+                                <NavLink to="categories" title="Par catégorie">
                                     <ImList className='nav_icon'/>
                                     <p className='nav_text'>Par catégorie</p>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="disconnect">
+                                <NavLink to="disconnect" title="Déconnexion">
                                     <ImExit className='nav_icon disconnect_btn'/>
                                     <p className='nav_text disconnect_btn'>Déconnexion</p>
                                 </NavLink>
@@ -95,12 +94,12 @@ const Nav = () => {
                     {!state.isLogged &&
                         <ul className='nav_notconnected'>
                             <li>
-                                <NavLink to="register">
+                                <NavLink to="register" title="Inscription">
                                 INSCRIPTION
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="login">
+                                <NavLink to="login" title="Connexion">
                                 CONNEXION
                                 </NavLink>
                             </li>

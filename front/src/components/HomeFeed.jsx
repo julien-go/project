@@ -1,4 +1,3 @@
-
 import {Fragment, useContext, useState, useEffect} from 'react'
 import {NavLink} from 'react-router-dom'
 import {AppContext} from '../reducer/reducer'
@@ -18,7 +17,6 @@ const HomeFeed = () => {
         // On envoie un requête à l'api qui récupère tout les posts
             axios.get(`${BASE_URL}/get-homefeed/${state.id}`)
             .then((res)=> {
-                console.log(res.data)
                 if(res.data.response){
                     setMsg('')
                     
@@ -55,7 +53,7 @@ const HomeFeed = () => {
                 <h1>ACCUEIL</h1>
                 <div className='feed_action_bar'>
                     <div className='refresh_container' >
-                            <button onClick={()=> refresh} className='action_btn'  >Rafraîchir la page</button>
+                            <button onClick={()=> refresh} className='action_btn' >Rafraîchir la page</button>
                     </div>
                     <div>
                         <NavLink to='/hall-of-fame'>

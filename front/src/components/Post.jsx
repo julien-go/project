@@ -1,8 +1,7 @@
-import {Fragment, useContext, useState, useEffect} from 'react'
+import {Fragment, useContext, useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import {AppContext} from '../reducer/reducer'
 import { ImCross } from "react-icons/im";
-import Linkify from 'react-linkify';
 
 import VoteBar from './VoteBar'
 import DeletePost from './DeletePost'
@@ -16,7 +15,7 @@ const Post = ({post, refresh}) => {
     return ( 
         <div id={post.id} className='post'>
             <div className="post_header">
-                <NavLink className='post_user' to={`/profile/${post.username}`}>
+                <NavLink className='post_user' to={`/profile/${post.username}`} title={`${post.username} profil`}>
                     <p className='username'>{post.username}</p>
                     <img src={`http://juliengodard.sites.3wa.io:9300/avatars/${post.avatar_url}`} alt={`${post.username}'s avatar`} className="little_avatar user_avatar "/>
                 </NavLink>

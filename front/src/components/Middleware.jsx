@@ -1,4 +1,3 @@
-import React from 'react';
 import {useContext, useEffect, Fragment, useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "../reducer/reducer.js";
@@ -12,6 +11,7 @@ const Middleware = ({children}) => {
     const location = useLocation()
     const currentPath = location.pathname
     
+    // On bloque l'accès a certains url en fonction du role (user/admin/ non connecté)
     useEffect(() =>  {
         setShow(true)
         if (userPath.includes(currentPath)){
@@ -28,7 +28,6 @@ const Middleware = ({children}) => {
         
         if (notConnectedPath.includes(currentPath)){
             if(state.username !== ''){
-                console.log(state.username)
                 navigate('/', {replace: true})
             }
         }

@@ -1,4 +1,4 @@
-import {useState, useContext, Fragment} from 'react';
+import {useContext, Fragment} from 'react';
 import {useNavigate} from 'react-router-dom'
 import {AppContext} from '../reducer/reducer'
 import BASE_URL from "../config.js"
@@ -18,7 +18,6 @@ const DeleteAccount = () => {
             })
             .then((res)=> {
                 if(res.data.response){
-                    console.log(res.data)
                     localStorage.removeItem('jwtToken')
                     delete axios.defaults.headers.common['Authorization']
                     dispatch({type: 'LOGOUT'})

@@ -7,7 +7,7 @@ const Logo = () => {
     const [state, dispatch] = useContext(AppContext)
     return (
             <div className='logo_container' >
-                <NavLink to='/' className='logo_link'>
+                <NavLink to='/' className='logo_link' title='Accueil'>
                     <span className='first_letter'>O</span>pium
                 </NavLink>
                 {state.isLogged && <ReturnButton/>}

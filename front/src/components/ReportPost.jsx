@@ -1,5 +1,4 @@
-import {Fragment, useContext, useState, useEffect} from 'react'
-import {useNavigate} from 'react-router-dom'
+import {Fragment, useContext, useState} from 'react'
 import { ImWarning, ImCross } from "react-icons/im";
 import BASE_URL from "../config.js"
 import axios from 'axios'
@@ -9,7 +8,6 @@ import {AppContext} from '../reducer/reducer'
 
 const ReportPost = (props) => {
     const [state, dispatch] = useContext(AppContext)
-    
     const [hidden, setHidden] = useState(false)
     const [active, setActive] = useState(false)
     const [reportMsg, setReportMsg] = useState('')
@@ -20,7 +18,6 @@ const ReportPost = (props) => {
             const params = {userId: state.id, username: state.username, msg:reportMsg, postId: props.postId}
             axios.post(`${BASE_URL}/report-post`, params)
             .then((res)=> {
-                console.log(res.data)
                 if(res.data.response){
                     setActive(false)
                     setHidden(true)

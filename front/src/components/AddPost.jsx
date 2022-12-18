@@ -1,4 +1,4 @@
-import {useEffect, Fragment, useState, useContext} from 'react'
+import {Fragment, useState, useContext} from 'react'
 import {useNavigate} from 'react-router-dom'
 import BASE_URL from "../config.js"
 import axios from 'axios'
@@ -35,7 +35,6 @@ const AddPost = () => {
                 } else {
                 setMsg(res.data.msg);
                 }
-    
             })
             .catch((err)=>{
                 console.log(err)

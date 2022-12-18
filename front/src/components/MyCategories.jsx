@@ -40,7 +40,6 @@ const MyCategories = () => {
 
     const changeToAdd = (e) => {
         let cats = []
-        // console.log(e)
         for(let i = 0; i < e.length; i++){
             cats.push(e[i])
         }
