@@ -4,18 +4,18 @@ const getHomeFeed = async (req, res) => {
     const userId = req.params.id;
     
     // On récupère la totalité des posts correspondant à ces catégories
-    const posts1 = await getAllPosts(userId)
+    const posts = await getAllPosts(userId)
     
     // On récupère  et ajoute la liste de toutes les catégories relatives à chaque post
-    const posts2 = await getAllPostCategories(posts1)
+    const postsWithCats = await getAllPostCategories(posts)
     
     // On récupère et ajoute les images relatives à chaque posts
-    const posts = await getPostImage(posts2)
+    const postsWithImages = await getPostImage(postsWithCats)
     
     if(posts === []){
         res.json({response: false})
     } else {
-        res.json({response: true, posts})
+        res.json({response: true, posts : postsWithImages})
     }
 }
 
@@ -34,7 +34,7 @@ const getSqlArray = (myCategories) =>  {
     }
 }
 
-const getAllPosts= async (userId) => {
+const getAllPosts = async (userId) => {
     const selectMyCategories = 'SELECT categories.id FROM categories JOIN users_categories ON users_categories.categorie_id = categories.id JOIN users ON users.id = users_categories.user_id WHERE users.id = ? ORDER BY categories.id DESC';
     
     const selectPosts = 'SELECT DISTINCT posts.id, posts.text_content, DATE_FORMAT( posts.publication_date, "%d/%m/%Y %H:%i") AS publication_date, users.username, users.id AS user_id, users.avatar_id, avatars.url AS avatar_url, posts_scores.score FROM posts JOIN users ON users.id = posts.user_id JOIN posts_categories ON posts_categories.post_id = posts.id JOIN avatars ON avatars.id = users.avatar_id JOIN posts_scores ON posts_scores.post_id = posts.id WHERE posts_categories.categorie_id IN (?)'

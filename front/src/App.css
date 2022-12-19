@@ -1250,6 +1250,20 @@ textarea{
     display: none;
   }
   
+  /*PAR CATEGORIE*/
+  
+  .nav_categories ul {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  
+  .nav_categories ul li {
+    width: 35%;
+    text-align: center;
+  }
+  
   /*FEED*/
   
   .feed, .profile, .mycategories {
