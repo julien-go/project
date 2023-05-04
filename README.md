@@ -1,3 +1,3 @@
-# project de cours
+# projet de cours
 
 Application web full stack réseau social
